@@ -3,7 +3,7 @@ import logging
 
 import grpc
 
-from takasho.schema.common_featureset.player_api import ondemand_master
+from takasho.schema.common_featureset.player_api import ondemand_master, system
 
 
 def serve():
@@ -12,6 +12,7 @@ def serve():
 
     ondemand_master.add_OndemandMasterServicer_to_server(
         ondemand_master.OndemandMaster(), server)
+    system.add_SystemServicer_to_server(system.System(), server)
     
     with open('keys/grpc.key', 'rb') as f:
         private_key = f.read()

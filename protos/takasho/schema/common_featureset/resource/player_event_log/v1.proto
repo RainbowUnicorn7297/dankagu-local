@@ -1,0 +1,78 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.player_event_log.v1;
+
+message PlayerEventLog {
+  string event_category = 1;
+  string event_id = 2;
+  bytes payload = 3;
+  string player_state = 4;
+  bytes player_state_bytes = 5;
+}
+
+message PlayerEventLogServerPayload {
+  bytes takasho_log = 1;
+}
+
+message LootBoxV3 {
+  string transaction_id = 1;
+  string loot_box_product_id = 2;
+  int64 num = 3;
+  repeated string content_ids = 4;
+  repeated ConsumeResource consume_resources = 5;
+  repeated bytes content_values = 6;
+  bytes takasho_log = 7;
+}
+
+message StepUpLootBoxV2 {
+  string transaction_id = 1;
+  string step_up_loot_box_product_id = 2;
+  int64 step = 3;
+  int64 next_step = 4;
+  repeated string content_ids = 5;
+  repeated ConsumeResource consume_resources = 6;
+  repeated bytes content_values = 7;
+  bytes takasho_log = 8;
+}
+
+message ConsumeResource {
+  string consume_resource_key = 1;
+  int64 consume_resource_num = 2;
+}
+
+message FriendV1 {
+  enum ActionType {
+    SEND = 0;
+    APPROVE = 1;
+    REJECT = 2;
+    DELETE_FRIEND = 3;
+    DELETE_SENT_REQUEST = 4;
+  }
+
+  ActionType action_type = 1;
+  repeated string target_player_ids = 2;
+  int64 friends_num = 3;
+  int64 max_friends_num = 4;
+  bytes takasho_log = 5;
+}
+
+message ConsumeVc {
+  message Currency {
+    string name = 1;
+    int64 amonut = 2;
+  }
+
+  string id = 1;
+  repeated Currency currencies = 2;
+  bytes takasho_log = 3;
+}
+
+message BoxLootBox {
+  string transaction_id = 1;
+  string gacha_id = 2;
+  int64 exec_num = 3;
+  repeated string get_item_ids = 4;
+  string paid_id = 5;
+  int64 paid_amount = 6;
+  int64 af_box_remain = 7;
+  bytes takasho_log = 8;
+}

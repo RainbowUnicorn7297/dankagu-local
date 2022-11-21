@@ -14,5 +14,5 @@ message OndemandMasterGetEntriesV2 {
 }
 
 service OndemandMaster {
-  rpc GetEntriesV1(OndemandMasterGetEntriesV2.Request) returns (OndemandMasterGetEntriesV2.Response);
+  rpc GetEntriesV1(OndemandMasterGetEntriesV2.Request) returns (OndemandMasterGetEntriesV2.Response) {}
 }

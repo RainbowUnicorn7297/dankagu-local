@@ -1,0 +1,100 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/system/v1.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+
+message SystemAuthorizeV3 {
+  message Request {
+    string device_account = 1;
+    string device_password = 2;
+    takasho.schema.common_featureset.resource.system.v1.DeviceInfo device_info = 3;
+    string id_token = 4;
+  }
+
+  message Response {
+    string session_token = 1;
+    string player_id = 2;
+  }
+}
+
+message SystemAuthorizeV2 {
+  message Request {
+    string device_account = 1;
+    string device_password = 2;
+    takasho.schema.common_featureset.resource.system.v1.DeviceInfo device_info = 3;
+  }
+
+  message Response {
+    string session_token = 1;
+    string player_id = 2;
+  }
+}
+
+message SystemGetPlayerStatusV1 {
+  message Request {}
+
+  message Response {
+    int64 player_status = 1;
+    int64 total_login_days = 2;
+  }
+}
+
+message SystemGetPlayerStatusV2 {
+  message Request {}
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.system.v1.PlayerStatus player_statuses = 1;
+    repeated takasho.schema.common_featureset.resource.system.v1.BanStatus ban_statuses = 2;
+    int64 total_login_days = 3;
+  }
+}
+
+message SystemSetPlayerStatusV1 {
+  message Request {
+    takasho.schema.common_featureset.resource.system.v1.PlayerStatus player_status = 1;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 2;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.system.v1.PlayerStatus player_statuses = 1;
+    repeated takasho.schema.common_featureset.resource.system.v1.BanStatus ban_statuses = 2;
+    int64 total_login_days = 3;
+  }
+}
+
+message SystemDeletePlayerStatusV1 {
+  message Request {
+    takasho.schema.common_featureset.resource.system.v1.PlayerStatus player_status = 1;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 2;
+  }
+
+  message Response {}
+}
+
+message SystemRecordLoginHistoryV1 {
+  message Request {}
+
+  message Response {
+    int64 logged_in_at = 1;
+  }
+}
+
+message SystemGetWebTokenV1 {
+  message Request {}
+
+  message Response {
+    string id_token = 1;
+  }
+}
+
+service System {
+  rpc AuthorizeV3(SystemAuthorizeV3.Request) returns (SystemAuthorizeV3.Response) {}
+  rpc AuthorizeV2(SystemAuthorizeV2.Request) returns (SystemAuthorizeV2.Response) {}
+  rpc GetPlayerStatusV1(SystemGetPlayerStatusV1.Request) returns (SystemGetPlayerStatusV1.Response) {}
+  rpc GetPlayerStatusV2(SystemGetPlayerStatusV2.Request) returns (SystemGetPlayerStatusV2.Response) {}
+  rpc SetPlayerStatusV1(SystemSetPlayerStatusV1.Request) returns (SystemSetPlayerStatusV1.Response) {}
+  rpc DeletePlayerStatusV1(SystemDeletePlayerStatusV1.Request) returns (SystemDeletePlayerStatusV1.Response) {}
+  rpc RecordLoginHistoryV1(SystemRecordLoginHistoryV1.Request) returns (SystemRecordLoginHistoryV1.Response) {}
+  rpc GetWebTokenV1(SystemGetWebTokenV1.Request) returns (SystemGetWebTokenV1.Response) {}
+}

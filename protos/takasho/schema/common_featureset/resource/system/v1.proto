@@ -1,0 +1,32 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.system.v1;
+
+enum PlatformType {
+  UNKNOWN = 0;
+  GOOGLE = 1;
+  APPLE = 2;
+  EDITOR = 3;
+}
+
+enum BaasType {
+  NPF = 0;
+  LCX = 1;
+}
+
+message DeviceInfo {
+  PlatformType platform = 1;
+}
+
+message PlayerStatus {
+  int64 status = 1;
+  string description = 2;
+  int64 expired_at = 3;
+  bool has_expired_at = 4;
+}
+
+message BanStatus {
+  int64 status = 1;
+  string description = 2;
+  int64 expired_at = 3;
+  bool has_expired_at = 4;
+}
