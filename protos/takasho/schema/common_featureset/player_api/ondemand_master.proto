@@ -1,0 +1,18 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/ondemand_master/v2.proto";
+
+message OndemandMasterGetEntriesV2 {
+  message Request {
+    repeated string keys = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.ondemand_master.v2.Entry entries = 1;
+  }
+}
+
+service OndemandMaster {
+  rpc GetEntriesV1(OndemandMasterGetEntriesV2.Request) returns (OndemandMasterGetEntriesV2.Response);
+}

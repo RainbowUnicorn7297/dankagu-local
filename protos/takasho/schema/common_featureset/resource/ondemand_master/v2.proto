@@ -1,0 +1,7 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.ondemand_master.v2;
+
+message Entry {
+  string key = 1;
+  bytes value = 2;
+}
