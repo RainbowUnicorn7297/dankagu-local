@@ -26,7 +26,7 @@ def start(port):
     lan_ip = get_ip()
     zone_record = cleandoc(f'''
         danmakujp4-local.lcx.tokyo. 60 IN A {lan_ip}
-        player-api-local-server.dena-takasho.com. 60 IN A {lan_ip}
+        player-api-local.dena-takasho.com. 60 IN A {lan_ip}
         assets-local.dena-takasho.com. 60 IN A {lan_ip}
     ''')
 
@@ -53,3 +53,4 @@ if __name__ == '__main__':
             sleep(1)
     except KeyboardInterrupt:
         pass
+
