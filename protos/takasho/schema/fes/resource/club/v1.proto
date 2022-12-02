@@ -1,0 +1,12 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.club.v1;
+
+import "takasho/schema/fes/resource/club_preference/v1.proto";
+import "takasho/schema/fes/resource/club_storage/v1.proto";
+
+message Club {
+  string club_id = 1;
+  sint64 organized_at = 2;
+  takasho.schema.fes.resource.club_preference.v1.ClubPreference preference = 3;
+  repeated takasho.schema.fes.resource.club_storage.v1.ClubStorageEntry club_storage_entries = 4;
+}

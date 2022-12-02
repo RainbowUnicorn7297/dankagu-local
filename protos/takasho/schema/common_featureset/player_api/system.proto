@@ -32,11 +32,13 @@ message SystemAuthorizeV2 {
 }
 
 message SystemGetPlayerStatusV1 {
+  option deprecated = true;
+  
   message Request {}
 
   message Response {
-    int64 player_status = 1;
-    int64 total_login_days = 2;
+    sint64 player_status = 1;
+    sint64 total_login_days = 2;
   }
 }
 
@@ -46,7 +48,7 @@ message SystemGetPlayerStatusV2 {
   message Response {
     repeated takasho.schema.common_featureset.resource.system.v1.PlayerStatus player_statuses = 1;
     repeated takasho.schema.common_featureset.resource.system.v1.BanStatus ban_statuses = 2;
-    int64 total_login_days = 3;
+    sint64 total_login_days = 3;
   }
 }
 
@@ -59,7 +61,7 @@ message SystemSetPlayerStatusV1 {
   message Response {
     repeated takasho.schema.common_featureset.resource.system.v1.PlayerStatus player_statuses = 1;
     repeated takasho.schema.common_featureset.resource.system.v1.BanStatus ban_statuses = 2;
-    int64 total_login_days = 3;
+    sint64 total_login_days = 3;
   }
 }
 
@@ -76,7 +78,7 @@ message SystemRecordLoginHistoryV1 {
   message Request {}
 
   message Response {
-    int64 logged_in_at = 1;
+    sint64 logged_in_at = 1;
   }
 }
 

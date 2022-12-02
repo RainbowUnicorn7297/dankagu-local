@@ -1,0 +1,47 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+message PushNotificationSetConfigV1 {
+  option deprecated = true;
+
+  message Request {
+    bool receivable = 1;
+  }
+
+  message Response {
+    bool receivable = 1;
+  }
+}
+
+message PushNotificationSetConfigV2 {
+  message Request {
+    repeated string topic_ids = 1;
+  }
+
+  message Response {}
+}
+
+message PushNotificationGetConfigV1 {
+  option deprecated = true;
+  
+  message Request {}
+
+  message Response {
+    bool receivable = 1;
+  }
+}
+
+message PushNotificationGetConfigV2 {
+  message Request {}
+
+  message Response {
+    repeated string topic_ids = 1;
+  }
+}
+
+service PushNotification {
+  rpc SetConfigV1(PushNotificationSetConfigV1.Request) returns (PushNotificationSetConfigV1.Response) {}
+  rpc SetConfigV2(PushNotificationSetConfigV2.Request) returns (PushNotificationSetConfigV2.Response) {}
+  rpc GetConfigV1(PushNotificationGetConfigV1.Request) returns (PushNotificationGetConfigV1.Response) {}
+  rpc GetConfigV2(PushNotificationGetConfigV2.Request) returns (PushNotificationGetConfigV2.Response) {}
+}

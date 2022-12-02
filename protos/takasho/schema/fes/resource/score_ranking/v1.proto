@@ -1,0 +1,105 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.score_ranking.v1;
+
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+
+message Season {
+  string season_id = 1;
+  uint64 opened_at = 2;
+  uint64 finished_at = 3;
+  uint64 closed_at = 4;
+  Period period = 5;
+  repeated RankingPrize ranking_prizes = 6;
+  uint64 entry_opened_at = 7;
+}
+
+message Period {
+  string period_id = 1;
+  uint64 opened_at = 2;
+  uint64 finished_at = 3;
+  uint64 closed_at = 4;
+  repeated ClassPrize class_prizes = 5;
+  ClassGroupPrize class_group_prizes = 6;
+}
+
+message ClassPrize {
+  string class_id = 1;
+  repeated Prize prizes = 2;
+}
+
+message ClassGroupPrize {
+  repeated RankingPrize ranking_prizes = 1;
+  repeated ClassRankingGrandPrixPointPrize class_ranking_grand_prix_points = 2;
+}
+
+message ClassRankingGrandPrixPointPrize {
+  sint64 start_rank = 1;
+  sint64 end_rank = 2;
+  sint64 point = 3;
+  bytes value = 4;
+}
+
+message RankingPrize {
+  sint64 start_rank = 1;
+  sint64 end_rank = 2;
+  repeated Prize prizes = 3;
+}
+
+message Prize {
+  string prize_id = 1;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 2;
+  string schema_key = 3;
+  bytes value = 4;
+  string inventory_message = 5;
+  string search_label = 6;
+  string resource_name = 7;
+  sint64 resource_num = 8;
+}
+
+message PlayerGrandPrixRankingInfo {
+  string player_id = 1;
+  string nickname = 2;
+  sint64 level = 3;
+  string class_id = 4;
+  sint64 rank = 5;
+  sint64 point = 6;
+  repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry player_storage_entries = 7;
+}
+
+message PlayerClassGroupRankingInfo {
+  string player_id = 1;
+  string nickname = 2;
+  sint64 level = 3;
+  string class_id = 4;
+  sint64 rank = 5;
+  sint64 score = 6;
+  repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry player_storage_entries = 7;
+}
+
+message PlayerGrandPrixRankInfo {
+  string player_id = 1;
+  sint64 rank = 2;
+  sint64 point = 3;
+}
+
+message PlayerClassGroupRankInfo {
+  string player_id = 1;
+  sint64 rank = 2;
+  sint64 score = 3;
+}
+
+message PlayerClass {
+  string player_id = 1;
+  string class_id = 2;
+  sint64 score = 3;
+  string group_id = 4;
+}
+
+message PlayerPeriodClassPrizeInfo {
+  string period_id = 1;
+  string class_id = 2;
+  sint64 rank = 3;
+  repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory ranking_inventories = 4;
+  repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory class_inventories = 5;
+}

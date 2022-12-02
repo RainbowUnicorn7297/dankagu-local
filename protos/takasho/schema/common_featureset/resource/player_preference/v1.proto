@@ -1,0 +1,25 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.player_preference.v1;
+
+enum AllowFriendRequestType {
+  NO_PREFERENCE = 0;
+  ALLOW_ALL = 1;
+  FORBID_ALL = 2;
+}
+
+message PlayerPreference {
+  sint64 birth_year = 2;
+  sint64 birth_month = 3;
+  string country = 4;
+  string language = 5;
+  bool opt_out = 6;
+  string consented_tos_version = 7;
+  sint64 created_at = 8;
+  sint64 updated_at = 9;
+  string nickname = 10;
+  string consented_privacy_policy_version = 11;
+  sint64 nickname_updated_at = 12;
+  AllowFriendRequestType allow_friend_request = 13;
+  sint64 max_friend_number = 14;
+  sint64 max_friend_request_queue_length = 15;
+}

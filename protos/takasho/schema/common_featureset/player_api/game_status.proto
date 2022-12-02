@@ -1,0 +1,18 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/game_status/v1.proto";
+
+message GameStatusGetV1 {
+  message Request {
+    repeated takasho.schema.common_featureset.resource.game_status.v1.Value values = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.game_status.v1.Status statuses = 1;
+  }
+}
+
+service GameStatus {
+  rpc GetV1(GameStatusGetV1.Request) returns (GameStatusGetV1.Response) {}
+}

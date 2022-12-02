@@ -1,0 +1,16 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.club_role.v1;
+
+enum ClubRole {
+  UNKNOWN_ROLE = 0;
+  LEADER = 1;
+  SUB_LEADER = 2;
+  MEMBER = 3;
+}
+
+enum ClubUpdateRoleType {
+  UNKNOWN_UPDATE_TYPE = 0;
+  ASSIGN_SUBLEADER = 1;
+  UNASSIGN_SUBLEADER = 2;
+  REPLACE_LEADER = 3;
+}

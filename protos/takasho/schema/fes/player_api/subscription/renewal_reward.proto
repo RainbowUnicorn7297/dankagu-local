@@ -1,0 +1,28 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api.subscription.renewal_reward;
+
+import "takasho/schema/fes/resource/subscription/renewal_reward/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+message RenewalRewardGetAvailableV1 {
+  message Request {}
+
+  message Response {
+    repeated takasho.schema.fes.resource.subscription.renewal_reward.v1.RenewalReward renewal_rewards = 1;
+  }
+}
+
+message RenewalRewardReceiveV1 {
+  message Request {}
+
+  message Response {
+    repeated takasho.schema.fes.resource.subscription.renewal_reward.v1.RenewalReward renewal_rewards = 1;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory inventories = 2;
+    repeated takasho.schema.fes.resource.subscription.renewal_reward.v1.RenewalCount renewal_counts = 3;
+  }
+}
+
+service RenewalReward {
+  rpc GetAvailableV1(RenewalRewardGetAvailableV1.Request) returns (RenewalRewardGetAvailableV1.Response) {}
+  rpc ReceiveV1(RenewalRewardReceiveV1.Request) returns (RenewalRewardReceiveV1.Response) {}
+}

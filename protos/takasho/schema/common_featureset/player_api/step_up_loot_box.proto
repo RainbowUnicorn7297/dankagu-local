@@ -1,0 +1,136 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/step_up_loot_box/v2.proto";
+import "takasho/schema/common_featureset/resource/step_up_loot_box/v1.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+import "takasho/schema/common_featureset/resource/wallet/v3.proto";
+
+message StepUpLootBoxGetAvailableV1 {
+  message Request {
+    string page_token = 1;
+    uint64 max_results = 2;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.step_up_loot_box.v1.StepUpLootBoxProductWithPlayerStepNum step_up_loot_box_products = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message StepUpLootBoxPurchaseV1 {
+  message Request {
+    enum ResourceType {
+      VIRTUAL_CURRENCY = 0;
+      PLAYER_KEY_VALUE = 1;
+    }
+
+    string step_up_loot_box_product_id = 1;
+    string transaction_id = 2;
+    ResourceType resource_type = 3;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 4;
+  }
+
+  message Response {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.step_up_loot_box.v2.StepUpLootBoxContent step_up_loot_box_contents = 2;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventories = 3;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory extra_player_inventories = 4;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 6;
+  }
+}
+
+message StepUpLootBoxGetProbabilityV1 {
+  message Request {
+    string step_up_loot_box_product_id = 1;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.step_up_loot_box.v2.StepUpLootBoxProbability step_up_loot_box_probability = 1;
+  }
+}
+
+message StepUpLootBoxGetDetailV1 {
+  message Request {
+    string step_up_loot_box_product_id = 1;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.step_up_loot_box.v1.StepUpLootBoxProductWithPlayerStepNum step_up_loot_box_product = 1;
+  }
+}
+
+message StepUpLootBoxV2GetAvailableV1 {
+  message Request {
+    string page_token = 1;
+    uint64 max_results = 2;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.step_up_loot_box.v2.StepUpLootBoxProduct step_up_loot_box_products = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message StepUpLootBoxV2PurchaseV1 {
+  message Request {
+    enum ResourceType {
+      VIRTUAL_CURRENCY = 0;
+      PLAYER_KEY_VALUE = 1;
+    }
+
+    string step_up_loot_box_product_id = 1;
+    string transaction_id = 2;
+    ResourceType resource_type = 3;
+    string purchase_token = 4;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 5;
+  }
+
+  message Response {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.step_up_loot_box.v2.StepUpLootBoxContent step_up_loot_box_contents = 2;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventories = 3;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory extra_player_inventories = 4;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 5;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory specific_content_extras = 6;
+  }
+}
+
+message StepUpLootBoxV2GetProbabilityV1 {
+  message Request {
+    repeated string step_up_loot_box_product_ids = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.step_up_loot_box.v2.StepUpLootBoxProbability step_up_loot_box_probabilities = 1;
+    string purchase_token = 2;
+  }
+}
+
+message StepUpLootBoxV2GetDetailV1 {
+  message Request {
+    repeated string step_up_loot_box_product_ids = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.step_up_loot_box.v2.StepUpLootBoxProduct step_up_loot_box_products = 1;
+    repeated takasho.schema.common_featureset.resource.step_up_loot_box.v2.StepUpLootBoxSpecificContentExtra step_up_loot_box_specific_content_extras = 2;
+  }
+}
+
+service StepUpLootBox {
+  rpc GetAvailableV1(StepUpLootBoxGetAvailableV1.Request) returns (StepUpLootBoxGetAvailableV1.Response) {}
+  rpc PurchaseV1(StepUpLootBoxPurchaseV1.Request) returns (StepUpLootBoxPurchaseV1.Response) {}
+  rpc GetProbabilityV1(StepUpLootBoxGetProbabilityV1.Request) returns (StepUpLootBoxGetProbabilityV1.Response) {}
+  rpc GetDetailV1(StepUpLootBoxGetDetailV1.Request) returns (StepUpLootBoxGetDetailV1.Response) {}
+}
+
+service StepUpLootBoxV2 {
+  rpc GetAvailableV1(StepUpLootBoxV2GetAvailableV1.Request) returns (StepUpLootBoxV2GetAvailableV1.Response) {}
+  rpc PurchaseV1(StepUpLootBoxV2PurchaseV1.Request) returns (StepUpLootBoxV2PurchaseV1.Response) {}
+  rpc GetProbabilityV1(StepUpLootBoxV2GetProbabilityV1.Request) returns (StepUpLootBoxV2GetProbabilityV1.Response) {}
+  rpc GetDetailV1(StepUpLootBoxV2GetDetailV1.Request) returns (StepUpLootBoxV2GetDetailV1.Response) {}
+}

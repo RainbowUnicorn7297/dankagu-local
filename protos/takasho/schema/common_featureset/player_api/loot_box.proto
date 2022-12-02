@@ -1,0 +1,197 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/loot_box/v3.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+import "takasho/schema/common_featureset/resource/wallet/v3.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+
+message LootBoxGetAvailableV1 {
+  message Request {}
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.loot_box.v3.LootBoxProduct loot_box_products = 1;
+  }
+}
+
+message LootBoxPurchaseV1 {
+  message Request {
+    string loot_box_product_id = 1;
+    string transaction_id = 2;
+  }
+
+  message Response {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.loot_box.v3.LootBoxContent loot_box_contents = 2;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventories = 3;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 4;
+  }
+}
+
+message LootBoxGetProbabilityV1 {
+  message Request {
+    string loot_box_product_id = 1;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.loot_box.v3.LootBoxProbability loot_box_probability = 1;
+  }
+}
+
+message LootBoxGetDetailV1 {
+  message Request {
+    string loot_box_product_id = 1;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.loot_box.v3.LootBoxProduct loot_box_product = 1;
+    repeated takasho.schema.common_featureset.resource.loot_box.v3.LootBoxContentSet loot_box_content_sets = 2;
+    bool is_limited = 3;
+    sint64 purchasable_count = 4;
+  }
+}
+
+message LootBoxV2GetAvailableV1 {
+  message Request {
+    string page_token = 1;
+    uint64 max_results = 2;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.loot_box.v3.LootBoxProductWithPurchasedCount loot_box_products = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message LootBoxV2PurchaseV1 {
+  message Request {
+    enum ResourceType {
+      VIRTUAL_CURRENCY = 0;
+      PLAYER_KEY_VALUE = 1;
+    }
+
+    string loot_box_product_id = 1;
+    string transaction_id = 2;
+    ResourceType resource_type = 3;
+  }
+
+  message Response {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.loot_box.v3.LootBoxContentSetPrizes loot_box_content_set_prizes = 2;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventories = 3;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory extra_player_inventories = 4;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 5;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory pickup_extra_player_inventories = 6;
+  }
+}
+
+message LootBoxV2GetProbabilityV1 {
+  message Request {
+    string loot_box_product_id = 1;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.loot_box.v3.LootBoxProbability loot_box_probability = 1;
+  }
+}
+
+message LootBoxV2GetDetailV1 {
+  message Request {
+    string loot_box_product_id = 1;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.loot_box.v3.LootBoxProduct loot_box_product = 1;
+    repeated takasho.schema.common_featureset.resource.loot_box.v3.LootBoxContentSet loot_box_content_sets = 2;
+    bool is_limited = 3;
+    sint64 purchased_count = 4;
+    takasho.schema.common_featureset.resource.loot_box.v3.LootBoxPickup loot_box_pickup = 5;
+  }
+}
+
+message LootBoxV3GetAvailableV1 {
+  message Request {
+    string page_token = 1;
+    uint64 max_results = 2;
+    bool exclude_pickup_response = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.loot_box.v3.LootBoxProductWithPurchasedCount loot_box_products = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message LootBoxV3PurchaseV1 {
+  message Request {
+    enum ResourceType {
+      VIRTUAL_CURRENCY = 0;
+      PLAYER_KEY_VALUE = 1;
+      NO_CONSUME = 2;
+    }
+
+    string loot_box_product_id = 1;
+    string transaction_id = 2;
+    ResourceType resource_type = 3;
+    string purchase_token = 4;
+    sint64 purchase_num = 5;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 6;
+  }
+
+  message Response {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.loot_box.v3.LootBoxContentSetPrizes loot_box_content_set_prizes = 2;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventories = 3;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory extra_player_inventories = 4;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 5;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory pickup_extra_player_inventories = 6;
+  }
+}
+
+message LootBoxV3GetProbabilityV1 {
+  message Request {
+    string loot_box_product_id = 1;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.loot_box.v3.LootBoxProbability loot_box_probability = 1;
+    string purchase_token = 2;
+  }
+}
+
+message LootBoxV3GetDetailV1 {
+  message Request {
+    string loot_box_product_id = 1;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.loot_box.v3.LootBoxProduct loot_box_product = 1;
+    repeated takasho.schema.common_featureset.resource.loot_box.v3.LootBoxContentSet loot_box_content_sets = 2;
+    bool is_limited = 3;
+    sint64 purchased_count = 4;
+    takasho.schema.common_featureset.resource.loot_box.v3.LootBoxPickup loot_box_pickup = 5;
+  }
+}
+
+service LootBox {
+  rpc GetAvailableV1(LootBoxGetAvailableV1.Request) returns (LootBoxGetAvailableV1.Response) {}
+  rpc PurchaseV1(LootBoxPurchaseV1.Request) returns (LootBoxPurchaseV1.Response) {}
+  rpc GetProbabilityV1(LootBoxGetProbabilityV1.Request) returns (LootBoxGetProbabilityV1.Response) {}
+  rpc GetDetailV1(LootBoxGetDetailV1.Request) returns (LootBoxGetDetailV1.Response) {}
+}
+
+service LootBoxV2 {
+  rpc GetAvailableV1(LootBoxV2GetAvailableV1.Request) returns (LootBoxV2GetAvailableV1.Response) {}
+  rpc PurchaseV1(LootBoxV2PurchaseV1.Request) returns (LootBoxV2PurchaseV1.Response) {}
+  rpc GetProbabilityV1(LootBoxV2GetProbabilityV1.Request) returns (LootBoxV2GetProbabilityV1.Response) {}
+  rpc GetDetailV1(LootBoxV2GetDetailV1.Request) returns (LootBoxV2GetDetailV1.Response) {}
+}
+
+service LootBoxV3 {
+  rpc GetAvailableV1(LootBoxV3GetAvailableV1.Request) returns (LootBoxV3GetAvailableV1.Response) {}
+  rpc PurchaseV1(LootBoxV3PurchaseV1.Request) returns (LootBoxV3PurchaseV1.Response) {}
+  rpc GetProbabilityV1(LootBoxV3GetProbabilityV1.Request) returns (LootBoxV3GetProbabilityV1.Response) {}
+  rpc GetDetailV1(LootBoxV3GetDetailV1.Request) returns (LootBoxV3GetDetailV1.Response) {}
+}

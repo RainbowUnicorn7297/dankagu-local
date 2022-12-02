@@ -1,0 +1,138 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/game_product/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+import "takasho/schema/common_featureset/resource/wallet/v3.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+
+message GameProductGetAvailableV1 {
+  message Request {
+    enum Condition {
+      AND = 0;
+      OR = 1;
+    }
+
+    message Criterion {
+      repeated string labels = 1;
+      Condition condition = 2;
+    }
+
+    string page_token = 1;
+    uint64 max_results = 2;
+    Criterion criterion = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.game_product.v1.GameProduct game_products = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message GameProductPurchaseV1 {
+  option deprecated = true;
+
+  message Request {
+    enum ResourceType {
+      VIRTUAL_CURRENCY = 0;
+      PLAYER_KEY_VALUE = 1;
+    }
+
+    string game_product_id = 1;
+    string transaction_id = 2;
+    ResourceType resource_type = 3;
+  }
+
+  message Response {
+    string transaction_id = 1;
+    takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventory = 2;
+    takasho.schema.common_featureset.resource.game_product.v1.GameProduct game_product = 3;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 4;
+  }
+}
+
+message GameProductPurchaseV2 {
+  message Request {
+    enum ResourceType {
+      VIRTUAL_CURRENCY = 0;
+      PLAYER_KEY_VALUE = 1;
+    }
+
+    string game_product_id = 1;
+    string transaction_id = 2;
+    ResourceType resource_type = 3;
+    sint64 purchase_num = 4;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 5;
+  }
+
+  message Response {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventories = 2;
+    takasho.schema.common_featureset.resource.game_product.v1.GameProduct game_product = 3;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 4;
+  }
+}
+
+message GameProductPurchaseAndSavePlayerStorageV1 {
+  option deprecated = true;
+  
+  message Request {
+    enum ResourceType {
+      VIRTUAL_CURRENCY = 0;
+      PLAYER_KEY_VALUE = 1;
+    }
+
+    string game_product_id = 1;
+    string transaction_id = 2;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 3;
+    string next_revision = 4;
+    string previous_revision = 5;
+    ResourceType resource_type = 6;
+  }
+
+  message Response {
+    string transaction_id = 1;
+    takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventory = 2;
+    takasho.schema.common_featureset.resource.game_product.v1.GameProduct game_product = 3;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 4;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 5;
+    string revision = 6;
+  }
+}
+
+message GameProductPurchaseAndSavePlayerStorageV2 {
+  message Request {
+    enum ResourceType {
+      VIRTUAL_CURRENCY = 0;
+      PLAYER_KEY_VALUE = 1;
+    }
+
+    string game_product_id = 1;
+    string transaction_id = 2;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 3;
+    string next_revision = 4;
+    string previous_revision = 5;
+    ResourceType resource_type = 6;
+    sint64 purchase_num = 7;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 8;
+  }
+
+  message Response {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventories = 2;
+    takasho.schema.common_featureset.resource.game_product.v1.GameProduct game_product = 3;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 4;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 5;
+    string revision = 6;
+  }
+}
+
+service GameProduct {
+  rpc GetAvailableV1(GameProductGetAvailableV1.Request) returns (GameProductGetAvailableV1.Response) {}
+  rpc PurchaseV1(GameProductPurchaseV1.Request) returns (GameProductPurchaseV1.Response) {}
+  rpc PurchaseV2(GameProductPurchaseV2.Request) returns (GameProductPurchaseV2.Response) {}
+  rpc PurchaseAndSavePlayerStorageV1(GameProductPurchaseAndSavePlayerStorageV1.Request) returns (GameProductPurchaseAndSavePlayerStorageV1.Response) {}
+  rpc PurchaseAndSavePlayerStorageV2(GameProductPurchaseAndSavePlayerStorageV2.Request) returns (GameProductPurchaseAndSavePlayerStorageV2.Response) {}
+}

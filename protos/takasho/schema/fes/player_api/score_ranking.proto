@@ -1,0 +1,134 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api;
+
+import "takasho/schema/fes/resource/score_ranking/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+message ScoreRankingGetAvailableV1 {
+  message Request {}
+
+  message Response {
+    takasho.schema.fes.resource.score_ranking.v1.Season season = 1;
+  }
+}
+
+message ScoreRankingGetGrandPrixLeaderBoardV1 {
+  message Request {
+    sint64 start = 1;
+    sint64 count = 2;
+    repeated string player_storage_keys = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.score_ranking.v1.PlayerGrandPrixRankingInfo player_rank_infos = 1;
+    bool is_during_aggregation = 2;
+  }
+}
+
+message ScoreRankingGetClassGroupLeaderBoardV1 {
+  message Request {
+    sint64 start = 1;
+    sint64 count = 2;
+    repeated string player_storage_keys = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.score_ranking.v1.PlayerClassGroupRankingInfo player_rank_infos = 1;
+  }
+}
+
+message ScoreRankingGetGrandPrixRankV1 {
+  message Request {
+    repeated string player_ids = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.score_ranking.v1.PlayerGrandPrixRankInfo player_grand_prix_rank_infos = 1;
+    bool is_during_aggregation = 2;
+  }
+}
+
+message ScoreRankingGetClassGroupRankV1 {
+  message Request {
+    repeated string player_ids = 1;
+    string period_id = 2;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.score_ranking.v1.PlayerClassGroupRankInfo player_class_group_rank_infos = 1;
+  }
+}
+
+message ScoreRankingGetClassV1 {
+  message Request {
+    repeated string player_ids = 1;
+    string period_id = 2;
+  }
+  
+  message Response {
+    repeated takasho.schema.fes.resource.score_ranking.v1.PlayerClass player_classes = 1;
+  }
+}
+
+message ScoreRankingRegisterV1 {
+  message Request {
+    sint64 score = 1;
+  }
+
+  message Response {
+    sint64 score = 1;
+    sint64 rank = 2;
+  }
+}
+
+message ScoreRankingReceiveClassPrizeV1 {
+  message Request {}
+
+  message Response {
+    repeated takasho.schema.fes.resource.score_ranking.v1.PlayerPeriodClassPrizeInfo player_period_class_prize_infos = 1;
+  }
+}
+
+message ScoreRankingReceiveGrandPrixPrizeV1 {
+  message Request {}
+
+  message Response {
+    sint64 rank = 1;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory inventories = 2;
+  }
+}
+
+message ScoreRankingEntryV1 {
+  message Request {}
+
+  message Response {
+    takasho.schema.fes.resource.score_ranking.v1.PlayerClass player_class = 1;
+  }
+}
+
+message ScoreRankingGetClassGroupElevatingRankV1 {
+  message Request {
+    string period_id = 1;
+    string class_id = 2;
+    string group_id = 3;
+  }
+
+  message Response {
+    sint64 promotion_rank = 1;
+    sint64 demotion_rank = 2;
+  }
+}
+
+service ScoreRanking {
+  rpc GetAvailableV1(ScoreRankingGetAvailableV1.Request) returns (ScoreRankingGetAvailableV1.Response) {}
+  rpc GetGrandPrixLeaderBoardV1(ScoreRankingGetGrandPrixLeaderBoardV1.Request) returns (ScoreRankingGetGrandPrixLeaderBoardV1.Response) {}
+  rpc GetClassGroupLeaderBoardV1(ScoreRankingGetClassGroupLeaderBoardV1.Request) returns (ScoreRankingGetClassGroupLeaderBoardV1.Response) {}
+  rpc GetGrandPrixRankV1(ScoreRankingGetGrandPrixRankV1.Request) returns (ScoreRankingGetGrandPrixRankV1.Response) {}
+  rpc GetClassGroupRankV1(ScoreRankingGetClassGroupRankV1.Request) returns (ScoreRankingGetClassGroupRankV1.Response) {}
+  rpc GetClassV1(ScoreRankingGetClassV1.Request) returns (ScoreRankingGetClassV1.Response) {}
+  rpc RegisterV1(ScoreRankingRegisterV1.Request) returns (ScoreRankingRegisterV1.Response) {}
+  rpc ReceiveClassPrizeV1(ScoreRankingReceiveClassPrizeV1.Request) returns (ScoreRankingReceiveClassPrizeV1.Response) {}
+  rpc ReceiveGrandPrixPrizeV1(ScoreRankingReceiveGrandPrixPrizeV1.Request) returns (ScoreRankingReceiveGrandPrixPrizeV1.Response) {}
+  rpc EntryV1(ScoreRankingEntryV1.Request) returns (ScoreRankingEntryV1.Response) {}
+  rpc GetClassGroupElevatingRankV1(ScoreRankingGetClassGroupElevatingRankV1.Request) returns (ScoreRankingGetClassGroupElevatingRankV1.Response) {}
+}

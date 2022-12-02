@@ -1,0 +1,20 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.player_storage.v2;
+
+message Entry {
+  string player_id = 1;
+  string key = 2;
+  bytes value = 3;
+  sint64 created_at = 4;
+  sint64 updated_at = 5;
+}
+
+message Criterion {
+  enum MatchingType {
+    EXACT = 0;
+    FORWARD = 1;
+  }
+
+  string key = 1;
+  MatchingType matching_type = 2;
+}

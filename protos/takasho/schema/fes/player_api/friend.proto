@@ -1,0 +1,109 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api.friend;
+
+import "takasho/schema/fes/resource/friend/v1.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+
+message FriendFollowV1 {
+  message Request {
+    string player_id = 1;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 2;
+  }
+
+  message Response {}
+}
+
+message FriendUnfollowV1 {
+  message Request {
+    string player_id = 1;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 2;
+  }
+
+  message Response {}
+}
+
+message FriendRemoveMyFollowerV1 {
+  message Request {
+    string player_id = 1;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 2;
+  }
+
+  message Response {}
+}
+
+message FriendSearchPlayerByPlayerShortIDV1 {
+  message Request {
+    string player_short_id = 1;
+    repeated string player_storage_keys = 2;
+  }
+
+  message Response {
+    takasho.schema.fes.resource.friend.v1.FriendPlayer player = 1;
+  }
+}
+
+message FriendGetMyFollowersV1 {
+  message Request {
+    repeated string player_storage_keys = 1;
+    takasho.schema.fes.resource.friend.v1.Criterion criterion = 2;
+    string page_token = 3;
+    uint64 max_results = 4;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.friend.v1.FriendPlayer players = 1;
+    string prev_page_token = 2;
+    string next_page_token = 3;
+  }
+}
+
+message FriendGetMyFollowingsV1 {
+  message Request {
+    repeated string player_storage_keys = 1;
+    takasho.schema.fes.resource.friend.v1.Criterion criterion = 2;
+    string page_token = 3;
+    uint64 max_results = 4;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.friend.v1.FriendPlayer players = 1;
+    string prev_page_token = 2;
+    string next_page_token = 3;
+  }
+}
+
+message FriendGetRecentlyLoggedInPlayersV1 {
+  message Request {
+    repeated string player_storage_keys = 1;
+    takasho.schema.fes.resource.friend.v1.Criterion criterion = 2;
+    string page_token = 3;
+    uint64 max_results = 4;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.friend.v1.FriendPlayer players = 1;
+    string prev_page_token = 2;
+    string next_page_token = 3;
+  }
+}
+
+message FriendGetFollowStatusesV1 {
+  message Request {
+    repeated string player_ids = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.friend.v1.FollowStatus follow_statuses = 1;
+  }
+}
+
+service Friend {
+  rpc FollowV1(FriendFollowV1.Request) returns (FriendFollowV1.Response) {}
+  rpc UnfollowV1(FriendUnfollowV1.Request) returns (FriendUnfollowV1.Response) {}
+  rpc RemoveMyFollowerV1(FriendRemoveMyFollowerV1.Request) returns (FriendRemoveMyFollowerV1.Response) {}
+  rpc SearchPlayerByPlayerShortIDV1(FriendSearchPlayerByPlayerShortIDV1.Request) returns (FriendSearchPlayerByPlayerShortIDV1.Response) {}
+  rpc GetMyFollowersV1(FriendGetMyFollowersV1.Request) returns (FriendGetMyFollowersV1.Response) {}
+  rpc GetMyFollowingsV1(FriendGetMyFollowingsV1.Request) returns (FriendGetMyFollowingsV1.Response) {}
+  rpc GetRecentlyLoggedInPlayersV1(FriendGetRecentlyLoggedInPlayersV1.Request) returns (FriendGetRecentlyLoggedInPlayersV1.Response) {}
+  rpc GetFollowStatusesV1(FriendGetFollowStatusesV1.Request) returns (FriendGetFollowStatusesV1.Response) {}
+}

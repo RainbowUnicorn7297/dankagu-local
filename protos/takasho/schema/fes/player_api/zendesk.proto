@@ -1,0 +1,14 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api;
+
+message ZendeskGetUnreadCountV1 {
+  message Request {}
+
+  message Response {
+    int64 unread_count = 1;
+  }
+}
+
+service Zendesk {
+  rpc GetUnreadCountV1(ZendeskGetUnreadCountV1.Request) returns (ZendeskGetUnreadCountV1.Response) {}
+}

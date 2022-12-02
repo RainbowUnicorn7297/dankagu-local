@@ -16,7 +16,7 @@ message PlayerEventLogServerPayload {
 message LootBoxV3 {
   string transaction_id = 1;
   string loot_box_product_id = 2;
-  int64 num = 3;
+  sint64 num = 3;
   repeated string content_ids = 4;
   repeated ConsumeResource consume_resources = 5;
   repeated bytes content_values = 6;
@@ -26,8 +26,8 @@ message LootBoxV3 {
 message StepUpLootBoxV2 {
   string transaction_id = 1;
   string step_up_loot_box_product_id = 2;
-  int64 step = 3;
-  int64 next_step = 4;
+  sint64 step = 3;
+  sint64 next_step = 4;
   repeated string content_ids = 5;
   repeated ConsumeResource consume_resources = 6;
   repeated bytes content_values = 7;
@@ -36,7 +36,7 @@ message StepUpLootBoxV2 {
 
 message ConsumeResource {
   string consume_resource_key = 1;
-  int64 consume_resource_num = 2;
+  sint64 consume_resource_num = 2;
 }
 
 message FriendV1 {
@@ -50,15 +50,15 @@ message FriendV1 {
 
   ActionType action_type = 1;
   repeated string target_player_ids = 2;
-  int64 friends_num = 3;
-  int64 max_friends_num = 4;
+  sint64 friends_num = 3;
+  sint64 max_friends_num = 4;
   bytes takasho_log = 5;
 }
 
 message ConsumeVc {
   message Currency {
     string name = 1;
-    int64 amonut = 2;
+    sint64 amonut = 2;
   }
 
   string id = 1;
@@ -69,10 +69,10 @@ message ConsumeVc {
 message BoxLootBox {
   string transaction_id = 1;
   string gacha_id = 2;
-  int64 exec_num = 3;
+  sint64 exec_num = 3;
   repeated string get_item_ids = 4;
   string paid_id = 5;
-  int64 paid_amount = 6;
-  int64 af_box_remain = 7;
+  sint64 paid_amount = 6;
+  sint64 af_box_remain = 7;
   bytes takasho_log = 8;
 }

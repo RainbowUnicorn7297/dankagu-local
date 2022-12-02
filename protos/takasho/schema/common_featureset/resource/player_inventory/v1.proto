@@ -1,0 +1,80 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.player_inventory.v1;
+
+enum ItemType {
+  GAME_RUNTIME = 0;
+  VIRTUAL_CURRENCY = 1;
+  PLAYER_KEY_VALUE_STORE = 2;
+}
+
+enum Route {
+  UNKNOWN = 0;
+  PURCHASE = 1;
+  LOGIN_BONUS = 2;
+  LOOT_BOX = 3;
+  ACHIEVEMENT = 4;
+  COMPENSATION = 5;
+  GAME_PRODUCT = 6;
+  BOX_LOOT_BOX = 7;
+  STEP_UP_LOOT_BOX = 8;
+  TOTAL_LOGIN_BONUS = 9;
+}
+
+enum OrderField {
+  OPENED_AT = 0;
+  EXPIRED_AT = 1;
+}
+
+enum OrderDirection {
+  ASC = 0;
+  DESC = 1;
+}
+
+message Criterion {
+  sint64 count = 1;
+  repeated Route routes = 2;
+  repeated string search_labels = 3;
+  string page_token = 4;
+  sint64 expired_at_before = 5;
+  sint64 expired_at_after = 6;
+  Order order = 7;
+}
+
+message Order {
+  OrderField field = 1;
+  OrderDirection direction = 2;
+}
+
+message PlayerInventory {
+  string id = 1;
+  string player_id = 2;
+  ItemType item_type = 3;
+  string schema_key = 4;
+  bytes value = 5;
+  Route route = 6;
+  string message = 7;
+  string search_label = 8;
+  sint64 opened_at = 9;
+  sint64 expired_at = 10;
+  string system_resource_name = 11;
+  sint64 system_resource_num = 12;
+  sint64 created_at = 13;
+}
+
+message ReceivedPlayerInventory {
+  string id = 1;
+  string original_inventory_id = 2;
+  string player_id = 3;
+  ItemType item_type = 4;
+  string schema_key = 5;
+  bytes value = 6;
+  Route route = 7;
+  string message = 8;
+  string search_label = 9;
+  sint64 opened_at = 10;
+  sint64 expired_at = 11;
+  string system_resource_name = 12;
+  sint64 system_resource_num = 13;
+  sint64 created_at = 14;
+  sint64 received_at = 15;
+}

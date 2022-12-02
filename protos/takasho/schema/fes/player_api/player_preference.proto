@@ -1,0 +1,35 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api.player_preference;
+
+import "takasho/schema/fes/resource/player_preference/v1.proto";
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+
+message FesPlayerPreferenceGetV1 {
+  message Request {}
+
+  message Response {
+    takasho.schema.fes.resource.player_preference.v1.PlayerPreference player_preference = 1;
+  }
+}
+
+message FesPlayerPreferenceSetAndSavePlayerStorageV1 {
+  message Request {
+    takasho.schema.fes.resource.player_preference.v1.PlayerPreference player_preference = 1;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 2;
+    string next_revision = 3;
+    string previous_revision = 4;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 5;
+  }
+
+  message Response {
+    takasho.schema.fes.resource.player_preference.v1.PlayerPreference player_preference = 1;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 2;
+    string revision = 3;
+  }
+}
+
+service FesPlayerPreference {
+  rpc GetV1(FesPlayerPreferenceGetV1.Request) returns (FesPlayerPreferenceGetV1.Response) {}
+  rpc SetAndSavePlayerStorageV1(FesPlayerPreferenceSetAndSavePlayerStorageV1.Request) returns (FesPlayerPreferenceSetAndSavePlayerStorageV1.Response) {}
+}

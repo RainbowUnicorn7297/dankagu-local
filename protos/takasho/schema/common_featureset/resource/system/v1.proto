@@ -18,15 +18,15 @@ message DeviceInfo {
 }
 
 message PlayerStatus {
-  int64 status = 1;
+  sint64 status = 1;
   string description = 2;
-  int64 expired_at = 3;
+  sint64 expired_at = 3;
   bool has_expired_at = 4;
 }
 
 message BanStatus {
-  int64 status = 1;
+  sint64 status = 1;
   string description = 2;
-  int64 expired_at = 3;
+  sint64 expired_at = 3;
   bool has_expired_at = 4;
 }

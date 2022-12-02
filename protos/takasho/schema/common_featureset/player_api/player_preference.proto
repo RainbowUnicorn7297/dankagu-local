@@ -1,0 +1,71 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/player_preference/v1.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+
+message PlayerPreferenceGetPreferenceV1 {
+  message Request {}
+
+  message Response {
+    takasho.schema.common_featureset.resource.player_preference.v1.PlayerPreference preference = 1;
+    string player_short_id = 2;
+  }
+}
+
+message PlayerPreferenceSetPreferenceV1 {
+  message Request {
+    takasho.schema.common_featureset.resource.player_preference.v1.PlayerPreference preference = 1;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 2;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.player_preference.v1.PlayerPreference preference = 1;
+    string player_short_id = 2;
+  }
+}
+
+message PlayerPreferenceSetPreferenceAndSavePlayerStorageV1 {
+  message Request {
+    takasho.schema.common_featureset.resource.player_preference.v1.PlayerPreference preference = 1;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 2;
+    string next_revision = 3;
+    string previous_revision = 4;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.player_preference.v1.PlayerPreference preference = 1;
+    string player_short_id = 2;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 3;
+    string revision = 4;
+  }
+}
+
+message PlayerPreferenceGetMonthlyBillingLimitV1 {
+  message Request {}
+
+  message Response {
+    sint64 min_age = 1;
+    sint64 max_age = 2;
+    sint64 monthly_billing_limit = 3;
+    bool exits_monthly_billing_limit = 4;
+  }
+}
+
+message PlayerPreferenceGetMonthlyPurchaseSummaryV1 {
+  message Request {}
+
+  message Response {
+    sint64 monthly_billing_limit = 1;
+    sint64 paid_amount = 2;
+  }
+}
+
+service PlayerPreference {
+  rpc GetPreferenceV1(PlayerPreferenceGetPreferenceV1.Request) returns (PlayerPreferenceGetPreferenceV1.Response) {}
+  rpc SetPreferenceV1(PlayerPreferenceSetPreferenceV1.Request) returns (PlayerPreferenceSetPreferenceV1.Response) {}
+  rpc SetPreferenceAndSavePlayerStorageV1(PlayerPreferenceSetPreferenceAndSavePlayerStorageV1.Request) returns (PlayerPreferenceSetPreferenceAndSavePlayerStorageV1.Response) {}
+  rpc GetMonthlyBillingLimitV1(PlayerPreferenceGetMonthlyBillingLimitV1.Request) returns (PlayerPreferenceGetMonthlyBillingLimitV1.Response) {}
+  rpc GetMonthlyPurchaseSummaryV1(PlayerPreferenceGetMonthlyPurchaseSummaryV1.Request) returns (PlayerPreferenceGetMonthlyPurchaseSummaryV1.Response) {}
+}

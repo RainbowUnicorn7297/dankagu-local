@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import grpc
 
 from takasho.packer import packer
@@ -6,9 +8,13 @@ from takasho.schema.common_featureset.player_api import ondemand_master_pb2_grpc
 
 
 class OndemandMaster(ondemand_master_pb2_grpc.OndemandMasterServicer):
-
+    
     def GetEntriesV1(self, request, context):
         response = ondemand_master_pb2.OndemandMasterGetEntriesV2.Response()
+        p = Path(__file__).with_name('ondemand_master.gacha.hex')
+        with p.open() as f:
+            gacha_entries = ondemand_master_pb2.OndemandMasterGetEntriesV2. \
+                Response.FromString(bytes.fromhex(f.read())).entries
         if 'ODMGeneric_Boot' in request.keys:
             entry = response.entries.add()
             entry.key = 'ODMGeneric_Boot'
@@ -21,18 +27,35 @@ class OndemandMaster(ondemand_master_pb2_grpc.OndemandMasterServicer):
             entry = response.entries.add()
             entry.key = 'ODMGeneric_Signature'
             entry.value = b'[{"CloseAt":"4102444800","Enable":2,"ID":1,"Key":"MasterEnable","OpenAt":"0","Value":"1"},{"CloseAt":"4102444800","Enable":2,"ID":2,"Key":"Sign_D","OpenAt":"0","Value":"db2d823ea4f7bcd40b6998a3b7a8adfd"},{"CloseAt":"4102444800","Enable":2,"ID":4,"Key":"Sign_X","OpenAt":"0","Value":"14b869b2ba7332f4d633f21932b57147"},{"CloseAt":"4102444800","Enable":2,"ID":5,"Key":"Sign_Xup","OpenAt":"0","Value":"cfb5a6c2695070d6642eb34b60e42048"}]'
+        if 'AssetRootHash' in request.keys:
+            entry = response.entries.add()
+            entry.key = 'AssetRootHash'
+            entry.value = b'{"Roots":[{"Client":"n5rgXwR19ppZ_client","Key":"v2_1_0_any","OpenAt":123456789}]}'
+        if 'AssetUploadV2+v2_1_0_any+g262' in request.keys:
+            entry = response.entries.add()
+            entry.key = 'AssetUploadV2+v2_1_0_any+g262'
+            p = Path(__file__).with_name('ondemand_master.AssetUploadV2+v2_1_0_any+g262.json')
+            with p.open('rb') as f:
+                entry.value = f.read()
+        for key in request.keys:
+            if 'Gacha-' in key:
+                values = [e.value for e in gacha_entries if e.key == key]
+                for value in values:
+                    entry = response.entries.add()
+                    entry.key = key
+                    entry.value = value
         return response
 
 
 def add_OndemandMasterServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'GetEntriesV1': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetEntriesV1,
-                    request_deserializer=lambda x: ondemand_master_pb2.OndemandMasterGetEntriesV2.Request.FromString(packer.unpack(x)),
-                    response_serializer=lambda x: packer.pack(ondemand_master_pb2.OndemandMasterGetEntriesV2.Response.SerializeToString(x)),
-            ),
+        'GetEntriesV1': grpc.unary_unary_rpc_method_handler(
+            servicer.GetEntriesV1,
+            request_deserializer=lambda x: ondemand_master_pb2.OndemandMasterGetEntriesV2.Request.FromString(packer.unpack(x)),
+            response_serializer=lambda x: packer.pack(ondemand_master_pb2.OndemandMasterGetEntriesV2.Response.SerializeToString(x)),
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'takasho.schema.common_featureset.player_api.OndemandMaster', rpc_method_handlers)
+        'takasho.schema.common_featureset.player_api.OndemandMaster', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 

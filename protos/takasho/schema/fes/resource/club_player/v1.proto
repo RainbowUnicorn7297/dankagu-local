@@ -1,0 +1,16 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.club_player.v1;
+
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+import "takasho/schema/fes/resource/club_role/v1.proto";
+
+message ClubPlayer {
+  string player_id =  1;
+  repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry player_storage_entries = 2;
+  string nickname = 3;
+  uint64 frame = 4;
+  takasho.schema.fes.resource.club_role.v1.ClubRole role = 5;
+  sint64 joined_at = 6;
+  sint64 last_logged_in_at = 7;
+  string player_short_id = 8;
+}

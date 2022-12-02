@@ -1,0 +1,20 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.baas_product.v1;
+
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+message BaasProduct {
+  string baas_product_id = 1;
+  string inventory_message = 2;
+  repeated BaasProductExtra extras = 3;
+}
+
+message BaasProductExtra {
+  string baas_product_extra_id = 1;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 2;
+  string schema_key = 3;
+  bytes value = 4;
+  string system_resource_name = 5;
+  sint64 system_resource_num = 6;
+  string search_label = 7;
+}

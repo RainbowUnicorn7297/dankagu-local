@@ -1,0 +1,24 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.club_preference.v1;
+
+message ClubPreference {
+  enum PlayStyle {
+    UNKNOWN_STYLE = 0;
+    MATTARI = 1;
+    GATTSURI = 2;
+    BEGINNER = 3;
+  }
+
+  enum ApprovalPolicy {
+    UNKNOWN_POLICY = 0;
+    MANUAL = 1;
+    AUTO = 2;
+  }
+
+  string name = 1;
+  string profile = 2;
+  PlayStyle play_style = 3;
+  ApprovalPolicy approval_policy = 4;
+  bool searchable = 5;
+  string character_id = 6;
+}

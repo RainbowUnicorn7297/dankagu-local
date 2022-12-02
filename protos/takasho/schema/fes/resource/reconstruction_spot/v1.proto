@@ -1,0 +1,36 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.reconstruction_spot.v1;
+
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+message Spot {
+  string spot_id = 1;
+  uint64 opened_at = 2;
+  uint64 finished_at = 3;
+  uint64 closed_at = 4;
+  string key = 5;
+  repeated Stage stages = 6;
+}
+
+message Stage {
+  uint64 stage = 1;
+  uint64 max_tickets_count = 2;
+  uint64 opened_at = 3;
+  uint64 closed_at = 4;
+  repeated Prize prizes = 5;
+  uint64 aggregated_tickets_count = 6;
+}
+
+message Prize {
+  string prize_id = 1;
+  float ratio = 2;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 3;
+  string schema_key = 4;
+  bytes value = 5;
+  string value_path = 6;
+  string inventory_message = 7;
+  string search_label = 8;
+  string system_resource_name = 9;
+  sint64 system_resource_num = 10;
+  bool is_unlocked = 11;
+}

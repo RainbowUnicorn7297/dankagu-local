@@ -1,0 +1,29 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api;
+
+import "takasho/schema/fes/resource/reconstruction_spot/v1.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+message ReconstructionSpotGetAvailableV1 {
+  message Request {}
+
+  message Response {
+    repeated takasho.schema.fes.resource.reconstruction_spot.v1.Spot spots = 1;
+  }
+}
+
+message ReconstructionSpotReceivePrizesV1 {
+  message Request {
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory inventories = 1;
+  }
+}
+
+service ReconstructionSpot {
+  rpc GetAvailableV1(ReconstructionSpotGetAvailableV1.Request) returns (ReconstructionSpotGetAvailableV1.Response) {}
+  rpc ReceivePrizesV1(ReconstructionSpotReceivePrizesV1.Request) returns (ReconstructionSpotReceivePrizesV1.Response) {}
+}

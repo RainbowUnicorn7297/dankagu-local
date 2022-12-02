@@ -1,0 +1,21 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.consume_resource_set.v1;
+
+enum ResourceType {
+  VIRTUAL_CURRENCY = 0;
+  PLAYER_KEY_VALUE = 1;
+  NO_CONSUME = 2;
+}
+
+message ConsumeResourceSet {
+  string consume_resource_set_id = 1;
+  ResourceType resource_type = 2;
+  sint64 amount = 3;
+  repeated ConsumeResource consume_resources = 4;
+}
+
+message ConsumeResource {
+  string consume_resource_id = 1;
+  string resource_key = 2;
+  sint64 priority = 3;
+}

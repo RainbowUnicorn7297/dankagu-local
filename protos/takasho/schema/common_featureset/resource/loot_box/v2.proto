@@ -1,0 +1,117 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.loot_box.v2;
+
+import "takasho/schema/common_featureset/resource/consume_resource_set/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+enum LimitType {
+  NONE = 0;
+  DATE_LINE = 1;
+  TOTAL = 2;
+}
+
+message LootBoxProduct {
+  string loot_box_product_id = 1;
+  string inventory_message = 2;
+  sint64 opened_at = 3;
+  sint64 closed_at = 4;
+  bool has_extra = 5;
+  repeated Extra extras = 6;
+  bool has_limit = 7;
+  Limit limit = 8;
+  sint64 total_lot_num = 9;
+  repeated takasho.schema.common_featureset.resource.consume_resource_set.v1.ConsumeResourceSet consume_resource_sets = 10;
+}
+
+message LootBoxPickup {
+  string loot_box_pickup_id = 1;
+  repeated LootBoxContent pickup_contents = 2;
+}
+
+message LootBoxProductWithPurchasedCount {
+  LootBoxProduct loot_product = 1;
+  sint64 purchased_count = 2;
+}
+
+message LootBoxContentSet {
+  string loot_box_content_set_id = 1;
+  sint64 lot_num = 2;
+  repeated LootBoxLabel labels = 3;
+}
+
+message LootBoxLabel {
+  string loot_box_label = 1;
+  sint64 weight = 2;
+  repeated LootBoxContent contents = 3;
+}
+
+message LootBoxContent {
+  string loot_box_content_id = 1;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 2;
+  string schema_key = 3;
+  bytes value = 4;
+  sint64 weight = 5;
+  string search_label = 6;
+}
+
+message Extra {
+  string loot_box_extra_id = 1;
+  string inventory_message = 2;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 3;
+  string schema_key = 4;
+  bytes value = 5;
+  string resource_name = 6;
+  sint64 resource_num = 7;
+  string search_label = 8;
+}
+
+message PickupExtra {
+  string loot_box_pickup_extra_id = 1;
+  string inventory_message = 2;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 3;
+  string schema_key = 4;
+  bytes value = 5;
+  string resource_name = 6;
+  sint64 resource_num = 7;
+  string search_label = 8;
+}
+
+message Limit {
+  LimitType limit_type = 1;
+  sint64 limit_num = 2;
+  string date_line = 3;
+}
+
+message LootBoxProbability {
+  string loot_box_product_id = 1;
+  repeated LootBoxContentSetProbability loot_box_content_set_probabilities = 2;
+}
+
+message LootBoxContentSetProbability {
+  string loot_box_content_set_id = 1;
+  repeated LootBoxLabelProbability loot_box_label_probabilities = 2;
+  repeated LootBoxContentProbabilityInContentSet loot_box_content_probabilities_in_content_set = 3;
+}
+
+message LootBoxLabelProbability {
+  string label = 1;
+  string probability = 2;
+  repeated LootBoxContentProbabilityInLabel loot_box_content_probabilities_in_label = 3;
+}
+
+message LootBoxContentProbabilityInLabel {
+  string loot_box_content_id = 1;
+  bytes value = 2;
+  string probability = 3;
+}
+
+message LootBoxContentProbabilityInContentSet {
+  string loot_box_content_id = 1;
+  bytes value = 2;
+  string probability = 3;
+}
+
+message LootBoxContentSetPrizes {
+  string loot_box_content_set_id = 1;
+  repeated LootBoxContent loot_box_contents = 2;
+}

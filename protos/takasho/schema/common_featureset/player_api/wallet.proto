@@ -1,0 +1,31 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/wallet/v3.proto";
+
+message WalletGetBalancesV1 {
+  option deprecated = true;
+  
+  message Request {}
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.wallet.v3.Wallet balance = 1;
+  }
+}
+
+message WalletGetBalancesV2 {
+  message Request {
+    int64 expired_at = 1;
+  }
+
+  message Response {
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet total = 1;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet expiration = 2;
+    int64 expired_at = 3;
+  }
+}
+
+service Wallet {
+  rpc GetBalancesV1(WalletGetBalancesV1.Request) returns (WalletGetBalancesV1.Response) {}
+  rpc GetBalancesV2(WalletGetBalancesV2.Request) returns (WalletGetBalancesV2.Response) {}
+}

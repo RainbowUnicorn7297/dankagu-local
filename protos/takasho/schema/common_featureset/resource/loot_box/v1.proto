@@ -1,0 +1,85 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.loot_box.v1;
+
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+enum LimitType {
+  NONE = 0;
+  DATE_LINE = 1;
+  TOTAL = 2;
+}
+
+message LootBoxProduct {
+  string loot_box_product_id = 1;
+  string virtual_currency_key = 2;
+  sint64 virtual_currency_amount = 3;
+  string inventory_message = 4;
+  sint64 opened_at = 5;
+  sint64 closed_at = 6;
+  bool has_extra = 7;
+  Extra extra = 8;
+  bool has_limit = 9;
+  Limit limit = 10;
+  sint64 total_lot_num = 11;
+}
+
+message LootBoxContentSet {
+  string loot_box_product_id = 1;
+  string loot_box_content_set_id = 2;
+  sint64 lot_num = 3;
+  repeated LootBoxContent contents = 4;
+}
+
+message LootBoxContent {
+  string loot_box_product_id = 1;
+  string loot_box_content_set_id = 2;
+  string loot_box_content_id = 3;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 4;
+  string schema_key = 5;
+  bytes value = 6;
+  string label = 7;
+  string search_label = 8;
+}
+
+message LootBoxProbability {
+  string loot_box_product_id = 1;
+  repeated LootBoxContentSetProbability loot_box_content_set_probabilities = 2;
+}
+
+message LootBoxContentSetProbability {
+  string loot_box_content_set_id = 1;
+  repeated LootBoxContentProbability loot_box_content_probabilities = 2;
+  repeated LootBoxLabelProbability loot_box_label_probability = 3;
+}
+
+message LootBoxContentProbability {
+  string loot_box_content_id = 1;
+  bytes value = 2;
+  string probability = 3;
+}
+
+message LootBoxLabelProbability {
+  string label = 1;
+  string probability = 2;
+}
+
+message LootBoxContentSetPrizes {
+  string loot_box_content_set_id = 1;
+  repeated LootBoxContent loot_box_contents = 2;
+}
+
+message Extra {
+  string inventory_message = 1;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 2;
+  string schema_key = 3;
+  bytes value = 4;
+  string resource_name = 5;
+  sint64 resource_num = 6;
+  string search_label = 7;
+}
+
+message Limit {
+  LimitType limit_type = 1;
+  sint64 limit_num = 2;
+  string date_line = 3;
+}

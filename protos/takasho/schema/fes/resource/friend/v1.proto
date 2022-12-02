@@ -1,0 +1,54 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.friend.v1;
+
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+
+message Criterion {
+  enum OrderField {
+    UNKNOWN_ORDER_FIELD = 0;
+    LAST_LOGGED_IN_AT = 1;
+    PLAYER_LEVEL = 2;
+  }
+
+  enum OrderDirection {
+    ASC = 0;
+    DESC = 1;
+  }
+
+  message Filter {
+    enum Follow {
+      ALL_FOLLOW = 0;
+      MUTUAL = 1;
+      NOT_MUTUAL = 2;
+    }
+
+    enum Club {
+      ALL_CLUB = 0;
+      SAME_CLUB = 1;
+      NOT_SAME_CLUB = 2;
+    }
+
+    Follow follow = 1;
+    Club club = 2;
+  }
+
+  OrderField order_field = 1;
+  OrderDirection order_direction = 2;
+  Filter filter = 3;
+}
+
+message FriendPlayer {
+  string player_id = 1;
+  repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry player_storage_entries = 2;
+  string nickname = 3;
+  repeated string club_names = 4;
+  bool is_following = 5;
+  bool is_followed = 6;
+  sint64 last_logged_in_at = 7;
+}
+
+message FollowStatus {
+  string player_id = 1;
+  bool is_following = 2;
+  bool is_followed = 3;
+}

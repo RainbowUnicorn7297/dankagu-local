@@ -1,0 +1,47 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+
+message PlayerStorageSetEntriesV2 {
+  message Request {
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 1;
+    string next_revision = 2;
+    string previous_revision = 3;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 4;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 1;
+    string revision = 2;
+  }
+}
+
+message PlayerStorageGetEntriesV2 {
+    message Request {
+        repeated takasho.schema.common_featureset.resource.player_storage.v2.Criterion criteria = 1;
+    }
+
+    message Response {
+        repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 1;
+        string revision = 2;
+    }
+}
+
+message PlayerStorageGetOtherPlayerEntriesV2 {
+    message Request {
+        repeated string player_ids = 1;
+        repeated takasho.schema.common_featureset.resource.player_storage.v2.Criterion criteria = 2;
+    }
+
+    message Response {
+        repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 1;
+    }
+}
+
+service PlayerStorage {
+  rpc SetEntriesV2(PlayerStorageSetEntriesV2.Request) returns (PlayerStorageSetEntriesV2.Response) {}
+  rpc GetEntriesV2(PlayerStorageGetEntriesV2.Request) returns (PlayerStorageGetEntriesV2.Response) {}
+  rpc GetOtherPlayerEntriesV2(PlayerStorageGetOtherPlayerEntriesV2.Request) returns (PlayerStorageGetOtherPlayerEntriesV2.Response) {}
+}

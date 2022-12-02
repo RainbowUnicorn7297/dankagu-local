@@ -1,0 +1,32 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.wallet.v2;
+
+message Wallet {
+  option deprecated = true;
+
+  enum Platform {
+    NONE = 0;
+    APPLE = 1;
+    GOOGLE = 2;
+  }
+
+  message Balance {
+    sint64 free = 1;
+    sint64 paid = 2;
+    sint64 total = 3;
+  }
+
+  message VirtualCurrency {
+    string virtual_currency_name = 1;
+    Platform platform = 2;
+    Balance balance = 3;
+  }
+
+  message PlayerKeyValue {
+    string key = 1;
+    sint64 amount = 2;
+  }
+
+  repeated VirtualCurrency virtual_currencies = 1;
+  repeated PlayerKeyValue player_key_values = 2;
+}

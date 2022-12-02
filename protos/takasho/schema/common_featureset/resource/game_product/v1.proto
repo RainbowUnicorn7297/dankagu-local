@@ -1,0 +1,17 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.game_product.v1;
+
+import "takasho/schema/common_featureset/resource/consume_resource_set/v1.proto";
+
+message GameProduct {
+  string game_product_id = 1;
+  string schema_key = 6;
+  bytes value = 7;
+  string inventory_message = 8;
+  sint64 opened_at = 9;
+  sint64 closed_at = 10;
+  sint64 receivable_sec = 11;
+  string search_label = 12;
+  repeated takasho.schema.common_featureset.resource.consume_resource_set.v1.ConsumeResourceSet consume_resource_sets = 13;
+  repeated string labels = 14;
+}

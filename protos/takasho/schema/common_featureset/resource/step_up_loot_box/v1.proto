@@ -1,0 +1,89 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.step_up_loot_box.v1;
+
+import "takasho/schema/common_featureset/resource/consume_resource_set/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+message StepUpLootBoxProduct {
+  string step_up_loot_box_product_id = 1;
+  sint64 opened_at = 2;
+  sint64 closed_at = 3;
+  bool is_loop = 4;
+  repeated StepUpLootBoxStep step_up_loot_box_steps = 5;
+}
+
+message StepUpLootBoxProductWithPlayerStepNum {
+  StepUpLootBoxProduct product = 1;
+  sint64 player_step_num = 2;
+}
+
+message StepUpLootBoxStep {
+  string step_up_loot_box_product_id = 1;
+  sint64 step_up_loot_box_step_num = 2;
+  string inventory_message = 5;
+  bool has_extra = 6;
+  repeated Extra extras = 7;
+  sint64 repeat_num = 8;
+  sint64 total_lot_num = 9;
+  repeated StepUpLootBoxContentSet step_up_loot_box_content_sets = 10;
+  repeated takasho.schema.common_featureset.resource.consume_resource_set.v1.ConsumeResourceSet consume_resource_sets = 11;
+}
+
+message StepUpLootBoxContentSet {
+  string step_up_loot_box_product_id = 1;
+  sint64 step_up_loot_box_step_num = 2;
+  string step_up_loot_box_content_set_id = 3;
+  sint64 lot_num = 4;
+  repeated StepUpLootBoxContent contents = 5;
+}
+
+message StepUpLootBoxContent {
+  string step_up_loot_box_product_id = 1;
+  sint64 step_up_loot_box_step_num = 2;
+  string step_up_loot_box_content_set_id = 3;
+  string step_up_loot_box_content_id = 4;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 5;
+  string schema_key = 6;
+  bytes value = 7;
+  sint64 weight = 8;
+  string label = 9;
+  string search_label = 10;
+}
+
+message StepUpLootBoxProbability {
+  string step_up_loot_box_product_id = 1;
+  repeated StepUpLootBoxStepProbability step_up_loot_box_step_probabilities = 2;
+}
+
+message StepUpLootBoxStepProbability {
+  sint64 step_up_loot_box_step_num = 1;
+  repeated StepUpLootBoxContentSetProbability step_up_loot_box_content_set_probabilities = 2;
+}
+
+message StepUpLootBoxContentSetProbability {
+  string step_up_loot_box_content_set_id = 1;
+  repeated StepUpLootBoxContentProbability step_up_loot_box_content_probabilities = 2;
+  repeated StepUpLootBoxLabelProbability step_up_loot_box_label_probability = 3;
+}
+
+message StepUpLootBoxContentProbability {
+  string step_up_loot_box_content_id = 1;
+  bytes value = 2;
+  string probability = 3;
+}
+
+message StepUpLootBoxLabelProbability {
+  string label = 1;
+  string probability = 2;
+}
+
+message Extra {
+  string step_up_loot_box_extra_id = 1;
+  string inventory_message = 2;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 3;
+  string schema_key = 4;
+  bytes value = 5;
+  string resource_name = 6;
+  sint64 resource_num = 7;
+  string search_label = 8;
+}

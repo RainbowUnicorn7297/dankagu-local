@@ -1,0 +1,18 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/baas_product/v1.proto";
+
+message BaasProductGetAvailableByIDsV1 {
+  message Request {
+    repeated string product_ids = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.baas_product.v1.BaasProduct baas_products = 1;
+  }
+}
+
+service BaasProduct {
+  rpc GetAvailableByIDsV1(BaasProductGetAvailableByIDsV1.Request) returns (BaasProductGetAvailableByIDsV1.Response) {}
+}

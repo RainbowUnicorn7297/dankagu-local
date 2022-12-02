@@ -1,0 +1,80 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api.club_player;
+
+import "takasho/schema/fes/resource/club_storage/v1.proto";
+import "takasho/schema/fes/resource/club/v1.proto";
+import "takasho/schema/fes/resource/club_player/v1.proto";
+import "takasho/schema/fes/resource/club_role/v1.proto";
+
+message ClubPlayerGetClubs {
+  message Request {
+    string player_id = 1;
+    repeated takasho.schema.fes.resource.club_storage.v1.Criterion criteria = 2;
+  }
+
+  message ClubWithFrame {
+    takasho.schema.fes.resource.club.v1.Club club = 1;
+    uint64 frame = 2;
+  }
+
+  message Response {
+    repeated ClubWithFrame clubs = 1;
+  }
+}
+
+message ClubPlayerGetPlayers {
+  message Request {
+    string club_id = 1;
+    repeated string player_storage_keys = 2;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.club_player.v1.ClubPlayer club_players = 1;
+  }
+}
+
+message ClubPlayerGetPlayersCount {
+  message Request {
+    string club_id = 1;
+  }
+
+  message Response {
+    uint64 players_count = 1;
+  }
+}
+
+message ClubPlayerKickPlayer {
+  message Request {
+    string club_id = 1;
+    string player_id = 2;
+  }
+
+  message Response {}
+}
+
+message ClubPlayerLeave {
+  message Request {
+    string club_id = 1;
+  }
+
+  message Response {}
+}
+
+message ClubPlayerUpdateRole {
+  message Request {
+    string club_id = 1;
+    string player_id = 2;
+    takasho.schema.fes.resource.club_role.v1.ClubUpdateRoleType type = 3;
+  }
+
+  message Response {}
+}
+
+service ClubPlayer {
+  rpc GetClubs(ClubPlayerGetClubs.Request) returns (ClubPlayerGetClubs.Response) {}
+  rpc GetPlayers(ClubPlayerGetPlayers.Request) returns (ClubPlayerGetPlayers.Response) {}
+  rpc GetPlayersCount(ClubPlayerGetPlayersCount.Request) returns (ClubPlayerGetPlayersCount.Response) {}
+  rpc KickPlayer(ClubPlayerKickPlayer.Request) returns (ClubPlayerKickPlayer.Response) {}
+  rpc Leave(ClubPlayerLeave.Request) returns (ClubPlayerLeave.Response) {}
+  rpc UpdateRole(ClubPlayerUpdateRole.Request) returns (ClubPlayerUpdateRole.Response) {}
+}

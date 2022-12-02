@@ -1,0 +1,70 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+import "takasho/schema/common_featureset/resource/wallet/v3.proto";
+
+message PlayerInventoryGetInventoriesV1 {
+  message Request {
+    takasho.schema.common_featureset.resource.player_inventory.v1.Criterion criterion = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory inventories = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message PlayerInventoryGetReceivedInventoriesV1 {
+  message Request {
+    uint32 count = 1;
+    repeated string search_labels = 2;
+    string page_token = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.ReceivedPlayerInventory received_inventories = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message PlayerInventoryReceiveV1 {
+  message Request {
+    repeated string delete_inventory_ids = 1;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 2;
+    string next_revision = 3;
+    string previous_revision = 4;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 5;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 1;
+    string revision = 2;
+    takasho.schema.common_featureset.resource.wallet.v3.Wallet wallet = 3;
+    repeated takasho.schema.common_featureset.resource.wallet.v3.Wallet.PlayerKeyValue player_key_values = 4;
+  }
+}
+
+message PlayerInventoryGetInventoriesAndCountV1 {
+  message Request {
+    takasho.schema.common_featureset.resource.player_inventory.v1.Criterion criterion = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory inventories = 1;
+    sint64 inventories_count = 2;
+    string next_page_token = 3;
+    string prev_page_token = 4;
+  }
+}
+
+service PlayerInventory {
+  rpc GetInventoriesV1(PlayerInventoryGetInventoriesV1.Request) returns (PlayerInventoryGetInventoriesV1.Response) {}
+  rpc GetReceivedInventoriesV1(PlayerInventoryGetReceivedInventoriesV1.Request) returns (PlayerInventoryGetReceivedInventoriesV1.Response) {}
+  rpc ReceiveV1(PlayerInventoryReceiveV1.Request) returns (PlayerInventoryReceiveV1.Response) {}
+  rpc GetInventoriesAndCountV1(PlayerInventoryGetInventoriesAndCountV1.Request) returns (PlayerInventoryGetInventoriesAndCountV1.Response) {}
+}

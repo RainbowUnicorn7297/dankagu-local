@@ -1,0 +1,11 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.game_status.v1;
+
+message Value {
+  sint64 value = 1;
+}
+
+message Status {
+  sint64 value = 1;
+  bool status = 2;
+}

@@ -1,0 +1,2414 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.player_event_log.v1;
+
+message EventSchema {
+  message Common {
+    string d = 1;
+    string client_time = 2;
+    uint64 user_rank = 3;
+    uint64 num_dream = 4;
+    uint64 kagura_tier = 5;
+    string gold_pass = 6;
+    string platinum_pass = 7;
+    uint64 monthly_pass = 8;
+    string monthly_pass_end = 9;
+    sint64 boost = 10;
+    uint64 boost_limit = 11;
+    string has_card_info = 12;
+    uint64 high_score_rate = 13;
+    uint64 defeat_boss_music = 14;
+    uint64 card_limit = 15;
+    uint64 heroine_limit = 16;
+    uint64 odekake_limit = 17;
+    uint64 active_skill_limit = 18;
+    uint64 skip_ticket = 19;
+    uint64 read_episode = 20;
+    uint64 reconstruct_complete = 21;
+    uint64 heroine_piece = 22;
+    float flowering_bonus = 23;
+    uint64 total_flowering_lv = 24;
+    string club_id = 25;
+    uint64 emblem1 = 26;
+    uint64 emblem2 = 27;
+    uint64 emblem_num = 28;
+    uint64 follow_num = 29;
+    uint64 follower_num = 30;
+    uint64 space_total_like = 32;
+    uint64 sapling_step = 33;
+    string player_name = 34;
+    string reg_date = 35;
+    uint64 pn_option = 36;
+    uint64 night_pn_option = 37;
+    uint64 gm_pn_option = 38;
+    uint64 num_free_crystal = 39;
+    uint64 num_paid_crystal = 40;
+    uint64 elapsed_date = 41;
+    string takasho_player_id = 42;
+    string takasho_player_short_id = 43;
+    string gacha_ticket_id = 44;
+    string gacha_ticket_num = 45;
+    sint64 repair_complete = 46;
+  }
+
+  message LoginBonus {
+    Common common = 1;
+    uint64 bingo_id = 2;
+    string item_id = 5;
+    string item_num = 6;
+    uint64 filled_cell = 7;
+    uint64 reach_num = 8;
+    uint64 bf_bingo_line = 9;
+    uint64 af_bingo_line = 10;
+    string bingo_item_id = 11;
+    string bingo_item_num = 12;
+    uint64 bonus_type_id = 13;
+    uint64 elapsed_time = 14;
+  }
+
+  message Mission {
+    Common common = 1;
+    uint64 mission_type_id = 2;
+    uint64 mission_id = 3;
+    string get_item_id = 4;
+    string get_item_num = 5;
+  }
+
+  message MissionClub {
+    Common common = 1;
+    uint64 mission_type_id = 2;
+    uint64 mission_id = 3;
+    string get_item_id = 4;
+    string get_item_num = 5;
+    uint64 club_point_num = 6;
+    uint64 club_point_balance = 7;
+  }
+
+  message MissionEvent {
+    Common common = 1;
+    uint64 mission_type_id = 2;
+    uint64 mission_id = 3;
+    string get_item_id = 4;
+    string get_item_num = 5;
+    uint64 event_coin_id = 6;
+    uint64 event_coin_num = 7;
+    uint64 stamp_num = 8;
+    uint64 stamp_max = 9;
+    string stamp_item_id = 10;
+    string stamp_item_num = 11;
+    uint64 page_num = 12;
+    uint64 special_flag = 13;
+    sint64 event_id = 14;
+  }
+
+  message Tutorial {
+    Common common = 1;
+    uint64 tutorial_step_id = 2;
+    string elapse_t = 3;
+  }
+
+  message TutorialMission {
+    Common common = 1;
+    uint64 mission_id = 2;
+    string get_item_id = 3;
+    string get_item_num = 4;
+    uint64 clear_num = 5;
+    uint64 page_num = 6;
+    uint64 page_complete_flag = 7;
+  }
+
+  message DeckCh {
+    Common common = 1;
+    string bf_card = 2;
+    string af_card = 3;
+    string af_card_instance = 4;
+    string card_rarity = 5;
+    string card_type_id = 6;
+    string card_main_level = 7;
+    string card_skill_level = 8;
+    string active_skill_id = 9;
+    string passive_skill_id = 10;
+    string odekake_skill_id = 11;
+    string card_flowering = 12;
+    string card_deepen = 13;
+    string flowering_flag = 14;
+    string premiere_flag = 15;
+    uint64 bf_heroine1 = 16;
+    uint64 af_heroine1 = 17;
+    uint64 bf_heroine2 = 18;
+    uint64 af_heroine2 = 19;
+    uint64 af_heroine1_instance = 20;
+    uint64 af_heroine2_instance = 21;
+    uint64 heroine1_life = 22;
+    uint64 heroine2_life = 23;
+    uint64 heroine1_shot = 24;
+    uint64 heroine2_shot = 25;
+    uint64 heroine1_lv = 26;
+    uint64 heroine2_lv = 27;
+    uint64 heroine1_heroine_skill_id = 28;
+    uint64 heroine2_heroine_skill_id = 29;
+    float heroine1_em_ratio = 30;
+    float heroine2_em_ratio = 31;
+    float heroine1_co_ratio = 32;
+    float heroine2_co_ratio = 33;
+    float heroine1_ro_ratio = 34;
+    float heroine2_ro_ratio = 35;
+    uint64 heroine1_origin_life = 36;
+    uint64 heroine2_origin_life = 37;
+    uint64 heroine1_origin_shot = 38;
+    uint64 heroine2_origin_shot = 39;
+    float heroine1_origin_em_ratio = 40;
+    float heroine2_origin_em_ratio = 41;
+    float heroine1_origin_co_ratio = 42;
+    float heroine2_origin_co_ratio = 43;
+    float heroine1_origin_ro_ratio = 44;
+    float heroine2_origin_ro_ratio = 45;
+    uint64 nakayoshi_pt = 46;
+    uint64 nakayoshi_lv = 47;
+    uint64 card_para_total = 48;
+    uint64 card_para_em = 49;
+    uint64 card_para_co = 50;
+    uint64 card_para_ro = 51;
+    uint64 para_total = 52;
+    uint64 total_para_em = 53;
+    uint64 total_para_co = 54;
+    uint64 total_para_ro = 55;
+    uint64 event_id = 56;
+    float event_bonus_ratio = 57;
+    uint64 deck_id = 58;
+    uint64 deck_slot = 59;
+    string deck_name = 60;
+    uint64 suggestion = 61;
+    uint64 suggestion_type = 62;
+    uint64 suggestion_heroine = 63;
+    uint64 suggestion_card = 64;
+    uint64 suggestion_skill = 65;
+    string burst_skill_id = 66;
+    string active_skill_level = 67;
+    string passive_skill_level = 68;
+    string burst_skill_level = 69;
+    string odekake_skill_lv = 70;
+  }
+
+  message DailyBonus {
+    Common common = 1;
+    string item_id = 2;
+    string item_num = 3;
+    uint64 bonus_times = 4;
+    uint64 item_set_id = 5;
+    string session_id = 6;
+    string odekake_session_id = 7;
+  }
+
+  message KaguraPass {
+    Common common = 1;
+    uint64 kagura_point = 2;
+    uint64 af_kagura_point = 3;
+    uint64 kagura_tier = 4;
+    uint64 last_tier = 5;
+    uint64 elapsed_date = 6;
+    uint64 tier_limite_flag = 7;
+    string season_end = 8;
+    string session_id = 9;
+    uint64 odekake_session_id = 10;
+    string transaction_id = 11;
+  }
+
+  message SingleStageStart {
+    Common common = 1;
+    string session_id = 2;
+    sint64 notes_speed = 3;
+    sint64 notes_timing = 4;
+    uint64 vibration_flag = 5;
+    uint64 bluetooth_flag = 6;
+    uint64 music_id = 7;
+    uint64 auto_mode_flag = 8;
+    uint64 first_music_flag = 9;
+    uint64 first_difficulty_flag = 10;
+    uint64 absolute_difficulty = 11;
+    uint64 difficulty = 12;
+    uint64 mode = 13;
+    uint64 attribute = 14;
+    uint64 boss_effect_flag = 15;
+    uint64 rhythm_effect_flag = 16;
+    uint64 deck_id = 17;
+    string card_id = 18;
+    string card_type_id = 19;
+    string card_level = 20;
+    string card_skill_level = 21;
+    string active_skill_id = 22;
+    string passive_skill_id = 23;
+    string card_rarity = 24;
+    string card_flowering = 25;
+    string card_deepen = 26;
+    string heroine_id = 27;
+    string heroine_lv = 28;
+    string heroine_skill = 29;
+    uint64 bf_nakayoshi_pt = 30;
+    uint64 bf_nakayoshi_lv = 31;
+    uint64 total_para_life = 32;
+    uint64 total_para_shot = 33;
+    uint64 para_total = 34;
+    uint64 total_para_em = 35;
+    uint64 total_para_co = 36;
+    uint64 total_para_ro = 37;
+    uint64 card_para_total = 38;
+    uint64 flowering_lv_bonus = 39;
+    uint64 type_fit_bonus = 40;
+    uint64 heroine_bonus = 41;
+    uint64 heroine_skill_bonus = 42;
+    uint64 expected_score_rank = 43;
+    string passive_skill_boost = 44;
+    string burst_skill_id = 45;
+    string active_skill_level = 46;
+    string passive_skill_level = 47;
+    string burst_skill_level = 48;
+  }
+
+  message SingleStageEnd {
+    Common common = 1;
+    string session_id = 2;
+    uint64 music_id = 3;
+    uint64 mv_flag = 4;
+    uint64 auto_mode_flag = 5;
+    uint64 skip_ticket_num = 6;
+    uint64 rehearsal_flag = 7;
+    uint64 spell_break_flag = 8;
+    uint64 absolute_difficulty = 9;
+    uint64 difficulty = 10;
+    uint64 life_result = 11;
+    uint64 start_t = 12;
+    uint64 deck_id = 13;
+    uint64 continue = 14;
+    uint64 score = 15;
+    uint64 high_score = 16;
+    uint64 bf_high_score_rate = 17;
+    uint64 af_high_score_rate = 18;
+    uint64 private_score_ranking = 19;
+    uint64 total_score_ranking = 20;
+    uint64 score_rank = 21;
+    uint64 new_score_rank = 22;
+    uint64 combo_num = 23;
+    uint64 full_combo_flag = 24;
+    uint64 new_full_combo = 25;
+    uint64 new_p_full_combo = 26;
+    uint64 auto_active_flag = 27;
+    uint64 active_skill = 28;
+    float active_skill_t = 29;
+    string active_skill_id = 30;
+    uint64 passive_skill = 31;
+    float passive_skill_t = 32;
+    string passive_skill_id = 33;
+    uint64 spell_card_id = 34;
+    uint64 spell_card_place_id = 35;
+    uint64 boss_id = 36;
+    uint64 boss_hp = 37;
+    uint64 boss_damage = 38;
+    uint64 max_damage = 39;
+    uint64 defeat_time = 40;
+    uint64 best_defeat_time = 41;
+    uint64 get_user_exp = 42;
+    string drop_item_id = 43;
+    string drop_item_num = 44;
+    uint64 ave_fps = 45;
+    uint64 low_fps = 46;
+    uint64 boost_reward_ratio = 47;
+    uint64 dream_point = 48;
+    string card_id = 49;
+    uint64 get_card_exp = 50;
+    string card_level = 51;
+    string heroine_id = 52;
+    string heroine_lv = 53;
+    uint64 get_nakayoshi_pt = 54;
+    uint64 af_nakayoshi_pt = 55;
+    uint64 af_nakayoshi_lv = 56;
+    string notes = 57;
+    uint64 score_target = 58;
+    uint64 combo_target = 59;
+    uint64 boss_target = 60;
+    uint64 daily_bonus_flag = 61;
+    uint64 danmaku_flag = 62;
+    uint64 danmaku_id = 63;
+    uint64 get_point_charm = 64;
+    uint64 get_power_charm = 65;
+    uint64 miss_num = 66;
+    string miss_time = 67;
+    uint64 bomb_num = 68;
+    string bomb_time = 69;
+    uint64 clear_danmaku = 70;
+    uint64 boost_ratio = 71;
+    sint64 remaint_boost = 72;
+    uint64 use_boost = 73;
+    uint64 result = 74;
+    uint64 continue_num = 75;
+    uint64 retry_self = 76;
+    uint64 retry_life = 77;
+    string detailed_notes = 78;
+    uint64 boss_atack_option = 79;
+    uint64 notes_size_option = 80;
+    string detailed_score_base = 81;
+    string detailed_combo = 82;
+    string detailed_score_up_bonus = 83;
+    string detailed_score_adjust = 84;
+    sint64 unlock_bgm_flag = 85;
+    sint64 unlock_bgm_id = 86;
+    sint64 burst_skill = 87;
+    double burst_skill_t = 88;
+    string burst_skill_id = 89;
+  }
+
+  message EventEnd {
+    Common common = 1;
+    uint64 event_pt_ranking = 2;
+    uint64 event_ttl_pt = 3;
+    uint64 event_id = 4;
+    uint64 high_score = 5;
+    uint64 high_score_ranking = 6;
+  }
+
+  message ChallengeStageStart {
+    Common common = 1;
+    string session_id = 2;
+    sint64 notes_speed = 3;
+    sint64 notes_timing = 4;
+    uint64 vibration_flag = 5;
+    uint64 bluetooth_flag = 6;
+    uint64 music_id = 7;
+    uint64 auto_mode_flag = 8;
+    uint64 first_music_flag = 9;
+    uint64 first_difficulty_flag = 10;
+    uint64 absolute_difficulty = 11;
+    uint64 difficulty = 12;
+    uint64 mode = 13;
+    uint64 attribute = 14;
+    uint64 boss_effect_flag = 15;
+    uint64 rhythm_effect_flag = 16;
+    uint64 deck_id = 17;
+    string card_id = 18;
+    string card_type_id = 19;
+    string card_level = 20;
+    string card_skill_level = 21;
+    string active_skill_id = 22;
+    string passive_skill_id = 23;
+    string card_rarity = 24;
+    string card_flowering = 25;
+    string card_deepen = 26;
+    string heroine_id = 27;
+    string heroine_lv = 28;
+    string heroine_skill = 29;
+    uint64 bf_nakayoshi_pt = 30;
+    uint64 bf_nakayoshi_lv = 31;
+    uint64 total_para_life = 32;
+    uint64 total_para_shot = 33;
+    uint64 para_total = 34;
+    uint64 total_para_em = 35;
+    uint64 total_para_co = 36;
+    uint64 total_para_ro = 37;
+    uint64 card_para_total = 38;
+    uint64 flowering_lv_bonus = 39;
+    uint64 type_fit_bonus = 40;
+    uint64 heroine_bonus = 41;
+    uint64 heroine_skill_bonus = 42;
+    uint64 expected_score_rank = 43;
+    uint64 event_id = 44;
+    uint64 bonus_music_flag = 45;
+    string passive_skill_boost = 46;
+    string burst_skill_id = 47;
+    string active_skill_level = 48;
+    string passive_skill_level = 49;
+    string burst_skill_level = 50;
+  }
+
+  message ChallengeStageEnd {
+    Common common = 1;
+    string session_id = 2;
+    uint64 music_id = 3;
+    uint64 mv_flag = 4;
+    uint64 auto_mode_flag = 5;
+    uint64 skip_ticket_num = 6;
+    uint64 rehearsal_flag = 7;
+    uint64 spell_break_flag = 8;
+    uint64 absolute_difficulty = 9;
+    uint64 difficulty = 10;
+    uint64 life_result = 11;
+    uint64 start_t = 12;
+    uint64 deck_id = 13;
+    uint64 continue = 14;
+    uint64 score = 15;
+    uint64 high_score = 16;
+    uint64 bf_high_score_rate = 17;
+    uint64 af_high_score_rate = 18;
+    uint64 private_score_ranking = 19;
+    uint64 total_score_ranking = 20;
+    uint64 score_rank = 21;
+    uint64 new_score_rank = 22;
+    uint64 combo_num = 23;
+    uint64 full_combo_flag = 24;
+    uint64 new_full_combo = 25;
+    uint64 new_p_full_combo = 26;
+    uint64 auto_active_flag = 27;
+    uint64 active_skill = 28;
+    float active_skill_t = 29;
+    string active_skill_id = 30;
+    uint64 passive_skill = 31;
+    float passive_skill_t = 32;
+    string passive_skill_id = 33;
+    uint64 spell_card_id = 34;
+    uint64 spell_card_place_id = 35;
+    uint64 boss_id = 36;
+    uint64 boss_hp = 37;
+    uint64 boss_damage = 38;
+    uint64 max_damage = 39;
+    uint64 defeat_time = 40;
+    uint64 best_defeat_time = 41;
+    uint64 get_user_exp = 42;
+    string drop_item_id = 43;
+    string drop_item_num = 44;
+    uint64 ave_fps = 45;
+    uint64 low_fps = 46;
+    uint64 boost_reward_ratio = 47;
+    uint64 dream_point = 48;
+    string card_id = 49;
+    uint64 get_card_exp = 50;
+    string card_level = 51;
+    string heroine_id = 52;
+    string heroine_lv = 53;
+    uint64 get_nakayoshi_pt = 54;
+    uint64 af_nakayoshi_pt = 55;
+    uint64 af_nakayoshi_lv = 56;
+    string notes = 57;
+    uint64 score_target = 58;
+    uint64 combo_target = 59;
+    uint64 boss_target = 60;
+    uint64 daily_bonus_flag = 61;
+    uint64 danmaku_flag = 62;
+    uint64 danmaku_id = 63;
+    uint64 get_point_charm = 64;
+    uint64 get_power_charm = 65;
+    uint64 miss_num = 66;
+    string miss_time = 67;
+    uint64 bomb_num = 68;
+    string bomb_time = 69;
+    uint64 clear_danmaku = 70;
+    uint64 boost_ratio = 71;
+    sint64 remaint_boost = 72;
+    uint64 use_boost = 73;
+    uint64 event_id = 74;
+    uint64 event_point_id = 75;
+    uint64 get_event_point = 76;
+    uint64 original_event_point = 77;
+    uint64 rank_bonus_point = 78;
+    uint64 event_bonus_point = 79;
+    uint64 gage_bonus = 80;
+    uint64 ttl_event_point = 81;
+    uint64 result = 82;
+    uint64 continue_num = 83;
+    uint64 retry_self = 84;
+    uint64 retry_life = 85;
+    string detailed_notes = 86;
+    uint64 boss_atack_option = 87;
+    uint64 notes_size_option = 88;
+    string detailed_score_base = 89;
+    string detailed_combo = 90;
+    string detailed_score_up_bonus = 91;
+    string detailed_score_adjust = 92;
+    sint64 unlock_bgm_flag = 93;
+    sint64 unlock_bgm_id = 94;
+    sint64 burst_skill = 95;
+    double burst_skill_t = 96;
+    string burst_skill_id = 97;
+  }
+
+  message FortuneStageStart {
+    Common common = 1;
+    string session_id = 2;
+    sint64 notes_speed = 3;
+    sint64 notes_timing = 4;
+    uint64 vibration_flag = 5;
+    uint64 bluetooth_flag = 6;
+    uint64 music_id = 7;
+    uint64 auto_mode_flag = 8;
+    uint64 first_music_flag = 9;
+    uint64 first_difficulty_flag = 10;
+    uint64 absolute_difficulty = 11;
+    uint64 difficulty = 12;
+    uint64 mode = 13;
+    uint64 attribute = 14;
+    uint64 boss_effect_flag = 15;
+    uint64 rhythm_effect_flag = 16;
+    uint64 deck_id = 17;
+    string card_id = 18;
+    string card_type_id = 19;
+    string card_level = 20;
+    string card_skill_level = 21;
+    string active_skill_id = 22;
+    string passive_skill_id = 23;
+    string card_rarity = 24;
+    string card_flowering = 25;
+    string card_deepen = 26;
+    string heroine_id = 27;
+    string heroine_lv = 28;
+    string heroine_skill = 29;
+    uint64 bf_nakayoshi_pt = 30;
+    uint64 bf_nakayoshi_lv = 31;
+    uint64 total_para_life = 32;
+    uint64 total_para_shot = 33;
+    uint64 para_total = 34;
+    uint64 total_para_em = 35;
+    uint64 total_para_co = 36;
+    uint64 total_para_ro = 37;
+    uint64 card_para_total = 38;
+    uint64 flowering_lv_bonus = 39;
+    uint64 type_fit_bonus = 40;
+    uint64 heroine_bonus = 41;
+    uint64 heroine_skill_bonus = 42;
+    uint64 expected_score_rank = 43;
+    uint64 event_id = 44;
+    uint64 bonus_music_flag = 45;
+    string passive_skill_boost = 46;
+    string burst_skill_id = 47;
+    string active_skill_level = 48;
+    string passive_skill_level = 49;
+    string burst_skill_level = 50;
+  }
+
+  message FortuneStageEnd {
+    Common common = 1;
+    string session_id = 2;
+    uint64 music_id = 3;
+    uint64 mv_flag = 4;
+    uint64 auto_mode_flag = 5;
+    uint64 skip_ticket_num = 6;
+    uint64 rehearsal_flag = 7;
+    uint64 spell_break_flag = 8;
+    uint64 absolute_difficulty = 9;
+    uint64 difficulty = 10;
+    uint64 life_result = 11;
+    uint64 start_t = 12;
+    uint64 deck_id = 13;
+    uint64 continue = 14;
+    uint64 score = 15;
+    uint64 high_score = 16;
+    uint64 bf_high_score_rate = 17;
+    uint64 af_high_score_rate = 18;
+    uint64 private_score_ranking = 19;
+    uint64 total_score_ranking = 20;
+    uint64 score_rank = 21;
+    uint64 new_score_rank = 22;
+    uint64 combo_num = 23;
+    uint64 full_combo_flag = 24;
+    uint64 new_full_combo = 25;
+    uint64 new_p_full_combo = 26;
+    uint64 auto_active_flag = 27;
+    uint64 active_skill = 28;
+    float active_skill_t = 29;
+    string active_skill_id = 30;
+    uint64 passive_skill = 31;
+    float passive_skill_t = 32;
+    string passive_skill_id = 33;
+    uint64 spell_card_id = 34;
+    uint64 spell_card_place_id = 35;
+    uint64 boss_id = 36;
+    uint64 boss_hp = 37;
+    uint64 boss_damage = 38;
+    uint64 max_damage = 39;
+    uint64 defeat_time = 40;
+    uint64 best_defeat_time = 41;
+    uint64 get_user_exp = 42;
+    string drop_item_id = 43;
+    string drop_item_num = 44;
+    uint64 ave_fps = 45;
+    uint64 low_fps = 46;
+    uint64 boost_reward_ratio = 47;
+    uint64 dream_point = 48;
+    string card_id = 49;
+    uint64 get_card_exp = 50;
+    string card_level = 51;
+    string heroine_id = 52;
+    string heroine_lv = 53;
+    uint64 get_nakayoshi_pt = 54;
+    uint64 af_nakayoshi_pt = 55;
+    uint64 af_nakayoshi_lv = 56;
+    string notes = 57;
+    uint64 score_target = 58;
+    uint64 combo_target = 59;
+    uint64 boss_target = 60;
+    uint64 daily_bonus_flag = 61;
+    uint64 danmaku_flag = 62;
+    uint64 danmaku_id = 63;
+    uint64 get_point_charm = 64;
+    uint64 get_power_charm = 65;
+    uint64 miss_num = 66;
+    string miss_time = 67;
+    uint64 bomb_num = 68;
+    string bomb_time = 69;
+    uint64 clear_danmaku = 70;
+    uint64 boost_ratio = 71;
+    sint64 remaint_boost = 72;
+    uint64 use_boost = 73;
+    uint64 event_id = 74;
+    uint64 event_point_id = 75;
+    uint64 event_coin_id = 76;
+    uint64 get_event_coin = 77;
+    uint64 get_event_point = 78;
+    uint64 oiginal_event_point = 79;
+    uint64 rank_bonus_point = 80;
+    uint64 event_bonus_point = 81;
+    uint64 gage_bonus = 82;
+    uint64 ttl_event_point = 83;
+    uint64 original_event_point = 84;
+    uint64 result = 85;
+    uint64 continue_num = 86;
+    uint64 retry_self = 87;
+    uint64 retry_life = 88;
+    string detailed_notes = 89;
+    uint64 boss_atack_option = 90;
+    uint64 notes_size_option = 91;
+    string detailed_score_base = 92;
+    string detailed_combo = 93;
+    string detailed_score_up_bonus = 94;
+    string detailed_score_adjust = 95;
+    sint64 unlock_bgm_flag = 96;
+    sint64 unlock_bgm_id = 97;
+    sint64 burst_skill = 98;
+    double burst_skill_t = 99;
+    string burst_skill_id = 100;
+  }
+
+  message MissionStageStart {
+    Common common = 1;
+    string session_id = 2;
+    sint64 notes_speed = 3;
+    sint64 notes_timing = 4;
+    uint64 vibration_flag = 5;
+    uint64 bluetooth_flag = 6;
+    uint64 music_id = 7;
+    uint64 auto_mode_flag = 8;
+    uint64 first_music_flag = 9;
+    uint64 first_difficulty_flag = 10;
+    uint64 absolute_difficulty = 11;
+    uint64 difficulty = 12;
+    uint64 mode = 13;
+    uint64 attribute = 14;
+    uint64 boss_effect_flag = 15;
+    uint64 rhythm_effect_flag = 16;
+    uint64 deck_id = 17;
+    string card_id = 18;
+    string card_type_id = 19;
+    string card_level = 20;
+    string card_skill_level = 21;
+    string active_skill_id = 22;
+    string passive_skill_id = 23;
+    string card_rarity = 24;
+    string card_flowering = 25;
+    string card_deepen = 26;
+    string heroine_id = 27;
+    string heroine_lv = 28;
+    string heroine_skill = 29;
+    uint64 bf_nakayoshi_pt = 30;
+    uint64 bf_nakayoshi_lv = 31;
+    uint64 total_para_life = 32;
+    uint64 total_para_shot = 33;
+    uint64 para_total = 34;
+    uint64 total_para_em = 35;
+    uint64 total_para_co = 36;
+    uint64 total_para_ro = 37;
+    uint64 card_para_total = 38;
+    uint64 flowering_lv_bonus = 39;
+    uint64 type_fit_bonus = 40;
+    uint64 heroine_bonus = 41;
+    uint64 heroine_skill_bonus = 42;
+    uint64 expected_score_rank = 43;
+    uint64 event_id = 44;
+    uint64 bonus_music_flag = 45;
+    string passive_skill_boost = 46;
+    string burst_skill_id = 47;
+    string active_skill_level = 48;
+    string passive_skill_level = 49;
+    string burst_skill_level = 50;
+  }
+
+  message MissionStageEnd {
+    Common common = 1;
+    string session_id = 2;
+    uint64 music_id = 3;
+    uint64 mv_flag = 4;
+    uint64 auto_mode_flag = 5;
+    uint64 skip_ticket_num = 6;
+    uint64 rehearsal_flag = 7;
+    uint64 spell_break_flag = 8;
+    uint64 absolute_difficulty = 9;
+    uint64 difficulty = 10;
+    uint64 life_result = 11;
+    uint64 start_t = 12;
+    uint64 deck_id = 13;
+    uint64 continue = 14;
+    uint64 score = 15;
+    uint64 high_score = 16;
+    uint64 bf_high_score_rate = 17;
+    uint64 af_high_score_rate = 18;
+    uint64 private_score_ranking = 19;
+    uint64 total_score_ranking = 20;
+    uint64 score_rank = 21;
+    uint64 new_score_rank = 22;
+    uint64 combo_num = 23;
+    uint64 full_combo_flag = 24;
+    uint64 new_full_combo = 25;
+    uint64 new_p_full_combo = 26;
+    uint64 auto_active_flag = 27;
+    uint64 active_skill = 28;
+    float active_skill_t = 29;
+    string active_skill_id = 30;
+    uint64 passive_skill = 31;
+    float passive_skill_t = 32;
+    string passive_skill_id = 33;
+    uint64 spell_card_id = 34;
+    uint64 spell_card_place_id = 35;
+    uint64 boss_id = 36;
+    uint64 boss_hp = 37;
+    uint64 boss_damage = 38;
+    uint64 max_damage = 39;
+    uint64 defeat_time = 40;
+    uint64 best_defeat_time = 41;
+    uint64 get_user_exp = 42;
+    string drop_item_id = 43;
+    string drop_item_num = 44;
+    uint64 ave_fps = 45;
+    uint64 low_fps = 46;
+    uint64 boost_reward_ratio = 47;
+    uint64 dream_point = 48;
+    string card_id = 49;
+    uint64 get_card_exp = 50;
+    string card_level = 51;
+    string heroine_id = 52;
+    string heroine_lv = 53;
+    uint64 get_nakayoshi_pt = 54;
+    uint64 af_nakayoshi_pt = 55;
+    uint64 af_nakayoshi_lv = 56;
+    string notes = 57;
+    uint64 score_target = 58;
+    uint64 combo_target = 59;
+    uint64 boss_target = 60;
+    uint64 daily_bonus_flag = 61;
+    uint64 danmaku_flag = 62;
+    uint64 danmaku_id = 63;
+    uint64 get_point_charm = 64;
+    uint64 get_power_charm = 65;
+    uint64 miss_num = 66;
+    string miss_time = 67;
+    uint64 bomb_num = 68;
+    string bomb_time = 69;
+    uint64 clear_danmaku = 70;
+    uint64 boost_ratio = 71;
+    sint64 remaint_boost = 72;
+    uint64 use_boost = 73;
+    uint64 event_id = 74;
+    uint64 event_point_id = 75;
+    uint64 event_coin_id = 76;
+    uint64 get_event_coin = 77;
+    uint64 get_event_point = 78;
+    uint64 oiginal_event_point = 79;
+    uint64 rank_bonus_point = 80;
+    uint64 event_bonus_point = 81;
+    uint64 gage_bonus = 82;
+    uint64 ttl_event_point = 83;
+    string clear_mission_id = 84;
+    uint64 original_event_point = 85;
+    uint64 result = 86;
+    uint64 continue_num = 87;
+    uint64 retry_self = 88;
+    uint64 retry_life = 89;
+    string detailed_notes = 90;
+    uint64 boss_atack_option = 91;
+    uint64 notes_size_option = 92;
+    string detailed_score_base = 93;
+    string detailed_combo = 94;
+    string detailed_score_up_bonus = 95;
+    string detailed_score_adjust = 96;
+    sint64 unlock_bgm_flag = 97;
+    sint64 unlock_bgm_id = 98;
+    sint64 burst_skill = 99;
+    double burst_skill_t = 100;
+    string burst_skill_id = 101;
+  }
+
+  message EmblemGet {
+    Common common = 1;
+    uint64 get_route = 2;
+    uint64 emblem_id = 3;
+  }
+
+  message GetItem {
+    Common common = 1;
+    uint64 item_id = 2;
+    uint64 item_num = 3;
+    uint64 item_type_id = 4;
+    uint64 route_id = 5;
+    uint64 instance_id = 6;
+    uint64 send_inventory = 7;
+    string route_option = 8;
+  }
+
+  message UseItem {
+    Common common = 1;
+    uint64 item_id = 2;
+    uint64 item_num = 3;
+    uint64 item_type_id = 4;
+    uint64 use_place_id = 5;
+    uint64 instance_id = 6;
+  }
+
+  message Boost {
+    Common common = 1;
+    uint64 heal = 2;
+    uint64 af = 3;
+    string use_item_id = 4;
+    string use_item_num = 5;
+    uint64 use_place_id = 6;
+  }
+
+  message TradeItem {
+    Common common = 1;
+    string use_item_id = 2;
+    string use_item_num = 3;
+    uint64 shop_id = 4;
+    uint64 shop_type_id = 5;
+    string get_item_id = 6;
+    string get_item_num = 7;
+    string instance_id = 8;
+    string item_type_id = 9;
+    uint64 trade_limit_date = 10;
+    uint64 trade_limit_remain = 11;
+    uint64 trade_count_limit = 12;
+  }
+
+  message TradeEvent {
+    Common common = 1;
+    uint64 use_item_id = 2;
+    uint64 use_item_num = 3;
+    uint64 shop_id = 4;
+    uint64 event_id = 5;
+    string get_item_id = 6;
+    string get_item_num = 7;
+    string instance_id = 8;
+    string item_type_id = 9;
+    uint64 trade_limit_date = 10;
+    uint64 trade_limit_remain = 11;
+    uint64 trade_count_limit = 12;
+  }
+
+  message TradeClubPoint {
+    Common common = 1;
+    string club_id = 2;
+    string club_name = 3;
+    string get_item_id = 4;
+    string get_item_num = 5;
+    string item_type_id = 6;
+    uint64 use_point_num = 7;
+    uint64 remain_point_num = 8;
+    uint64 trade_limit_date = 9;
+    uint64 trade_limit_remain = 10;
+    uint64 trade_count_limit = 11;
+  }
+
+  message RealMoneyShop {
+    Common common = 1;
+    uint64 shop_id = 2;
+    string purchase_id = 3;
+    uint64 product_id = 4;
+    string get_item_id = 5;
+    string get_item_num = 6;
+    string instance_id = 7;
+    string item_type_id = 8;
+    uint64 get_paid_vc = 9;
+    uint64 get_free_vc = 10;
+    uint64 trade_limit_date = 11;
+    uint64 trade_count_limit = 12;
+  }
+
+  message EpisodeUnlock {
+    Common common = 1;
+    uint64 episode_type_id = 2;
+    uint64 episode_id = 3;
+    uint64 event_id = 4;
+    uint64 unlock_reason_id = 5;
+    uint64 card_id = 6;
+    uint64 spot_id = 7;
+  }
+
+  message EpisodeStart {
+    Common common = 1;
+    string session_id = 2;
+    uint64 episode_type_id = 3;
+    uint64 episode_id = 4;
+    uint64 event_id = 5;
+    uint64 continue = 6;
+    uint64 voice = 7;
+    uint64 card_id = 8;
+    uint64 spot_id = 9;
+    string item_id = 10;
+    string item_num = 11;
+  }
+
+  message EpisodeEnd {
+    Common common = 1;
+    string session_id = 2;
+    uint64 episode_type_id = 3;
+    uint64 skip_flag = 4;
+    uint64 episode_id = 5;
+    uint64 event_id = 6;
+    uint64 card_id = 7;
+    uint64 spot_id = 8;
+    uint64 auto_flag = 9;
+    uint64 session_time = 10;
+    uint64 read_num = 13;
+  }
+
+  message OdekakeUnlock {
+    Common common = 1;
+    uint64 unlock_reason_id = 2;
+    uint64 odekake_id = 3;
+    uint64 odekake_type_id = 4;
+    uint64 place_id = 5;
+    uint64 odekake_limit = 6;
+    uint64 odekake_appearance_id = 7;
+    uint64 event_id = 8;
+  }
+
+  message OdekakeOrder {
+    Common common = 1;
+    string odekake_session_id = 2;
+    uint64 odekake_time = 3;
+    uint64 odekake_real_time = 4;
+    uint64 odekake_id = 5;
+    string suggetion_id = 6;
+    uint64 odekake_type_id = 7;
+    uint64 odekake_appearance_id = 8;
+    uint64 event_id = 9;
+    string heroine_id = 10;
+    string heroine_lv = 11;
+    string heroine_skill_id = 12;
+    string card_id = 13;
+    string card_lv = 14;
+    string odekake_skill_id = 15;
+    string odekake_skill_lv = 16;
+    uint64 target_flag = 17;
+    uint64 target_para = 18;
+    uint64 great_target = 19;
+    uint64 excellent_target = 20;
+    uint64 para_total = 21;
+    uint64 card_para = 22;
+    uint64 frame_fit_bonus = 23;
+    uint64 heroine_bonus = 24;
+    uint64 heroine_skill_bonus = 25;
+    uint64 odekake_skilll_bonus = 26;
+    uint64 recomend_flag = 27;
+    uint64 odekake_limit = 28;
+    uint64 odekake_skill_bonus = 29;
+    sint64 use_boost = 30;
+    sint64 attack_target = 31;
+    sint64 suggestion = 32;
+    sint64 suggestion_heroine = 33;
+    sint64 suggestion_card = 34;
+    sint64 suggestion_event_bonus = 35;
+    sint64 quest_fit_bonus = 36;
+    string quest_fit_bonus_number = 37;
+  }
+
+  message OdekakeResult {
+    Common common = 1;
+    string odekake_session_id = 2;
+    uint64 cancel_frag = 3;
+    uint64 result_type = 4;
+    uint64 odekake_id = 5;
+    uint64 odekake_type_id = 6;
+    uint64 odekake_appearance_id = 7;
+    string heroine_id = 8;
+    uint64 nakayoshi_pt = 9;
+    string card_id = 10;
+    uint64 get_dream_point = 11;
+    uint64 get_user_exp = 12;
+    uint64 event_coin_id = 13;
+    uint64 get_event_coin = 14;
+    uint64 event_id = 15;
+    uint64 event_point_id = 16;
+    uint64 get_event_point = 17;
+    uint64 original_event_point = 18;
+    uint64 rank_bonus_point = 19;
+    uint64 event_bonus_point = 20;
+    uint64 result_bonus_point = 21;
+    uint64 ttl_event_point = 22;
+    uint64 episode_id = 23;
+    string get_item_id = 24;
+    string get_item_num = 25;
+    uint64 odekake_limit = 26;
+    uint64 remain_limit = 27;
+    uint64 boost_reward_ratio = 28;
+    uint64 daily_bonus_flag = 29;
+    uint64 odekake_time = 30;
+    uint64 odekake_real_time = 31;
+    uint64 odekake_check_time = 32;
+    uint64 get_card_exp = 33;
+    string card_level = 34;
+    string clear_mission_id = 35;
+    sint64 raid_boss_id = 36;
+    string raid_boss_instance_id = 37;
+    sint64 raid_boss_lv = 38;
+    sint64 raid_boss_max_hp = 39;
+    sint64 raid_status = 40;
+    sint64 raid_bf_hp = 41;
+    sint64 raid_af_hp = 42;
+    sint64 raid_boss_attack_damage = 43;
+    sint64 raid_original_damage = 44;
+    sint64 raid_bonus_damage = 45;
+    sint64 raid_boss_status = 46;
+    sint64 raid_boss_discover = 47;
+    sint64 raid_boost_bonus_point = 48;
+    sint64 raid_help_boost_bonus_point = 49;
+    sint64 raid_boss_bonus_point = 50;
+    sint64 raid_help_boost_reward_ratio = 51;
+    sint64 raid_remaint_boost = 52;
+    sint64 raid_use_boost = 53;
+    sint64 remaint_boost = 54;
+    sint64 use_boost = 55;
+    sint64 cp_boost_reward_ratio = 56;
+    sint64 quest_id = 57;
+    sint64 quest_point_id = 58;
+    sint64 get_quest_point = 59;
+  }
+
+  message OdekakeBoost {
+    Common common = 1;
+    string odekake_session_id = 2;
+    sint64 timeboost_route = 3;
+    sint64 free_vc = 4;
+    sint64 paid_vc = 5;
+    sint64 odekake_current_time = 6;
+    sint64 odekake_update_time = 7;
+  }
+
+  message MapSpotConstruction {
+    Common common = 1;
+    uint64 area_flag = 2;
+    uint64 coordinate_id = 3;
+    uint64 place_spot_id = 4;
+    uint64 recomend_flag = 5;
+    uint64 construct_time = 6;
+  }
+
+  message MapGridExpand {
+    Common common = 1;
+    uint64 coordinate_id = 2;
+    string use_item_id = 3;
+    string use_item_num = 4;
+  }
+
+  message Reconstruction {
+    Common common = 1;
+    uint64 reconstruct_id = 2;
+    uint64 reconstruct_char_id = 3;
+    uint64 reconstruct_max_step = 4;
+    uint64 reconstruct_step = 5;
+    string use_item_id = 6;
+    string use_item_num = 7;
+    uint64 use_dream = 8;
+    uint64 object_id = 9;
+    uint64 episode_id = 10;
+    uint64 place_spot_id = 11;
+    uint64 area_id = 12;
+    uint64 char_id = 13;
+    uint64 odekake_id = 14;
+    string get_item_id = 15;
+    string get_item_num = 16;
+  }
+
+  message Hakoniwa {
+    Common common = 1;
+    string episode_id = 2;
+  }
+
+  message MapSpotSet {
+    Common common = 1;
+    string coordinate_id = 2;
+    string place_spot_id = 3;
+    sint64 auto_flag = 4;
+  }
+
+  message NakayoshiCrowd {
+    Common common = 1;
+  }
+
+  message PartyEnd {
+    Common common = 1;
+    string coming_char_id = 2;
+    uint64 tap_num = 3;
+    string get_item_id = 4;
+    string get_item_num = 5;
+    uint64 limit_time = 6;
+    uint64 end_flag = 7;
+  }
+
+  message MySpaceEdit {
+    Common common = 1;
+    string object_symbol_id = 2;
+    string coordinate_id = 3;
+    uint64 use_cost = 4;
+    uint64 theme_id = 5;
+    string char_id = 6;
+    sint64 bgm_id = 7;
+  }
+
+  message MySpaceSet {
+    Common common = 1;
+    string object_symbol_id = 2;
+    string coordinate_id = 3;
+    uint64 use_cost = 4;
+    uint64 theme_id = 5;
+    string char_id = 6;
+    uint64 my_set_num = 7;
+    string my_set_name = 8;
+  }
+
+  message MySpaceDelete {
+    Common common = 1;
+    string object_symbol_id = 2;
+    string coordinate_id = 3;
+    uint64 use_cost = 4;
+    uint64 theme_id = 5;
+    string char_id = 6;
+    uint64 my_set_num = 7;
+    string my_set_name = 8;
+  }
+
+  message MySpaceVisit {
+    Common common = 1;
+    uint64 visit_flag = 2;
+    string object_symbol_id = 3;
+    string coordinate_id = 4;
+    uint64 use_cost = 5;
+    uint64 theme_id = 6;
+    string char_id = 7;
+    string set_owner = 8;
+    uint64 space_total_like = 9;
+  }
+
+  message MySpacePhoto {
+    Common common = 1;
+  }
+
+  message NameChange {
+    Common common = 1;
+    string bf_name = 2;
+    string af_name = 3;
+  }
+
+  message FavHeroineChange {
+    Common common = 1;
+    uint64 bf_heroine_id = 2;
+    uint64 af_heroine_id = 3;
+    uint64 af_heroine_lv = 4;
+  }
+
+  message FavCardChange {
+    Common common = 1;
+    uint64 bf_card_id = 2;
+    uint64 af_card_id = 3;
+    uint64 af_card_lv = 4;
+    uint64 af_flowering_flag = 5;
+    uint64 af_flowering = 6;
+    uint64 af_deepen = 7;
+    uint64 premiere_flag = 8;
+  }
+
+  message FavMusicChange {
+    Common common = 1;
+    uint64 bf_music_id = 2;
+    uint64 af_music_id = 3;
+  }
+
+  message ChangeComment {
+    Common common = 1;
+    string bf_comment = 2;
+    string af_comment = 3;
+  }
+
+  message CardEnhance {
+    Common common = 1;
+    uint64 char_id = 2;
+    uint64 card_id = 3;
+    uint64 instance_id = 4;
+    uint64 get_exp = 5;
+    uint64 af_exp = 6;
+    uint64 bf_main_lv = 7;
+    uint64 af_main_lv = 8;
+    uint64 main_lv_limit = 9;
+    uint64 bf_em = 10;
+    uint64 af_em = 11;
+    uint64 bf_co = 12;
+    uint64 af_co = 13;
+    uint64 bf_ro = 14;
+    uint64 af_ro = 15;
+    uint64 bf_ttl = 16;
+    uint64 af_ttl = 17;
+    uint64 use_dream = 18;
+    string item_id = 19;
+    string item_num = 20;
+    uint64 rarity = 21;
+    uint64 emblem_id = 22;
+  }
+
+  message CardFlowering {
+    Common common = 1;
+    uint64 char_id = 2;
+    uint64 card_id = 3;
+    uint64 instance_id = 4;
+    uint64 bf_limit_lv = 5;
+    uint64 af_limit_lv = 6;
+    string item_id = 7;
+    string item_num = 8;
+    uint64 use_dream = 9;
+    uint64 rarity = 10;
+    uint64 episode_id = 11;
+    uint64 flowering_num = 12;
+    uint64 bf_danmaku_lv = 13;
+    uint64 af_danmaku_lv = 14;
+  }
+
+  message CardDeepen {
+    Common common = 1;
+    uint64 char_id = 2;
+    uint64 card_id = 3;
+    uint64 instance_id = 4;
+    string use_instance_id = 5;
+    uint64 bf_skill_lv = 6;
+    uint64 af_skill_lv = 7;
+    uint64 bf_em = 8;
+    uint64 af_em = 9;
+    uint64 bf_co = 10;
+    uint64 af_co = 11;
+    uint64 bf_ro = 12;
+    uint64 af_ro = 13;
+    uint64 bf_ttl = 14;
+    uint64 af_ttl = 15;
+    string item_id = 16;
+    string item_num = 17;
+    uint64 rarity = 18;
+    uint64 bf_deepen_lv = 19;
+    uint64 af_deepen_lv = 20;
+    uint64 bf_deepen_exp = 21;
+    uint64 af_deepen_exp = 22;
+    sint64 bf_passive_skill_level = 23;
+    sint64 af_passive_skill_level = 24;
+    sint64 bf_burst_skill_level = 25;
+    sint64 af_burst_skill_level = 26;
+    sint64 bf_odekake_skill_lv = 27;
+    sint64 af_odekake_skill_lv = 28;
+  }
+
+  message SellingCard {
+    Common common = 1;
+    string card_id = 2;
+    string instance_id = 3;
+    uint64 card_num = 4;
+    string rarity = 5;
+    uint64 piece_num = 6;
+  }
+
+  message SellingHeroine {
+    Common common = 1;
+    string heroine_id = 2;
+    string instance_id = 3;
+    uint64 heroine_num = 4;
+    uint64 medal_num = 5;
+  }
+
+  message ProtectCard {
+    Common common = 1;
+    uint64 rarity = 2;
+    uint64 card_id = 3;
+    uint64 instance_id = 4;
+    uint64 flowering_num = 6;
+    uint64 main_lv = 7;
+    uint64 deepen_lv = 8;
+    uint64 lock = 9;
+  }
+
+  message ProtectHeroine {
+    Common common = 1;
+    uint64 heroine_id = 2;
+    uint64 instance_id = 3;
+    uint64 heroine_lv = 4;
+    uint64 lock = 5;
+  }
+
+  message HeroineEnhance {
+    Common common = 1;
+    uint64 heroine_id = 2;
+    uint64 instance_id = 3;
+    uint64 bf_main_lv = 4;
+    uint64 af_main_lv = 5;
+    uint64 main_lv_limit = 6;
+    uint64 bf_shot = 7;
+    uint64 af_shot = 8;
+    uint64 bf_life = 9;
+    uint64 af_life = 10;
+    float bf_pow = 11;
+    float af_pow = 12;
+    uint64 use_valuable_num = 13;
+    uint64 use_heroine_num = 14;
+    string get_item_id = 15;
+    string get_item_num = 16;
+    uint64 heroine_skill_id = 17;
+  }
+
+  message HeroineTrade {
+    Common common = 1;
+    uint64 heroine_id = 2;
+    uint64 instance_id = 3;
+    uint64 use_valuable_num = 4;
+    uint64 use_heroine_num = 5;
+    uint64 trade_limit_date = 6;
+    uint64 trade_limit_remain = 7;
+    uint64 trade_count_limit = 8;
+    uint64 get_heroine_lv = 9;
+    uint64 life = 10;
+    uint64 shot = 11;
+    float em_bonus = 12;
+    float ro_bonus = 13;
+    float co_bonus = 14;
+    uint64 origin_life = 15;
+    uint64 origin_shot = 16;
+    float origin_em_bonus = 17;
+    float origin_ro_bonus = 18;
+    float origin_co_bonus = 19;
+    uint64 heroine_skill_id = 20;
+    uint64 trade_flag = 21;
+    uint64 patern_id = 22;
+  }
+
+  message HeroineBulkTrade {
+    Common common = 1;
+    string enhance_id = 2;
+    string first_trade_id = 3;
+    string second_trade_id = 4;
+    string enhance_instance_id = 5;
+    string first_trade_instance_id = 6;
+    string second_trade_instance_id = 7;
+    string enhance_lv_id = 8;
+    string use_item_id = 9;
+    string use_item_num = 10;
+    string option_flag = 11;
+  }
+
+  message ClubMemberChange {
+    Common common = 1;
+    uint64 type = 2;
+    string leader_id = 3;
+    string club_name = 4;
+    string club_id = 5;
+    uint64 member_num = 6;
+    uint64 club_num = 7;
+    uint64 disband_flag = 8;
+  }
+
+  message ClubCreate {
+    Common common = 1;
+    string club_name = 2;
+    string club_id = 3;
+    uint64 icon_id = 4;
+    uint64 flowering_flag = 5;
+    uint64 premiere_flag = 6;
+    uint64 style = 7;
+    uint64 attend = 8;
+    string profile = 9;
+    string item_id = 10;
+    string item_num = 11;
+  }
+
+  message ClubInfoChange {
+    Common common = 1;
+    uint64 bf_style = 2;
+    uint64 af_style = 3;
+    uint64 bf_attend = 4;
+    uint64 af_attend = 5;
+    string bf_profile = 6;
+    string af_profile = 7;
+    uint64 bf_emblem1 = 8;
+    uint64 af_emblem1 = 9;
+    uint64 bf_emblem2 = 10;
+    uint64 af_emblem2 = 11;
+    string club_name = 12;
+    string club_id = 13;
+  }
+
+  message ClubOptionChange {
+    Common common = 1;
+    string club_name = 2;
+    string club_id = 3;
+    uint64 search_flag = 4;
+    uint64 ssr_flag = 5;
+    uint64 enhance_flag = 6;
+    uint64 flowering_flag = 7;
+    uint64 deepen_flag = 8;
+  }
+
+  message ClubSlotOpen {
+    Common common = 1;
+    string item_id = 2;
+    string item_num = 3;
+    uint64 open_slot = 4;
+  }
+
+  message ClubMemberManagement {
+    Common common = 1;
+    string member_id = 2;
+    uint64 manage_type = 3;
+    string club_name = 4;
+    string club_id = 5;
+    uint64 position_id = 6;
+  }
+
+  message ClubChangePosition {
+    Common common = 1;
+    uint64 change_type = 2;
+    string club_name = 3;
+    string club_id = 4;
+    uint64 bf_position_id = 5;
+    uint64 af_position_id = 6;
+  }
+
+  message ClubSpaceEdit {
+    Common common = 1;
+    string club_id = 2;
+    string object_symbol_id = 3;
+    string coordinate_id = 4;
+    uint64 use_cost = 5;
+    uint64 theme_id = 6;
+  }
+
+  message ClubSpaceSet {
+    Common common = 1;
+    string club_id = 2;
+    string object_symbol_id = 3;
+    string coordinate_id = 4;
+    uint64 use_cost = 5;
+    uint64 theme_id = 6;
+    uint64 club_set_num = 7;
+    string club_set_name = 8;
+  }
+
+  message ClubSpaceDelete {
+    Common common = 1;
+    string club_id = 2;
+    string club_set_owner = 3;
+    string object_symbol_id = 4;
+    string coordinate_id = 5;
+    uint64 use_cost = 6;
+    uint64 theme_id = 7;
+    uint64 club_set_num = 8;
+    string club_set_name = 9;
+  }
+
+  message ClubChat {
+    Common common = 1;
+    string comment = 2;
+    uint64 position_id = 3;
+    string club_name = 4;
+    string club_id = 5;
+  }
+
+  message ClubStamp {
+    Common common = 1;
+    uint64 stamp_id = 2;
+    uint64 position_id = 3;
+    string club_name = 4;
+    string club_id = 5;
+  }
+
+  message ClubChatOption {
+    Common common = 1;
+    uint64 chat_option_flag = 2;
+    uint64 ssr_flag = 3;
+    uint64 enhance_flag = 4;
+    uint64 flowering_flag = 5;
+    uint64 deepen_flag = 6;
+    string club_name = 7;
+    string club_id = 8;
+  }
+
+  message EmblemChange {
+    Common common = 1;
+    uint64 bf_emblem = 2;
+    uint64 af_emblem = 3;
+    uint64 af_emblem_num = 4;
+  }
+
+  message WallpaperChange {
+    Common common = 1;
+    string card_id = 2;
+    string flowering_flag = 3;
+    string premiere_flag = 4;
+    uint64 my_space_flag = 5;
+  }
+
+  message PlayerIcon {
+    Common common = 1;
+    uint64 bf_icon_id = 2;
+    uint64 af_icon_id = 3;
+    uint64 card_icon_flag = 4;
+  }
+
+  message PushOption {
+    Common common = 1;
+    uint64 boost_push_flag = 2;
+    uint64 symbol_push_flag = 3;
+    uint64 odekake_push_flag = 4;
+    uint64 gm_notice_push_flag = 5;
+    uint64 night_push_flag = 6;
+  }
+
+  message Birthday {
+    Common common = 1;
+    string birthday = 2;
+  }
+
+  message TotalDownload {
+    Common common = 1;
+  }
+
+  message WebView {
+    Common common = 1;
+    string url = 2;
+  }
+
+  message Banner {
+    Common common = 1;
+    string start_date = 2;
+    string end_date = 3;
+    uint64 banner_place = 4;
+    uint64 banner_id = 5;
+  }
+
+  message News {
+    Common common = 1;
+    string start_date = 2;
+    uint64 important_flag = 3;
+    uint64 news_id = 4;
+  }
+
+  message Review {
+    Common common = 1;
+  }
+
+  message GameStartLoad {
+    Common common = 1;
+    uint64 elapsed_time = 2;
+    uint64 place_id = 3;
+  }
+
+  message AccountOption {
+    Common common = 1;
+    uint64 account_flag = 2;
+  }
+
+  message SoundVolume {
+    Common common = 1;
+    uint64 bgm_volume = 2;
+    uint64 se_volume = 3;
+    uint64 voice_volume = 4;
+  }
+
+  message DisplaySetting {
+    Common common = 1;
+    uint64 hakoniwa_flag = 2;
+    uint64 hold = 3;
+  }
+
+  message DialogueSetting {
+    Common common = 1;
+    uint64 danmaku_boost_flag = 2;
+    uint64 odekake_boost_flag = 3;
+    uint64 battery_flag = 4;
+  }
+
+  message ProtectSetting {
+    Common common = 1;
+    uint64 first_get_flag = 2;
+    uint64 rarity_flag = 3;
+    sint64 n_flag = 4;
+    sint64 r_flag = 5;
+    sint64 sr_flag = 6;
+    sint64 ssr_flag = 7;
+  }
+
+  message KaguraSetting {
+    Common common = 1;
+    sint64 notes_speed = 2;
+    sint64 notes_timing = 3;
+    uint64 vibration_flag = 4;
+    uint64 touch_se = 5;
+    uint64 notes_design = 6;
+    uint64 notes_effect = 7;
+    uint64 boss_anime = 8;
+    uint64 mitama_burst = 9;
+    uint64 attack_notes = 10;
+    uint64 rhythm_line = 11;
+    uint64 dannmaku_effect = 12;
+    uint64 dimmer = 13;
+    uint64 music_volume = 14;
+    uint64 touch_volume = 15;
+    uint64 dannmaku_volume = 16;
+    uint64 effect_volume = 17;
+    uint64 voice_volume = 18;
+    uint64 boss_atack_option = 19;
+    uint64 notes_size_option = 20;
+    uint64 touch_score_option = 21;
+    uint64 mitama_burst_cut_in_option = 22;
+    uint64 kagura_effect_cut_in_option = 23;
+    uint64 shikikaku_option = 24;
+  }
+
+  message GensoTicket {
+    Common common = 1;
+    sint64 item_id = 2;
+    sint64 item_num = 3;
+    sint64 accum_num = 4;
+    double donate_rate = 5;
+    double get_donate_rate = 6;
+    double get_boost_rate = 7;
+    double get_rate = 8;
+    string music_session_id = 9;
+    string odekake_session_id = 10;
+  }
+
+  message Spot {
+    Common common = 1;
+    sint64 area_flag = 2;
+    sint64 place_spot_id = 3;
+    sint64 place_status = 4;
+  }
+
+  message RaidBossDiscover {
+    Common common = 1;
+    sint64 raid_boss_id = 2;
+    string raid_boss_instance_id = 3;
+    sint64 raid_boss_lv = 4;
+    sint64 raid_boss_max_hp = 5;
+    sint64 raid_boss_discover_route = 6;
+    string session_id = 7;
+    string odekake_session_id = 8;
+    sint64 event_id = 9;
+    sint64 raid_boss_shere_route = 10;
+    string discover_user = 11;
+    sint64 user_relation = 12;
+  }
+
+  message RaidBossSelect {
+    Common common = 1;
+    sint64 raid_boss_id = 2;
+    string raid_boss_instance_id = 3;
+    sint64 raid_boss_lv = 4;
+    sint64 raid_boss_max_hp = 5;
+    sint64 raid_status = 6;
+    sint64 raid_choose = 7;
+    sint64 raid_boss_hp = 8;
+    sint64 raid_boss_participants = 9;
+    sint64 event_id = 10;
+    string discover_user = 11;
+    sint64 user_relation = 12;
+  }
+
+  message RaidBossLost {
+    Common common = 1;
+    sint64 raid_boss_id = 2;
+    string raid_boss_instance_id = 3;
+    sint64 raid_boss_lv = 4;
+    sint64 raid_boss_max_hp = 5;
+    sint64 raid_status = 6;
+    sint64 reason = 7;
+    sint64 boss_attack_select = 8;
+    sint64 boss_attack_route = 9;
+    string session_id = 10;
+    string odekake_session_id = 11;
+    sint64 raid_boss_hp = 12;
+    sint64 raid_boss_participants = 13;
+    sint64 event_id = 14;
+    string discover_user = 15;
+  }
+
+  message MissionRaid {
+    Common common = 1;
+    sint64 mission_type_id = 2;
+    sint64 mission_id = 3;
+    string get_item_id = 4;
+    string get_item_num = 5;
+    sint64 event_coin_id = 6;
+    sint64 get_event_coin = 7;
+    sint64 event_id = 8;
+  }
+
+  message RaidStageStart {
+    Common common = 1;
+    uint64 raid_boss_id = 2;
+    string raid_boss_instance_id = 3;
+    uint64 raid_boss_lv = 4;
+    uint64 raid_boss_max_hp = 5;
+    string session_id = 6;
+    sint64 notes_speed = 7;
+    sint64 notes_timing = 8;
+    uint64 vibration_flag = 9;
+    uint64 bluetooth_flag = 10;
+    uint64 music_id = 11;
+    uint64 auto_mode_flag = 12;
+    uint64 first_music_flag = 13;
+    uint64 first_difficulty_flag = 14;
+    uint64 absolute_difficulty = 15;
+    uint64 difficulty = 16;
+    uint64 mode = 17;
+    uint64 attribute = 18;
+    uint64 boss_effect_flag = 19;
+    uint64 rhythm_effect_flag = 20;
+    uint64 deck_id = 21;
+    string card_id = 22;
+    string card_type_id = 23;
+    string card_level = 24;
+    string card_skill_level = 25;
+    string active_skill_id = 26;
+    string passive_skill_id = 27;
+    string burst_skill_id = 28;
+    string active_skill_level = 29;
+    string passive_skill_level = 30;
+    string burst_skill_level = 31;
+    string card_rarity = 32;
+    string card_flowering = 33;
+    string card_deepen = 34;
+    string heroine_id = 35;
+    string heroine_lv = 36;
+    string heroine_skill = 37;
+    uint64 bf_nakayoshi_pt = 38;
+    uint64 bf_nakayoshi_lv = 39;
+    uint64 total_para_life = 40;
+    uint64 total_para_shot = 41;
+    uint64 para_total = 42;
+    uint64 total_para_em = 43;
+    uint64 total_para_co = 44;
+    uint64 total_para_ro = 45;
+    uint64 card_para_total = 46;
+    uint64 flowering_lv_bonus = 47;
+    uint64 type_fit_bonus = 48;
+    uint64 heroine_bonus = 49;
+    uint64 heroine_skill_bonus = 50;
+    uint64 expected_score_rank = 51;
+    uint64 event_id = 52;
+    uint64 bonus_music_flag = 53;
+    string passive_skill_boost = 54;
+  }
+
+  message RaidStageEnd {
+    Common common = 1;
+    string session_id = 2;
+    uint64 music_id = 3;
+    uint64 mv_flag = 4;
+    uint64 auto_mode_flag = 5;
+    uint64 skip_ticket_num = 6;
+    uint64 rehearsal_flag = 7;
+    uint64 spell_break_flag = 8;
+    uint64 absolute_difficulty = 9;
+    uint64 difficulty = 10;
+    uint64 life_result = 11;
+    uint64 start_t = 12;
+    uint64 deck_id = 13;
+    uint64 continue = 14;
+    uint64 score = 15;
+    uint64 high_score = 16;
+    uint64 bf_high_score_rate = 17;
+    uint64 af_high_score_rate = 18;
+    uint64 private_score_ranking = 19;
+    uint64 total_score_ranking = 20;
+    uint64 score_rank = 21;
+    uint64 new_score_rank = 22;
+    uint64 combo_num = 23;
+    uint64 full_combo_flag = 24;
+    uint64 new_full_combo = 25;
+    uint64 new_p_full_combo = 26;
+    uint64 auto_active_flag = 27;
+    uint64 active_skill = 28;
+    double active_skill_t = 29;
+    string active_skill_id = 30;
+    uint64 passive_skill = 31;
+    double passive_skill_t = 32;
+    string passive_skill_id = 33;
+    uint64 burst_skill = 34;
+    double burst_skill_t = 35;
+    string burst_skill_id = 36;
+    uint64 spell_card_id = 37;
+    uint64 spell_card_place_id = 38;
+    uint64 boss_id = 39;
+    uint64 boss_hp = 40;
+    uint64 boss_damage = 41;
+    uint64 max_damage = 42;
+    uint64 defeat_time = 43;
+    uint64 best_defeat_time = 44;
+    uint64 get_user_exp = 45;
+    string drop_item_id = 46;
+    string drop_item_num = 47;
+    uint64 ave_fps = 48;
+    uint64 low_fps = 49;
+    uint64 dream_point = 50;
+    string card_id = 51;
+    uint64 get_card_exp = 52;
+    string card_level = 53;
+    string heroine_id = 54;
+    string heroine_lv = 55;
+    uint64 get_nakayoshi_pt = 56;
+    uint64 af_nakayoshi_pt = 57;
+    uint64 af_nakayoshi_lv = 58;
+    string notes = 59;
+    uint64 score_target = 60;
+    uint64 combo_target = 61;
+    uint64 boss_target = 62;
+    uint64 daily_bonus_flag = 63;
+    uint64 danmaku_flag = 64;
+    uint64 danmaku_id = 65;
+    uint64 get_point_charm = 66;
+    uint64 get_power_charm = 67;
+    uint64 miss_num = 68;
+    string miss_time = 69;
+    uint64 bomb_num = 70;
+    string bomb_time = 71;
+    uint64 clear_danmaku = 72;
+    uint64 boost_ratio = 73;
+    uint64 raid_help_boost_reward_ratio = 74;
+    sint64 remaint_boost = 75;
+    uint64 use_boost = 76;
+    uint64 raid_remaint_boost = 77;
+    uint64 raid_use_boost = 78;
+    uint64 event_id = 79;
+    uint64 event_point_id = 80;
+    uint64 get_event_point = 81;
+    uint64 oirginal_event_point = 82;
+    uint64 difficulty_bonus_damage = 83;
+    uint64 rank_bonus_point = 84;
+    uint64 raid_boost_bonus_point = 85;
+    uint64 raid_help_boost_bonus_point = 86;
+    uint64 event_bonus_point = 87;
+    uint64 gage_bonus = 88;
+    uint64 ttl_event_point = 89;
+    uint64 event_coin_id = 90;
+    uint64 get_event_coin = 91;
+    uint64 raid_boss_id = 92;
+    string raid_boss_instance_id = 93;
+    uint64 raid_boss_lv = 94;
+    uint64 raid_boss_max_hp = 95;
+    uint64 raid_status = 96;
+    uint64 raid_bf_hp = 97;
+    uint64 raid_af_hp = 98;
+    uint64 raid_boss_attack_damage = 99;
+    uint64 raid_original_damage = 100;
+    uint64 raid_bonus_damage = 101;
+    uint64 raid_boss_status = 102;
+    uint64 raid_boss_discover = 103;
+    uint64 result = 104;
+    uint64 continue_num = 105;
+    uint64 retry_self = 106;
+    uint64 retry_life = 107;
+    string detailed_notes = 108;
+    uint64 boss_atack_option = 109;
+    uint64 notes_size_option = 110;
+    string detailed_score_base = 111;
+    string detailed_combo = 112;
+    string detailed_score_up_bonus = 113;
+    string detailed_score_adjust = 114;
+    uint64 boost_reward_ratio = 115;
+    sint64 unlock_bgm_flag = 116;
+    sint64 unlock_bgm_id = 117;
+  }
+
+  message RaidBossAttack {
+    Common common = 1;
+    sint64 raid_boss_id = 2;
+    string raid_boss_instance_id = 3;
+    sint64 raid_boss_lv = 4;
+    sint64 raid_boss_max_hp = 5;
+    sint64 raid_status = 6;
+    sint64 boss_attack_route = 7;
+    string session_id = 8;
+    string odekake_session_id = 9;
+    sint64 raid_bf_hp = 10;
+    sint64 raid_af_hp = 11;
+    sint64 raid_boss_attack_damage = 12;
+    sint64 raid_boss_status = 13;
+    sint64 raid_original_damage = 14;
+    sint64 raid_bonus_damage = 15;
+    sint64 event_point_id = 16;
+    sint64 get_event_point = 17;
+    sint64 event_coin_id = 18;
+    sint64 get_event_coin = 19;
+    sint64 event_id = 20;
+  }
+
+  message RaidBossInvite {
+    Common common = 1;
+    sint64 raid_boss_id = 2;
+    string raid_boss_instance_id = 3;
+    sint64 raid_boss_lv = 4;
+    sint64 raid_boss_max_hp = 5;
+    string discover_user = 6;
+    sint64 user_relation = 7;
+  }
+
+  message UraKaguraUnlock {
+    Common common = 1;
+    sint64 use_item_flag = 2;
+    sint64 use_item_num = 3;
+    sint64 get_score_id = 4;
+  }
+
+  message Gacha {
+    Common common = 1;
+    uint64 gacha_appearance_id = 2;
+  }
+
+  message GachaServerPayload {
+    uint64 num_free_crystal = 1;
+    uint64 num_paid_crystal = 2;
+    string transaction_id = 3;
+    string gacha_id = 4;
+    uint64 exec_num = 5;
+    string get_item_info = 6;
+    string paid_id = 8;
+    string paid_num = 9;
+    uint64 paid_amount = 10;
+    uint64 paid_vc = 11;
+    uint64 bf_step_index = 12;
+    uint64 af_step_index = 13;
+  }
+
+  message BoxGacha {
+    Common common = 1;
+    uint64 event_id = 2;
+  }
+
+  message BoxGachaServerPayload {
+    uint64 num_free_crystal = 1;
+    uint64 num_paid_crystal = 2;
+    string transaction_id = 3;
+    string gacha_id = 4;
+    uint64 exec_num = 5;
+    string get_item_info = 6;
+    string paid_id = 8;
+    uint64 paid_amount = 9;
+    uint64 af_box_remain = 10;
+    uint64 box_step = 11;
+  }
+
+  message Friend {
+    Common common = 1;
+    string action = 2;
+  }
+
+  message FriendServerPayload {
+    string target_user_id = 1;
+    uint64 target_user_rank = 2;
+    uint64 follow_num = 3;
+    uint64 max_follow_num = 4;
+  }
+
+  message ConsumeVc {
+    Common common = 1;
+  }
+
+  message ConsumeVcServerPayload {
+    string id = 1;
+    uint64 num_free_crystal = 2;
+    uint64 num_paid_crystal = 3;
+  }
+
+  message Status {
+    string alert_digest = 1;
+    string alert_hash = 2;
+    uint64 alert_content = 3;
+    string alert_detail = 4;
+  }
+
+  message StatusServerPayload {
+    string d = 1;
+    string client_time = 2;
+    string takasho_player_id = 3;
+    string takasho_player_short_id = 4;
+    string player_name = 5;
+    string reg_date = 6;
+    uint64 num_free_crystal = 7;
+    uint64 num_paid_crystal = 8;
+  }
+
+  message AdvertiseView {
+    Common common = 1;
+    string ad_unit_id = 2;
+    sint64 view_route = 3;
+    string item_id = 4;
+    string item_num = 5;
+    sint64 bf_count = 6;
+    sint64 af_count = 7;
+    sint64 appear_special_chance = 8;
+    sint64 sp_chance_flag = 9;
+    sint64 sp_chance_step = 10;
+  }
+
+  message GpMedleyStart {
+    Common common = 1;
+    sint64 gp_season_id = 2;
+    sint64 gp_period_id = 3;
+    string medley_session_id = 4;
+    sint64 medley_difficulty = 5;
+    string use_item_id = 6;
+    string use_item_num = 7;
+  }
+
+  message GpMedleyEnd {
+    Common common = 1;
+    sint64 gp_season_id = 2;
+    sint64 gp_period_id = 3;
+    string medley_session_id = 4;
+    sint64 medley_difficulty = 5;
+    sint64 medley_total_score = 6;
+    sint64 medley_first_score = 7;
+    sint64 medley_second_score = 8;
+    sint64 medley_third_score = 9;
+    sint64 bf_high_medley_total_score = 10;
+    sint64 af_high_medley_total_score = 11;
+    sint64 medley_end_status = 12;
+  }
+
+  message GpEnd {
+    Common common = 1;
+    sint64 gp_season_id = 2;
+    sint64 gp_season_ranking = 3;
+    sint64 gp_season_point = 4;
+    sint64 gp_period_id = 5;
+    sint64 gp_period_ranking = 6;
+    sint64 af_gp_period_point = 7;
+    sint64 bf_gp_period_point = 8;
+    sint64 gp_period_high_score = 9;
+    sint64 gp_period_class_ranking = 10;
+    sint64 af_gp_class_rank = 11;
+    sint64 bf_gp_class_rank = 12;
+    sint64 gp_class_change = 13;
+  }
+
+  message GpTicket {
+    Common common = 1;
+    sint64 heal_ticket = 2;
+    sint64 af_tikcet = 3;
+    string use_item_id = 4;
+    string use_item_num = 5;
+    sint64 use_place_id = 6;
+  }
+
+  message GpStageStart {
+    Common common = 1;
+    string medley_session_id = 2;
+    string session_id = 3;
+    sint64 notes_speed = 4;
+    sint64 notes_timing = 5;
+    sint64 vibration_flag = 6;
+    sint64 bluetooth_flag = 7;
+    sint64 music_id = 8;
+    sint64 auto_mode_flag = 9;
+    sint64 first_music_flag = 10;
+    sint64 first_difficulty_flag = 11;
+    sint64 absolute_difficulty = 12;
+    sint64 difficulty = 13;
+    sint64 mode = 14;
+    sint64 attribute = 15;
+    sint64 boss_effect_flag = 16;
+    sint64 rhythm_effect_flag = 17;
+    sint64 medley_number = 18;
+    sint64 medley_deck_id = 19;
+    string card_id = 20;
+    string card_type_id = 21;
+    string card_level = 22;
+    string card_skill_level = 23;
+    string active_skill_id = 24;
+    string passive_skill_id = 25;
+    string burst_skill_id = 26;
+    string active_skill_level = 27;
+    string passive_skill_level = 28;
+    string burst_skill_level = 29;
+    string card_rarity = 30;
+    string card_flowering = 31;
+    string card_deepen = 32;
+    string heroine_id = 33;
+    string heroine_lv = 34;
+    string heroine_skill = 35;
+    sint64 bf_nakayoshi_pt = 36;
+    sint64 bf_nakayoshi_lv = 37;
+    sint64 total_para_life = 38;
+    sint64 total_para_shot = 39;
+    sint64 para_total = 40;
+    sint64 total_para_em = 41;
+    sint64 total_para_co = 42;
+    sint64 total_para_ro = 43;
+    sint64 card_para_total = 44;
+    sint64 flowering_lv_bonus = 45;
+    sint64 type_fit_bonus = 46;
+    sint64 heroine_bonus = 47;
+    sint64 heroine_skill_bonus = 48;
+    sint64 expected_score_rank = 49;
+    sint64 gp_season_id = 50;
+    sint64 gp_period_id = 51;
+    sint64 bonus_music_flag = 52;
+    string passive_skill_boost = 53;
+  }
+
+  message GpStageEnd {
+    Common common = 1;
+    string medley_session_id = 2;
+    string session_id = 3;
+    sint64 music_id = 4;
+    sint64 medley_number = 5;
+    sint64 medley_deck_id = 6;
+    sint64 mv_flag = 7;
+    sint64 auto_mode_flag = 8;
+    sint64 skip_ticket_num = 9;
+    sint64 rehearsal_flag = 10;
+    sint64 spell_break_flag = 11;
+    sint64 absolute_difficulty = 12;
+    sint64 difficulty = 13;
+    sint64 life_result = 14;
+    sint64 start_t = 15;
+    sint64 deck_id = 16;
+    sint64 continue = 17;
+    sint64 medley_total_score = 18;
+    sint64 bf_high_medley_total_score = 19;
+    sint64 af_high_medley_total_score = 20;
+    sint64 score = 21;
+    sint64 high_score = 22;
+    sint64 bf_high_score_rate = 23;
+    sint64 af_high_score_rate = 24;
+    sint64 private_score_ranking = 25;
+    sint64 total_score_ranking = 26;
+    sint64 score_rank = 27;
+    sint64 new_score_rank = 28;
+    sint64 combo_num = 29;
+    sint64 full_combo_flag = 30;
+    sint64 new_full_combo = 31;
+    sint64 new_p_full_combo = 32;
+    sint64 auto_active_flag = 33;
+    sint64 active_skill = 34;
+    float active_skill_t = 35;
+    string active_skill_id = 36;
+    sint64 passive_skill = 37;
+    float passive_skill_t = 38;
+    string passive_skill_id = 39;
+    sint64 burst_skill = 40;
+    float burst_skill_t = 41;
+    string burst_skill_id = 42;
+    sint64 spell_card_id = 43;
+    sint64 spell_card_place_id = 44;
+    sint64 boss_id = 45;
+    sint64 boss_hp = 46;
+    sint64 boss_damage = 47;
+    sint64 max_damage = 48;
+    sint64 defeat_time = 49;
+    sint64 best_defeat_time = 50;
+    sint64 get_user_exp = 51;
+    string drop_item_id = 52;
+    string drop_item_num = 53;
+    sint64 ave_fps = 54;
+    sint64 low_fps = 55;
+    sint64 boost_reward_ratio = 56;
+    sint64 dream_point = 57;
+    string card_id = 58;
+    sint64 get_card_exp = 59;
+    string card_level = 60;
+    string heroine_id = 61;
+    string heroine_lv = 62;
+    sint64 get_nakayoshi_pt = 63;
+    sint64 af_nakayoshi_pt = 64;
+    sint64 af_nakayoshi_lv = 65;
+    string notes = 66;
+    sint64 score_target = 67;
+    sint64 combo_target = 68;
+    sint64 boss_target = 69;
+    sint64 daily_bonus_flag = 70;
+    sint64 danmaku_flag = 71;
+    sint64 danmaku_id = 72;
+    sint64 get_point_charm = 73;
+    sint64 get_power_charm = 74;
+    sint64 miss_num = 75;
+    string miss_time = 76;
+    sint64 bomb_num = 77;
+    string bomb_time = 78;
+
+    sint64 clear_danmaku = 79;
+    sint64 boost_ratio = 80;
+    sint64 remaint_boost = 81;
+    sint64 use_boost = 82;
+    sint64 gp_season_id = 83;
+    sint64 gp_period_id = 84;
+    sint64 result = 85;
+    sint64 continue_num = 86;
+    sint64 retry_self = 87;
+    sint64 retry_life = 88;
+    string detailed_notes = 89;
+    sint64 boss_atack_option = 90;
+    sint64 notes_size_option = 91;
+    string detailed_score_base = 92;
+    string detailed_combo = 93;
+    string detailed_score_up_bonus = 94;
+    string detailed_score_adjust = 95;
+    sint64 unlock_bgm_flag = 96;
+    sint64 unlock_bgm_id = 97;
+  }
+
+  message GpDeckCh {
+    Common common = 1;
+    string bf_card = 2;
+    string af_card = 3;
+    string af_card_instance = 4;
+    string card_rarity = 5;
+    string card_type_id = 6;
+    string card_main_level = 7;
+    string card_skill_level = 8;
+    string active_skill_id = 9;
+    string passive_skill_id = 10;
+    string burst_skill_id = 11;
+    string odekake_skill_id = 12;
+    string active_skill_level = 13;
+    string passive_skill_level = 14;
+    string burst_skill_level = 15;
+    string odekake_skill_lv = 16;
+    string card_flowering = 17;
+    string card_deepen = 18;
+    string flowering_flag = 19;
+    string premiere_flag = 20;
+    sint64 bf_heroine1 = 21;
+    sint64 af_heroine1 = 22;
+    sint64 bf_heroine2 = 23;
+    sint64 af_heroine2 = 24;
+    sint64 af_heroine1_instance = 25;
+    sint64 af_heroine2_instance = 26;
+    sint64 heroine1_life = 27;
+    sint64 heroine2_life = 28;
+    sint64 heroine1_shot = 29;
+    sint64 heroine2_shot = 30;
+    sint64 heroine1_lv = 31;
+    sint64 heroine2_lv = 32;
+    sint64 heroine1_heroine_skill_id = 33;
+    sint64 heroine2_heroine_skill_id = 34;
+    float heroine1_em_ratio = 35;
+    float heroine2_em_ratio = 36;
+    float heroine1_co_ratio = 37;
+    float heroine2_co_ratio = 38;
+    float heroine1_ro_ratio = 39;
+    float heroine2_ro_ratio = 40;
+    sint64 heroine1_origin_life = 41;
+    sint64 heroine2_origin_life = 42;
+    sint64 heroine1_origin_shot = 43;
+    sint64 heroine2_origin_shot = 44;
+    float heroine1_origin_em_ratio = 45;
+    float heroine2_origin_em_ratio = 46;
+    float heroine1_origin_co_ratio = 47;
+    float heroine2_origin_co_ratio = 48;
+    float heroine1_origin_ro_ratio = 49;
+    float heroine2_origin_ro_ratio = 50;
+    sint64 nakayoshi_pt = 51;
+    sint64 nakayoshi_lv = 52;
+    sint64 card_para_total = 53;
+    sint64 card_para_em = 54;
+    sint64 card_para_co = 55;
+    sint64 card_para_ro = 56;
+    sint64 para_total = 57;
+    sint64 total_para_em = 58;
+    sint64 total_para_co = 59;
+    sint64 total_para_ro = 60;
+    sint64 medley_deck_id = 61;
+    sint64 deck_call = 62;
+    sint64 deck_id = 63;
+    sint64 deck_slot = 64;
+    string deck_name = 65;
+    sint64 suggestion = 66;
+    sint64 suggestion_type = 67;
+    sint64 suggestion_heroine = 68;
+    sint64 suggestion_card = 69;
+    sint64 suggestion_skill = 70;
+  }
+
+  message Repair {
+    Common common = 1;
+    sint64 repair_id = 2;
+    sint64 repair_char_id = 3;
+    sint64 repair_max_objects = 4;
+    sint64 repair_objects = 5;
+    string use_item_id = 6;
+    string use_item_num = 7;
+    sint64 use_dream = 8;
+    sint64 object_id = 9;
+    sint64 episode_id = 10;
+    sint64 place_spot_id = 11;
+    sint64 area_id = 12;
+    sint64 char_id = 13;
+    sint64 odekake_id = 14;
+    string get_item_id = 15;
+    string get_item_num = 16;
+  }
+
+  message ChangeCostume {
+    Common common = 1;
+    string char_id = 2;
+    sint64 befor_costume = 3;
+    sint64 after_costume = 4;
+  }
+
+  message QuestEnd {
+    Common common = 1;
+    sint64 quest_pt_ranking = 2;
+    sint64 quest_pt = 3;
+    sint64 quest_id = 4;
+  }
+}
+
+message PlayerEventLogForWeb {
+  enum EventID {
+    NONE = 0;
+    ENQUETE = 1;
+    OPINION_BOX = 2;
+  }
+
+  message Payload {
+    EventSchemaForWeb.Enquete enquete = 1;
+    EventSchemaForWeb.OpinionBox opinion_box = 2;
+  }
+
+  string event_category = 1;
+  EventID event_id = 2;
+  Payload payload = 3;
+  string player_state = 4;
+}
+
+message EventSchemaForWeb {
+  message Enquete {
+    string takasho_player_id = 1;
+    string takasho_player_short_id = 2;
+    string player_name = 3;
+    string enquete_ver = 4;
+    string question1 = 5;
+    string question2 = 6;
+    string question3_1 = 7;
+    string question3_2 = 8;
+    string question3_3 = 9;
+    string question4 = 10;
+    string question5 = 11;
+    string question6 = 12;
+    string question7 = 13;
+  }
+  message OpinionBox {
+    string takasho_player_id = 1;
+    string takasho_player_short_id = 2;
+    string player_name = 3;
+    uint64 type_id = 4;
+    string opinion_id = 5;
+    string category_id = 6;
+    string opinion_string = 7;
+  }
+}

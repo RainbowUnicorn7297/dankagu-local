@@ -1,0 +1,29 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.subscription.renewal_reward.v1;
+
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+message RenewalReward {
+  string reward_id = 1;
+  string subscription_product_id = 2;
+  sint64 opened_at = 3;
+  sint64 closed_at = 4;
+  repeated RenewalRewardPrize prizes = 5;
+  bool is_loop = 6;
+}
+
+message RenewalRewardPrize {
+  string reward_prize_id = 1;
+  sint64 count = 2;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 3;
+  string schema_key = 4;
+  bytes value = 5;
+  string search_label = 6;
+  string system_resource_name = 7;
+  sint64 system_resource_num = 8;
+}
+
+message RenewalCount {
+  string subscription_product_id = 1;
+  sint64 count = 2;
+}
