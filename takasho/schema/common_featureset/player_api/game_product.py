@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import grpc
 
 from takasho.packer import packer
@@ -8,11 +10,12 @@ from takasho.schema.common_featureset.player_api import game_product_pb2_grpc
 class GameProduct(game_product_pb2_grpc.GameProductServicer):
     
     def GetAvailableV1(self, request, context):
-        if request.page_token is None:
+        if not request.page_token:
             filename = 'game_product.hex'
         else:
             filename = 'game_product.' + request.page_token + '.hex'
-        with open (filename) as f:
+        p = Path(__file__).with_name(filename)
+        with p.open() as f:
             response = game_product_pb2.GameProductGetAvailableV1.Response. \
                 FromString(bytes.fromhex(f.read()))
         return response

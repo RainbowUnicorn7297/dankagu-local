@@ -9,6 +9,9 @@ from takasho.schema.common_featureset.player_api import player_storage_pb2_grpc
 
 
 class PlayerStorage(player_storage_pb2_grpc.PlayerStorageServicer):
+
+    def __init__(self):
+        self._revision = 'b69e1df8-2e05-48c9-bdb2-5a09bc8c7f4c'
     
     def SetEntriesV2(self, request, context):
         response = player_storage_pb2.PlayerStorageSetEntriesV2.Response()
@@ -18,6 +21,7 @@ class PlayerStorage(player_storage_pb2_grpc.PlayerStorageServicer):
             entry.created_at = int(time.time())
             entry.updated_at = int(time.time())
         response.revision = request.next_revision
+        self._revision = request.next_revision
         return response
     
     def GetEntriesV2(self, request, context):
@@ -38,6 +42,25 @@ class PlayerStorage(player_storage_pb2_grpc.PlayerStorageServicer):
                 entry.value = b'\010\001 \016(\001'
                 entry.created_at = 1635215027
                 entry.updated_at = 1663655102
+            elif criterion.key == 'JoinClubStatus--':
+                entry = response.entries.add()
+                entry.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
+                entry.key = 'JoinClubStatus--0'
+                entry.value = b'\020\363\234\252\210\006\030\363\234\252\210\006 \001'
+                entry.created_at = 1628081779
+                entry.updated_at = 1628081779
+                entry = response.entries.add()
+                entry.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
+                entry.key = 'JoinClubStatus--1'
+                entry.value = b'\010\001\020\363\234\252\210\006\030\363\234\252\210\006'
+                entry.created_at = 1628081779
+                entry.updated_at = 1628081779
+                entry = response.entries.add()
+                entry.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
+                entry.key = 'JoinClubStatus--2'
+                entry.value = b'\010\002\020\363\234\252\210\006\030\363\234\252\210\006'
+                entry.created_at = 1628081779
+                entry.updated_at = 1628081779
             elif criterion.key == 'GpxInfoStatus-V1-':
                 entry = response.entries.add()
                 entry.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
@@ -191,7 +214,7 @@ class PlayerStorage(player_storage_pb2_grpc.PlayerStorageServicer):
             # 8th set
             # if criterion.key == 'JoinClubStatus--':
             #     entry = response.entries.add()
-        response.revision = 'b69e1df8-2e05-48c9-bdb2-5a09bc8c7f4c'
+        response.revision = self._revision
         return response
 
 

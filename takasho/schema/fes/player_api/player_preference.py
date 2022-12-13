@@ -1,3 +1,5 @@
+import time
+
 import grpc
 
 from takasho.packer import packer
@@ -9,9 +11,21 @@ class FesPlayerPreference(player_preference_pb2_grpc.FesPlayerPreferenceServicer
     
     def GetV1(self, request, context):
         response = player_preference_pb2.FesPlayerPreferenceGetV1.Response()
-        response.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
-        response.player_level = 500
-        response.is_my_space_released = True
+        player_preference = response.player_preference
+        player_preference.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
+        player_preference.player_level = 500
+        player_preference.is_my_space_released = True
+        return response
+    
+    def SetAndSavePlayerStorageV1(self, request, context):
+        response = player_preference_pb2.FesPlayerPreferenceSetAndSavePlayerStorageV1.Response()
+        response.player_preference.CopyFrom(request.player_preference)
+        response.entries.extend(request.entries)
+        for entry in response.entries:
+            entry.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
+            entry.created_at = int(time.time())
+            entry.updated_at = int(time.time())
+        response.revision = request.next_revision
         return response
 
 

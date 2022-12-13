@@ -1,3 +1,4 @@
 *.pyc
 assets/*
 debug/*
+pcap/*

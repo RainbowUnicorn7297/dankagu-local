@@ -1,11 +1,12 @@
-from wsgiref.simple_server import make_server
-from ssl import SSLContext, PROTOCOL_TLS_SERVER
-from handler import application
 from os import path
+from ssl import PROTOCOL_TLS_SERVER, SSLContext
 import sys
+from wsgiref.simple_server import make_server
+
+from handler import application
 
 # Port used by the LCX server
-_port = 443
+_port = 9443
 
 
 def key_path():

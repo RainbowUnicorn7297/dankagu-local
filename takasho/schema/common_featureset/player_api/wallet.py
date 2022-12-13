@@ -13,9 +13,10 @@ class Wallet(wallet_pb2_grpc.WalletServicer):
         response = wallet_pb2.WalletGetBalancesV2.Response()
         p = Path(__file__).with_name('wallet.hex')
         with p.open() as f:
-            total = wallet_pb2.WalletGetBalancesV2.Response.FromString(
-                bytes.fromhex(f.read())).total
-        response.total.extend(total)
+            r = wallet_pb2.WalletGetBalancesV2.Response.FromString(
+                bytes.fromhex(f.read()))
+        response.total.CopyFrom(r.total)
+        response.expiration.CopyFrom(r.expiration)
         response.expired_at = request.expired_at
         return response
 

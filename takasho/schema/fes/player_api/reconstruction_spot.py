@@ -14,7 +14,7 @@ class ReconstructionSpot(reconstruction_spot_pb2_grpc.ReconstructionSpotServicer
         with p.open() as f:
             response = reconstruction_spot_pb2. \
                 ReconstructionSpotGetAvailableV1.Response.FromString(
-                    packer.unpack(bytes.fromhex(f.read())))
+                    bytes.fromhex(f.read()))
         return response
     
     def ReceivePrizesV1(self, request, context):

@@ -1,5 +1,5 @@
 from inspect import cleandoc
-from socket import socket, AF_INET, SOCK_DGRAM
+from socket import AF_INET, SOCK_DGRAM, socket
 from time import sleep
 
 from dnslib.intercept import InterceptResolver

@@ -1,5 +1,5 @@
 from os import path
-import sys, random
+import sys
 
 
 def response_path():

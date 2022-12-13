@@ -10,7 +10,7 @@ class GameStatus(game_status_pb2_grpc.GameStatusServicer):
     def GetV1(self, request, context):
         response = game_status_pb2.GameStatusGetV1.Response()
         for v in request.values:
-            status = request.statuses.add()
+            status = response.statuses.add()
             status.value = v.value
         return response
 
