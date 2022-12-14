@@ -6,5 +6,6 @@ Touhou Danmaku Kagura Local Server
 - requests
 - grpcio
 - grpcio-tools
+- grpc-interceptor
 - pbkdf2
 - pycryptodomex
