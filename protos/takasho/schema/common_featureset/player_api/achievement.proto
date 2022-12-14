@@ -1,0 +1,68 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/achievement/v1.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+import "takasho/schema/common_featureset/resource/player_achievement/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+
+message AchievementGetAvailableV1 {
+  message Request {
+    takasho.schema.common_featureset.resource.achievement.v1.Criterion criterion = 1;
+    string page_token = 2;
+    uint64 max_results = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.achievement.v1.Achievement achievements = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message AchievementGetAvailableByIDsV1 {
+  message Request {
+    repeated string achievement_ids = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.achievement.v1.Achievement achievements = 1;
+  }
+}
+
+message AchievementUnlockV1 {
+  message Request {
+    repeated string achievement_ids = 1;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 2;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_achievement.v1.PlayerAchievement player_achievements = 1;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory inventories = 2;
+  }
+}
+
+message AchievementUnlockAndSavePlayerStorageV1 {
+  message Request {
+    repeated string achievement_ids = 1;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 2;
+    string next_revision = 3;
+    string previous_revision = 4;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 5;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_achievement.v1.PlayerAchievement player_achievements = 1;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory inventories = 2;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 3;
+    string revision = 4;
+  }
+}
+
+service Achievement {
+  rpc GetAvailableV1(AchievementGetAvailableV1.Request) returns (AchievementGetAvailableV1.Response) {}
+  rpc GetAvailableByIDsV1(AchievementGetAvailableByIDsV1.Request) returns (AchievementGetAvailableByIDsV1.Response) {}
+  rpc UnlockV1(AchievementUnlockV1.Request) returns (AchievementUnlockV1.Response) {}
+  rpc UnlockAndSavePlayerStorageV1(AchievementUnlockAndSavePlayerStorageV1.Request) returns (AchievementUnlockAndSavePlayerStorageV1.Response) {}
+}

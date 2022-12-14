@@ -1,0 +1,69 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/player_key_value/v1.proto";
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+
+message PlayerKeyValueStoreGetPlayerKeyValuesV1 {
+  message Request {
+    repeated string key = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_key_value.v1.PlayerKeyValue player_key_values = 1;
+  }
+}
+
+message PlayerKeyValueStoreIncrementPlayerKeyValuesV1 {
+  message Request {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.player_key_value.v1.PlayerKeyValueIncrementInfo player_key_values = 2;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_key_value.v1.PlayerKeyValue player_key_values = 1;
+  }
+}
+
+message PlayerKeyValueStoreIncrementPlayerKeyValuesAndSavePlayerStorageV1 {
+  message Request {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.player_key_value.v1.PlayerKeyValueIncrementInfo player_key_values = 2;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 3;
+    string next_revision = 4;
+    string previous_revision = 5;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 6;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_key_value.v1.PlayerKeyValue player_key_values = 1;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 2;
+    string revision = 3;
+  }
+}
+
+message PlayerKeyValueStoreUpdatePlayerKeyValuesAndSavePlayerStorageV1 {
+  message Request {
+    string transaction_id = 1;
+    repeated takasho.schema.common_featureset.resource.player_key_value.v1.PlayerKeyValueUpdateInfo player_key_values = 2;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 3;
+    string next_revision = 4;
+    string previous_revision = 5;
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 6;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_key_value.v1.PlayerKeyValue player_key_values = 1;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 2;
+    string revision = 3;
+  }
+}
+
+service PlayerKeyValueStore {
+  rpc GetPlayerKeyValuesV1(PlayerKeyValueStoreGetPlayerKeyValuesV1.Request) returns (PlayerKeyValueStoreGetPlayerKeyValuesV1.Response) {}
+  rpc IncrementPlayerKeyValuesV1(PlayerKeyValueStoreIncrementPlayerKeyValuesV1.Request) returns (PlayerKeyValueStoreIncrementPlayerKeyValuesV1.Response) {}
+  rpc IncrementPlayerKeyValuesAndSavePlayerStorageV1(PlayerKeyValueStoreIncrementPlayerKeyValuesAndSavePlayerStorageV1.Request) returns (PlayerKeyValueStoreIncrementPlayerKeyValuesAndSavePlayerStorageV1.Response) {}
+  rpc UpdatePlayerKeyValuesAndSavePlayerStorageV1(PlayerKeyValueStoreUpdatePlayerKeyValuesAndSavePlayerStorageV1.Request) returns (PlayerKeyValueStoreUpdatePlayerKeyValuesAndSavePlayerStorageV1.Response) {}
+}

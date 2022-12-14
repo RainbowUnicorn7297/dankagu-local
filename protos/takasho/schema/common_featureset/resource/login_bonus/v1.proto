@@ -1,0 +1,34 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.login_bonus.v1;
+
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+enum ResetType {
+  DATE_LINE = 0;
+  TIME_LAPSE = 1;
+}
+
+message LoginBonus {
+  string login_bonus_id = 1;
+  sint64 opened_at = 4;
+  sint64 closed_at = 5;
+  ResetType reset_type = 6;
+  string date_line = 7;
+  sint64 time_lapse = 8;
+  sint64 last_prize_count = 9;
+  sint64 last_counted_up_at = 10;
+  repeated LoginBonusPrize prizes = 11;
+  bool loop = 12;
+}
+
+message LoginBonusPrize {
+  string login_bonus_id = 1;
+  string login_bonus_prize_id = 2;
+  sint64 prize_count = 3;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 4;
+  string schema_key = 5;
+  bytes value = 6;
+  string search_label = 7;
+  string resource_name = 8;
+  sint64 resource_num = 9;
+}

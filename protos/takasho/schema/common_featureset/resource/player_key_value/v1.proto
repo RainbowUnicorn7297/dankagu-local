@@ -1,0 +1,24 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.player_key_value.v1;
+
+enum OperationType {
+  UNKNOWN = 0;
+  INCREASE = 1;
+  DECREASE = 2;
+}
+
+message PlayerKeyValue {
+  string key = 1;
+  sint64 value = 2;
+  sint64 expired_at = 3;
+}
+
+message PlayerKeyValueIncrementInfo {
+  string key = 1;
+  sint64 delta = 2;
+}
+
+message PlayerKeyValueUpdateInfo {
+  string key = 1;
+  sint64 amount = 2;
+}

@@ -1,8 +1,13 @@
+from pathlib import Path
+import time
+
 import grpc
 
 from takasho.packer import packer
 from takasho.schema.common_featureset.player_api import player_inventory_pb2
 from takasho.schema.common_featureset.player_api import player_inventory_pb2_grpc
+from takasho.schema.common_featureset.player_api import wallet_pb2
+from takasho.shared_storage import shared_storage
 
 
 class PlayerInventory(player_inventory_pb2_grpc.PlayerInventoryServicer):
@@ -36,6 +41,25 @@ class PlayerInventory(player_inventory_pb2_grpc.PlayerInventoryServicer):
             pass
         elif 'NoFilter' in search_labels:
             pass
+        return response
+    
+    def ReceiveV1(self, request, context):
+        response = player_inventory_pb2.PlayerInventoryReceiveV1.Response()
+        response.entries.extend(request.entries)
+        for entry in response.entries:
+            entry.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
+            entry.created_at = int(time.time())
+            entry.updated_at = int(time.time())
+        response.revision = request.next_revision
+        shared_storage.revision = request.next_revision
+        p = Path(__file__).with_name('wallet.hex')
+        with p.open() as f:
+            total = wallet_pb2.WalletGetBalancesV2.Response.FromString(
+                bytes.fromhex(f.read())).total
+        response.wallet.CopyFrom(total)
+        player_key_value = response.player_key_values.add()
+        player_key_value.key = 'point'
+        player_key_value.amount = 8622
         return response
 
 

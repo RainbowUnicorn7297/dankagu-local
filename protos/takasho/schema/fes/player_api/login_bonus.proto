@@ -1,0 +1,34 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api;
+
+import "takasho/schema/fes/resource/login_bonus/v1.proto";
+import "takasho/schema/common_featureset/resource/login_bonus/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+import "takasho/schema/fes/resource/comeback_login_bonus/v1.proto";
+
+message LoginBonusCountUpProgressV1 {
+  message Request {}
+
+  message Response {
+    repeated takasho.schema.fes.resource.login_bonus.v1.BingoLoginBonus bingo_login_bonuses = 1;
+    repeated takasho.schema.common_featureset.resource.login_bonus.v1.LoginBonus campaign_login_bonuses = 2;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory player_inventories = 3;
+    repeated takasho.schema.fes.resource.comeback_login_bonus.v1.ComebackLoginBonus comeback_login_bonus = 4;
+    repeated takasho.schema.fes.resource.comeback_login_bonus.v1.ComebackLoginBonusProgress comeback_login_bonus_progresses = 5;
+  }
+}
+
+message LoginBonusGetAvailableV1 {
+  message Request {}
+
+  message Response {
+    repeated takasho.schema.fes.resource.login_bonus.v1.BingoLoginBonus bingo_login_bonuses = 1;
+    repeated takasho.schema.fes.resource.comeback_login_bonus.v1.ComebackLoginBonus comeback_login_bonus = 2;
+    repeated takasho.schema.fes.resource.comeback_login_bonus.v1.ComebackLoginBonusProgress comeback_login_bonus_progresses = 3;
+  }
+}
+
+service LoginBonus {
+  rpc CountUpProgressV1(LoginBonusCountUpProgressV1.Request) returns (LoginBonusCountUpProgressV1.Response) {}
+  rpc GetAvailableLoginBonusV1(LoginBonusGetAvailableV1.Request) returns (LoginBonusGetAvailableV1.Response) {}
+}

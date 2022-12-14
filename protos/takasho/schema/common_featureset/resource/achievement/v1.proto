@@ -1,0 +1,38 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.achievement.v1;
+
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+enum ResetType {
+  NONE = 0;
+  DATE_LINE = 1;
+  WEEK_LINE = 2;
+}
+
+message Achievement {
+  string achievement_id = 1;
+  bytes value = 2;
+  sint64 opened_at = 4;
+  sint64 closed_at = 5;
+  ResetType reset_type = 6;
+  string date_line = 7;
+  sint64 day_of_week = 8;
+  repeated AchievementPrize prizes = 11;
+  string category = 12;
+  bool unlock = 13;
+}
+
+message AchievementPrize {
+  string achievement_id = 1;
+  string achievement_prize_id = 2;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 4;
+  string schema_key = 5;
+  bytes value = 6;
+  string search_label = 7;
+  string system_resource_name = 8;
+  sint64 system_resource_num = 9;
+}
+
+message Criterion {
+  string category = 1;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.announcement.v1;
+
+message Announcement {
+  string id = 1;
+  string language_code = 2;
+  string title = 3;
+  sint64 opened_at = 4;
+  sint64 closed_at = 5;
+  bytes value = 6;
+  repeated AnnouncementContent contents = 7;
+}
+
+message AnnouncementContent {
+  string schema_key = 1;
+  bytes value = 2;
+}

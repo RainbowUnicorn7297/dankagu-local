@@ -27,8 +27,9 @@ def start(port):
     zone_record = cleandoc(f'''
         danmakujp4-local.lcx.tokyo. 60 IN A {lan_ip}
         player-api-local.dena-takasho.com. 60 IN A {lan_ip}
-        assets-local.dena-takasho.com. 60 IN A {lan_ip}
     ''')
+    # Uncomment this line to use local asset server
+    # zone_record += f'\ndankagu-assets.rainbowunicorn7297.com. 60 IN A {lan_ip}'
 
     resolver = InterceptResolver(
         '8.8.8.8',     #upstream address

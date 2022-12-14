@@ -41,5 +41,27 @@ python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.
 python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/player_api/subscription/renewal_reward.proto
 python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/resource/reconstruction_spot/v1.proto
 python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/player_api/reconstruction_spot.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/resource/login_bonus/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/resource/login_bonus/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/resource/comeback_login_bonus/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/player_api/login_bonus.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/resource/achievement/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/resource/player_achievement/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/player_api/player_achievement.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/resource/game_message/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/player_api/game_message.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/resource/announcement/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/resource/extra_announcement/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/player_api/announcement.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/resource/club_chat/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/player_api/club_chat.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/resource/club_achievement/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/player_api/club_achievement.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/player_api/player_event_log.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/player_api/achievement.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/resource/player_regular_ranking/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/player_api/regular_ranking.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/resource/player_key_value/v1.proto
+python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/common_featureset/player_api/player_key_value_store.proto
 
 python -m grpc_tools.protoc -I. --python_out=.. --pyi_out=.. --grpc_python_out=.. takasho/schema/fes/resource/player_event_log/v1.proto

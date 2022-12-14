@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n>takasho/schema/common_featureset/resource/game_status/v1.proto\x12\x38takasho.schema.common_featureset.resource.game_status.v1\"\x16\n\x05Value\x12\r\n\x05value\x18\x01 \x01(\x12\"\'\n\x06Status\x12\r\n\x05value\x18\x01 \x01(\x12\x12\x0e\n\x06status\x18\x02 \x01(\x08\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n>takasho/schema/common_featureset/resource/game_status/v1.proto\x12\x38takasho.schema.common_featureset.resource.game_status.v1\"\x16\n\x05Value\x12\r\n\x05value\x18\x01 \x01(\x03\"\'\n\x06Status\x12\r\n\x05value\x18\x01 \x01(\x03\x12\x0e\n\x06status\x18\x02 \x01(\x08\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'takasho.schema.common_featureset.resource.game_status.v1_pb2', globals())

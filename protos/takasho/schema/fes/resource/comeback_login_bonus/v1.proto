@@ -1,0 +1,37 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.comeback_login_bonus.v1;
+
+import "takasho/schema/common_featureset/resource/login_bonus/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+message ComebackLoginBonus {
+  string comeback_login_bonus_id = 1;
+  sint64 opened_at = 2;
+  sint64 closed_at = 3;
+  sint64 condition_days = 4;
+  sint64 valid_days = 5;
+  takasho.schema.common_featureset.resource.login_bonus.v1.ResetType reset_type = 6;
+  string date_line = 7;
+  sint64 time_lapse = 8;
+  repeated ComebackLoginBonusPrize comeback_login_bonus_prizes = 9;
+  sint64 last_counted_up_at = 10;
+}
+
+message ComebackLoginBonusPrize {
+  sint64 days = 1;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 2;
+  string schema_key = 3;
+  string value = 4;
+  string value_path = 5;
+  string inventory_message = 6;
+  string search_label = 7;
+  string system_resource_name = 8;
+  int64 system_resource_num = 9;
+}
+
+message ComebackLoginBonusProgress {
+  string player_id = 1;
+  sint64 remain_days = 2;
+  sint64 come_backed_at = 3;
+  sint64 expired_at = 4;
+}

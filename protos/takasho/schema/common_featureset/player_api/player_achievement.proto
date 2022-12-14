@@ -1,0 +1,61 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/achievement/v1.proto";
+import "takasho/schema/common_featureset/resource/player_achievement/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+import "takasho/schema/common_featureset/resource/player_storage/v2.proto";
+
+message PlayerAchievementGetAvailableV1 {
+  message Request {
+    takasho.schema.common_featureset.resource.achievement.v1.Criterion criterion = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_achievement.v1.PlayerAchievement player_achievements = 1;
+  }
+}
+
+message PlayerAchievementGetAvailableByIDsV1 {
+  message Request {
+    repeated string achievement_ids = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_achievement.v1.PlayerAchievement player_achievements = 1;
+  }
+}
+
+message PlayerAchievementUnlockV1 {
+  message Request {
+    repeated string achievement_ids = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_achievement.v1.PlayerAchievement player_achievements = 1;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory inventories = 2;
+  }
+}
+
+message PlayerAchievementUnlockAndSavePlayerStorageV1 {
+  message Request {
+    repeated string achievement_ids = 1;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 2;
+    string next_revision = 3;
+    string previous_revision = 4;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.player_achievement.v1.PlayerAchievement player_achievements = 1;
+    repeated takasho.schema.common_featureset.resource.player_inventory.v1.PlayerInventory inventories = 2;
+    repeated takasho.schema.common_featureset.resource.player_storage.v2.Entry entries = 3;
+    string revision = 4;
+  }
+}
+
+service PlayerAchievement {
+  rpc GetAvailableV1(PlayerAchievementGetAvailableV1.Request) returns (PlayerAchievementGetAvailableV1.Response) {}
+  rpc GetAvailableByIDsV1(PlayerAchievementGetAvailableByIDsV1.Request) returns (PlayerAchievementGetAvailableByIDsV1.Response) {}
+  rpc UnlockV1(PlayerAchievementUnlockV1.Request) returns (PlayerAchievementUnlockV1.Response) {}
+  rpc UnlockAndSavePlayerStorageV1(PlayerAchievementUnlockAndSavePlayerStorageV1.Request) returns (PlayerAchievementUnlockAndSavePlayerStorageV1.Response) {}
+}

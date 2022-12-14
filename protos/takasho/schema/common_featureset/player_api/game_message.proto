@@ -1,0 +1,44 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/game_message/v1.proto";
+
+message GameMessageGetUnreadMessageV1 {
+  message Request {
+    string page_token = 1;
+    uint64 max_results = 2;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.game_message.v1.GameMessage messages = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message GameMessageGetMessageV1 {
+  message Request {
+    string page_token = 1;
+    uint64 max_results = 2;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.game_message.v1.GameMessage messages = 1;
+    string next_page_token = 2;
+    string prev_page_token = 3;
+  }
+}
+
+message GameMessageReceiveMessageV1 {
+  message Request {
+    repeated string message_ids = 1;
+  }
+
+  message Response {}
+}
+
+service GameMessage {
+  rpc GetUnreadMessageV1(GameMessageGetUnreadMessageV1.Request) returns (GameMessageGetUnreadMessageV1.Response) {}
+  rpc GetMessageV1(GameMessageGetMessageV1.Request) returns (GameMessageGetMessageV1.Response) {}
+  rpc ReceiveMessageV1(GameMessageReceiveMessageV1.Request) returns (GameMessageReceiveMessageV1.Response) {}
+}

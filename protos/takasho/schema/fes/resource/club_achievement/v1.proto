@@ -1,0 +1,25 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.club_achievement.v1;
+
+enum ResetType {
+  NONE = 0;
+  DATE_LINE = 1;
+  WEEK_LINE = 2;
+}
+
+message ClubAchievement {
+  string club_achievement_id = 1;
+  bytes value = 2;
+  sint64 opened_at = 3;
+  sint64 closed_at = 4;
+  ResetType reset_type = 5;
+  string date_line = 6;
+  sint64 day_of_week = 7;
+  string category = 8;
+  uint64 points = 9;
+  bool unlocked = 10;
+}
+
+message Criteria {
+  string category = 1;
+}

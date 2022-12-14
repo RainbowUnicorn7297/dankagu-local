@@ -6,12 +6,14 @@ from typing import Any, Callable
 import grpc
 from grpc_interceptor import ServerInterceptor
 
-from takasho.schema.common_featureset.player_api import baas_product, \
-    game_product, game_status, loot_box, player_inventory, player_preference, \
-    player_storage, push_notification, ondemand_master, step_up_loot_box, \
-    system, wallet
-from takasho.schema.fes.player_api import club_player, friend, \
-    reconstruction_spot, score_ranking, zendesk
+from takasho.schema.common_featureset.player_api import achievement, \
+    announcement, baas_product, game_message, game_product, game_status, \
+    loot_box, player_achievement, player_event_log, player_inventory, \
+    player_key_value_store, player_preference, player_storage, \
+    push_notification, ondemand_master, step_up_loot_box, system, wallet
+from takasho.schema.fes.player_api import club_achievement, club_chat, \
+    club_player, friend, login_bonus, reconstruction_spot, regular_ranking, \
+    score_ranking, zendesk
 from takasho.schema.fes.player_api import player_preference \
     as fes_player_preference
 from takasho.schema.fes.player_api.subscription import renewal_reward
@@ -39,11 +41,12 @@ class TakashoInterceptor(ServerInterceptor):
             method response, as a protobuf message.
         """
         print('Calling ' + method_name)
-        server_timestamp = str(int(time.time()))
-        # server_timestamp = '1665641020'
-        formatted_timestamp = time.strftime(
-           '%a, %d %b %Y %H:%M:%S GMT', time.gmtime())
-        # formatted_timestamp = 'Thu, 13 Oct 2022 06:03:40 GMT'
+        # Hardcode server time to Oct 13 for now
+        # server_timestamp = str(int(time.time()))
+        server_timestamp = '1665641020'
+        # formatted_timestamp = time.strftime(
+        #    '%a, %d %b %Y %H:%M:%S GMT', time.gmtime())
+        formatted_timestamp = 'Thu, 13 Oct 2022 06:03:40 GMT'
         start_time = time.perf_counter_ns()
         response = method(request, context)
         end_time = time.perf_counter_ns()
@@ -105,6 +108,25 @@ def serve():
         renewal_reward.RenewalReward(), server)
     reconstruction_spot.add_ReconstructionSpotServicer_to_server(
         reconstruction_spot.ReconstructionSpot(), server)
+    login_bonus.add_LoginBonusServicer_to_server(
+        login_bonus.LoginBonus(), server)
+    player_achievement.add_PlayerAchievementServicer_to_server(
+        player_achievement.PlayerAchievement(), server)
+    game_message.add_GameMessageServicer_to_server(
+        game_message.GameMessage(), server)
+    announcement.add_AnnouncementServicer_to_server(
+        announcement.Announcement(), server)
+    club_chat.add_ClubChatServicer_to_server(club_chat.ClubChat(), server)
+    club_achievement.add_ClubAchievementServicer_to_server(
+        club_achievement.ClubAchievement(), server)
+    player_event_log.add_PlayerEventLogServicer_to_server(
+        player_event_log.PlayerEventLog(), server)
+    achievement.add_AchievementServicer_to_server(
+        achievement.Achievement(), server)
+    regular_ranking.add_RegularRankingServicer_to_server(
+        regular_ranking.RegularRanking(), server)
+    player_key_value_store.add_PlayerKeyValueStoreServicer_to_server(
+        player_key_value_store.PlayerKeyValueStore(), server)
     
     with open('keys/grpc.key', 'rb') as f:
         private_key = f.read()

@@ -1,0 +1,31 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api.club_achievement;
+
+import "takasho/schema/fes/resource/club_achievement/v1.proto";
+
+message ClubAchievementGetAvailable {
+  message Request {
+    takasho.schema.fes.resource.club_achievement.v1.Criteria criteria = 1;
+    string page_token = 2;
+    uint64 max_results = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.club_achievement.v1.ClubAchievement achievements = 1;
+    string next_page_token = 2;
+  }
+}
+
+message ClubAchievementUnlockAndIncrementClubScalar {
+  message Request {
+    string achievement_id = 1;
+    string scalar_key = 2;
+  }
+
+  message Response {}
+}
+
+service ClubAchievement {
+  rpc GetAvailable(ClubAchievementGetAvailable.Request) returns (ClubAchievementGetAvailable.Response) {}
+  rpc UnlockAndIncrementClubScalar(ClubAchievementUnlockAndIncrementClubScalar.Request) returns (ClubAchievementUnlockAndIncrementClubScalar.Response) {}
+}

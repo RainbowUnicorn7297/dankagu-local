@@ -7,6 +7,31 @@ from takasho.schema.fes.player_api import score_ranking_pb2_grpc
 
 class ScoreRanking(score_ranking_pb2_grpc.ScoreRankingServicer):
     
+    def GetGrandPrixRankV1(self, request, context):
+        response = score_ranking_pb2.ScoreRankingGetGrandPrixRankV1.Response()
+        player_grand_prix_rank_info = response.player_grand_prix_rank_infos.add()
+        player_grand_prix_rank_info.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
+        player_grand_prix_rank_info.rank = 700
+        player_grand_prix_rank_info.point = 10607
+        return response
+    
+    def GetClassGroupRankV1(self, request, context):
+        response = score_ranking_pb2.ScoreRankingGetClassGroupRankV1.Response()
+        player_class_group_rank_info = response.player_class_group_rank_infos.add()
+        player_class_group_rank_info.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
+        player_class_group_rank_info.rank = 26
+        player_class_group_rank_info.score = 15382459
+        return response
+    
+    def GetClassV1(self, request, context):
+        response = score_ranking_pb2.ScoreRankingGetClassV1.Response()
+        player_class = response.player_classes.add()
+        player_class.player_id = 'b7124b56-3fa4-427a-8dd0-64ec8830294e'
+        player_class.class_id = '1'
+        player_class.score = 15382459
+        player_class.group_id = 'd5c0c1906e8e91ec6e027edfecb9eca9'
+        return response
+    
     def ReceiveClassPrizeV1(self, request, context):
         response = score_ranking_pb2.ScoreRankingReceiveClassPrizeV1.Response()
         return response

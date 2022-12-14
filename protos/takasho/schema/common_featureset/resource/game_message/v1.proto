@@ -1,0 +1,11 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.resource.game_message.v1;
+
+message GameMessage {
+  string message_id = 1;
+  bool is_received = 2;
+  string title = 3;
+  string message = 4;
+  bytes extra = 5;
+  sint64 created_at = 6;
+}

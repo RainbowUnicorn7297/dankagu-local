@@ -1,0 +1,16 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/player_event_log/v1.proto";
+
+message PlayerEventLogSendV1 {
+  message Request {
+    repeated takasho.schema.common_featureset.resource.player_event_log.v1.PlayerEventLog player_event_logs = 1;
+  }
+
+  message Response {}
+}
+
+service PlayerEventLog {
+  rpc SendV1(PlayerEventLogSendV1.Request) returns (PlayerEventLogSendV1.Response) {}
+}

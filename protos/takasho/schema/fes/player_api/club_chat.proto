@@ -1,0 +1,65 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api.club_chat;
+
+import "takasho/schema/fes/resource/club_chat/v1.proto";
+
+message ClubChatCreateMessage {
+  message Message {
+    string club_id = 1;
+    string message_id = 2;
+    takasho.schema.fes.resource.club_chat.v1.MessageType message_type = 3;
+    string content = 4;
+  }
+
+  message Request {
+    repeated Message messages = 1;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.club_chat.v1.ClubChatMessage message = 1;
+  }
+}
+
+message ClubChatGet {
+  message Request {
+    string club_id = 1;
+    repeated takasho.schema.fes.resource.club_chat.v1.MessageType types = 2;
+    repeated string player_storage_keys = 3;
+    uint64 max_results = 4;
+    string page_token = 5;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.club_chat.v1.ClubChatMessage message = 1;
+    string prev_page_token = 2;
+    string next_page_token = 3;
+  }
+}
+
+message ClubChatGetMessagesCount {
+  message MessageID {
+    string club_id = 1;
+    string message_id = 2;
+  }
+
+  message Request {
+    repeated MessageID message_ids = 1;
+    repeated takasho.schema.fes.resource.club_chat.v1.MessageType ignore_message_types = 2;
+    bool ignore_my_message = 3;
+  }
+
+  message MessageCount {
+    string club_id = 1;
+    uint64 messages_count = 2;
+  }
+
+  message Response {
+    repeated MessageCount message_counts = 1;
+  }
+}
+
+service ClubChat {
+  rpc CreateMessage(ClubChatCreateMessage.Request) returns (ClubChatCreateMessage.Response) {}
+  rpc Get(ClubChatGet.Request) returns (ClubChatGet.Response) {}
+  rpc GetMessagesCount(ClubChatGetMessagesCount.Request) returns (ClubChatGetMessagesCount.Response) {}
+}

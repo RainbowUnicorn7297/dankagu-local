@@ -6,13 +6,11 @@ import grpc
 from takasho.packer import packer
 from takasho.schema.common_featureset.player_api import player_storage_pb2
 from takasho.schema.common_featureset.player_api import player_storage_pb2_grpc
+from takasho.shared_storage import shared_storage
 
 
 class PlayerStorage(player_storage_pb2_grpc.PlayerStorageServicer):
 
-    def __init__(self):
-        self._revision = 'b69e1df8-2e05-48c9-bdb2-5a09bc8c7f4c'
-    
     def SetEntriesV2(self, request, context):
         response = player_storage_pb2.PlayerStorageSetEntriesV2.Response()
         response.entries.extend(request.entries)
@@ -21,7 +19,7 @@ class PlayerStorage(player_storage_pb2_grpc.PlayerStorageServicer):
             entry.created_at = int(time.time())
             entry.updated_at = int(time.time())
         response.revision = request.next_revision
-        self._revision = request.next_revision
+        shared_storage.revision = request.next_revision
         return response
     
     def GetEntriesV2(self, request, context):
@@ -214,7 +212,7 @@ class PlayerStorage(player_storage_pb2_grpc.PlayerStorageServicer):
             # 8th set
             # if criterion.key == 'JoinClubStatus--':
             #     entry = response.entries.add()
-        response.revision = self._revision
+        response.revision = shared_storage.revision
         return response
 
 

@@ -1,0 +1,32 @@
+syntax = "proto3";
+package takasho.schema.fes.player_api;
+
+import "takasho/schema/fes/resource/player_regular_ranking/v1.proto";
+
+message RegularRankingRegisterV1 {
+  message Request {
+    string ranking_key = 1;
+    int64 score = 2;
+  }
+
+  message Response {
+    takasho.schema.fes.resource.player_regular_ranking.v1.PlayerRegularRanking player_ranking = 1;
+  }
+}
+
+message RegularRankingGetTopRankingV1 {
+  message Request {
+    string ranking_key = 1;
+    sint64 start = 2;
+    sint64 count = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.fes.resource.player_regular_ranking.v1.PlayerRegularRanking player_rankings = 1;
+  }
+}
+
+service RegularRanking {
+  rpc RegisterV1(RegularRankingRegisterV1.Request) returns (RegularRankingRegisterV1.Response) {}
+  rpc GetTopRankingV1(RegularRankingGetTopRankingV1.Request) returns (RegularRankingGetTopRankingV1.Response) {}
+}

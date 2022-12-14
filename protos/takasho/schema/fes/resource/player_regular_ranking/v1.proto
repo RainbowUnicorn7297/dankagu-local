@@ -1,0 +1,10 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.player_regular_ranking.v1;
+
+message PlayerRegularRanking {
+  string ranking_key = 1;
+  string player_id = 2;
+  string nick_name = 3;
+  int64 rank = 4;
+  int64 score = 5;
+}

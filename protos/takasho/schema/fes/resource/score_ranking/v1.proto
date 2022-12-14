@@ -79,20 +79,20 @@ message PlayerClassGroupRankingInfo {
 
 message PlayerGrandPrixRankInfo {
   string player_id = 1;
-  sint64 rank = 2;
-  sint64 point = 3;
+  int64 rank = 2;
+  int64 point = 3;
 }
 
 message PlayerClassGroupRankInfo {
   string player_id = 1;
-  sint64 rank = 2;
-  sint64 score = 3;
+  int64 rank = 2;
+  int64 score = 3;
 }
 
 message PlayerClass {
   string player_id = 1;
   string class_id = 2;
-  sint64 score = 3;
+  int64 score = 3;
   string group_id = 4;
 }
 

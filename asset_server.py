@@ -59,13 +59,13 @@ def application(environ, start_response):
 
 def start(port):
     with make_server('', port, application) as httpd:
-        certfile = path.join(key_path(), 'asset.crt')
-        keyfile = path.join(key_path(), 'asset.key')
+        certfile = path.join(key_path(), 'fullchain1.pem')
+        keyfile = path.join(key_path(), 'privkey1.pem')
         context = SSLContext(PROTOCOL_TLS_SERVER)
         context.load_cert_chain(certfile, keyfile)
         httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
 
-        print(f'Serving HTTP on port {port}...')
+        print(f'Serving HTTPS on port {port}...')
         httpd.serve_forever()
 
 

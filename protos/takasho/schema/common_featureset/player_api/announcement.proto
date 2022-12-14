@@ -1,0 +1,38 @@
+syntax = "proto3";
+package takasho.schema.common_featureset.player_api;
+
+import "takasho/schema/common_featureset/resource/announcement/v1.proto";
+import "takasho/schema/common_featureset/resource/extra_announcement/v1.proto";
+
+message AnnouncementGetAvailableV1 {
+  message Request {
+    string language_code = 1;
+    string page_token = 2;
+    uint64 max_results = 3;
+  }
+
+  message Response {
+    repeated takasho.schema.common_featureset.resource.announcement.v1.Announcement announcements = 1;
+    string base_image_url = 2;
+    string next_page_token = 3;
+    string prev_page_token = 4;
+    repeated takasho.schema.common_featureset.resource.extra_announcement.v1.ExtraAnnouncement extra_announcements = 5;
+  }
+}
+
+message AnnouncementGetCredentialV1 {
+  message Request {}
+
+  message Response {
+    string credential = 1;
+    string url = 2;
+  }
+}
+
+service Announcement {
+  rpc GetAvailableV1(AnnouncementGetAvailableV1.Request) returns (AnnouncementGetAvailableV1.Response) {}
+}
+
+service AnnouncementV2 {
+  rpc GetCredentialV1(AnnouncementGetCredentialV1.Request) returns (AnnouncementGetCredentialV1.Response) {}
+}

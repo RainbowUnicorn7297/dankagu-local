@@ -1,0 +1,48 @@
+syntax = "proto3";
+package takasho.schema.fes.resource.login_bonus.v1;
+
+import "takasho/schema/common_featureset/resource/login_bonus/v1.proto";
+import "takasho/schema/common_featureset/resource/player_inventory/v1.proto";
+
+message BingoLoginBonus {
+  string bingo_login_bonus_id = 1;
+  takasho.schema.common_featureset.resource.login_bonus.v1.ResetType reset_type = 2;
+  string date_line = 3;
+  sint64 time_lapse = 4;
+  sint64 opened_at = 5;
+  sint64 closed_at = 6;
+  repeated BingoLoginBonusPrize bingo_prizes = 7;
+  repeated BingoLoginBonusOmikujiPrize omikuji_prizes = 8;
+  sint64 last_counted_up_at = 9;
+  repeated BingoStatus bingo_statuses = 10;
+  int64 count_bingo_rows = 11;
+}
+
+message BingoLoginBonusPrize {
+  int64 row = 1;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 2;
+  string schema_key = 3;
+  string value = 4;
+  string value_path = 5;
+  string inventory_message = 6;
+  string search_label = 7;
+  string system_resource_name = 8;
+  int64 system_resource_num = 9;
+}
+
+message BingoStatus {
+  int64 frame = 1;
+  bool is_open = 2;
+}
+
+message BingoLoginBonusOmikujiPrize {
+  int64 frame_num = 1;
+  takasho.schema.common_featureset.resource.player_inventory.v1.ItemType item_type = 2;
+  string schema_key = 3;
+  string value = 4;
+  string value_path = 5;
+  string inventory_message = 6;
+  string search_label = 7;
+  string system_resource_name = 8;
+  int64 system_resource_num = 9;
+}
