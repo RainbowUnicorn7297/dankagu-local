@@ -3,6 +3,7 @@ Touhou Danmaku Kagura Local Server
 
 ## Required Python Packages
 - dnslib
+- netifaces
 - requests
 - grpcio
 - grpcio-tools

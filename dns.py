@@ -1,35 +1,53 @@
 from inspect import cleandoc
-from socket import AF_INET, SOCK_DGRAM, socket
 from time import sleep
 
 from dnslib.intercept import InterceptResolver
 from dnslib.server import DNSServer
+import netifaces
 
 # Port used by the DNS server
 _port = 53
 
 
-def get_ip():
-    s = socket(AF_INET, SOCK_DGRAM)
-    s.settimeout(0)
+def get_lan_ips():
     try:
-        s.connect(('10.255.255.255', 1))
-        ip = s.getsockname()[0]
+        iface = netifaces.gateways()['default'][netifaces.AF_INET][1]
+        ipv4 = netifaces.ifaddresses(iface)[netifaces.AF_INET][0]['addr']
     except Exception:
-        ip = '127.0.0.1'
-    finally:
-        s.close()
-    return ip
+        ipv4 = None
+    try:
+        iface = netifaces.gateways()['default'][netifaces.AF_INET6][1]
+        ipv6 = netifaces.ifaddresses(iface)[netifaces.AF_INET6][0]['addr']
+    except Exception:
+        ipv6 = None
+    return ipv4, ipv6
 
 
 def start(port):
-    lan_ip = get_ip()
-    zone_record = cleandoc(f'''
-        danmakujp4-local.lcx.tokyo. 60 IN A {lan_ip}
-        player-api-local.dena-takasho.com. 60 IN A {lan_ip}
-    ''')
-    # Uncomment this line to use local asset server
-    # zone_record += f'\ndankagu-assets.rainbowunicorn7297.com. 60 IN A {lan_ip}'
+    lan_ipv4, lan_ipv6 = get_lan_ips()
+    zone_record = ''
+    if lan_ipv4:
+        zone_record += cleandoc(f'''
+            danmakujp4-local.lcx.tokyo. 60 IN A {lan_ipv4}
+            danmakujp4-v1.lcx.tokyo. 60 IN A {lan_ipv4}
+            player-api-local.dena-takasho.com. 60 IN A {lan_ipv4}
+        ''')
+        zone_record += '\n'
+    if lan_ipv6:
+        zone_record += cleandoc(f'''
+            danmakujp4-local.lcx.tokyo. 60 IN AAAA {lan_ipv6}
+            danmakujp4-v1.lcx.tokyo. 60 IN AAAA {lan_ipv6}
+            player-api-local.dena-takasho.com. 60 IN AAAA {lan_ipv6}
+        ''')
+        zone_record += '\n'
+    
+    # Uncomment these lines to use local asset server
+    # if lan_ipv4:
+    #     zone_record += 'dankagu-assets.rainbowunicorn7297.com. 60 IN A ' \
+    #         + '{lan_ipv4}\n'
+    # if lan_ipv6:
+    #     zone_record += 'dankagu-assets.rainbowunicorn7297.com. 60 IN AAAA ' \
+    #         + '{lan_ipv6}\n'
 
     resolver = InterceptResolver(
         '8.8.8.8',     #upstream address
