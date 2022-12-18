@@ -62,6 +62,8 @@ def start(port):
     )
     udp_server = DNSServer(resolver, port=port)
     print(f'DNS is running on port {port}...')
+    print(f'IPv4: {lan_ipv4}')
+    print(f'IPv6: {lan_ipv6}')
     udp_server.start_thread()
 
 
